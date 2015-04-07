@@ -1,0 +1,67 @@
+PODS:
+  - ActionSheetPicker-3.0 (1.0.18)
+  - AFNetworking (2.5.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.5.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.1)
+  - AFNetworking/Security (2.5.1)
+  - AFNetworking/Serialization (2.5.1)
+  - AFNetworking/UIKit (2.5.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - CrashlyticsFramework (2.2.9)
+  - DTCoreText (1.6.15):
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTFoundation/Core (1.7.5)
+  - DTFoundation/DTAnimatedGIF (1.7.5)
+  - DTFoundation/DTHTMLParser (1.7.5):
+    - DTFoundation/Core
+  - DTFoundation/UIKit (1.7.5):
+    - DTFoundation/Core
+  - GoogleAnalytics-iOS-SDK (3.10):
+    - GoogleAnalytics-iOS-SDK/Core
+  - GoogleAnalytics-iOS-SDK/Core (3.10)
+  - KissXML (5.0)
+  - MBProgressHUD (0.9.1)
+  - Reachability (3.2)
+  - SSZipArchive (0.3.2)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 1.0.9)
+  - AFNetworking (~> 2.0)
+  - CrashlyticsFramework (~> 2.2)
+  - DTCoreText (~> 1.6)
+  - GoogleAnalytics-iOS-SDK (~> 3.0)
+  - KissXML (~> 5.0)
+  - MBProgressHUD (~> 0.8)
+  - Reachability (~> 3.1)
+  - SSZipArchive (~> 0.3)
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 374a2fed2546b1bc1151b38a76968ddb29a9d8c7
+  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
+  CrashlyticsFramework: 013bae3c30d5b9bfad1aa10008e155e18473984c
+  DTCoreText: d446600133d01214758ff45004b1b8109e5b8c9f
+  DTFoundation: bea4e07459f0f88a5aa3b8258fab1576bbe2e58c
+  GoogleAnalytics-iOS-SDK: f422062075d9ccb1ea8d783fc5ba3829461e9502
+  KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
+  MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
+  Reachability: 1ef8adf5c4e3d362f96515d4278f68dad3c26930
+  SSZipArchive: 11299a4e89821bd4085b12f25edaa85853e0051c
+
+COCOAPODS: 0.34.4

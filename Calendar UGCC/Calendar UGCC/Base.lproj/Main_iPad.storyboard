@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="s3p-JL-jWJ">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="74f-zc-Nhq">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="s3p-JL-jWJ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="taz-sj-Kcp">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2lK-vI-RnZ" kind="relationship" relationship="rootViewController" id="oe7-Va-Ucw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4qV-aK-ZtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-491" y="-1721"/>
+        </scene>
+        <!--Day List View Controller-->
+        <scene sceneID="IIy-GB-HMT">
+            <objects>
+                <viewController id="2lK-vI-RnZ" userLabel="Day List View Controller" customClass="DSViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="09q-No-Ygg">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="AYT-ig-9S9">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DSDayTableViewCell" rowHeight="80" id="aPx-uy-bbb" customClass="DSDayTableViewCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aPx-uy-bbb" id="tAe-DP-vwL">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="vVG-u0-4cC">
+                                                    <rect key="frame" x="1" y="2" width="764" height="76"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" id="tXZ-7s-nF8">
+                                                            <rect key="frame" x="3" y="3" width="70" height="70"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fasting.png" id="qUE-xq-VFe">
+                                                                    <rect key="frame" x="5" y="5" width="30" height="12"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                </imageView>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r6I-RE-LlQ">
+                                                                    <rect key="frame" x="44" y="5" width="23" height="13"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="12"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QFu-Kl-ZvV">
+                                                                    <rect key="frame" x="3" y="21" width="64" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="33"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wq" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ORD-2u-XLo">
+                                                                    <rect key="frame" x="14" y="49" width="42" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" id="sPl-De-j6f">
+                                                            <rect key="frame" x="76" y="3" width="684" height="70"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" id="IQc-gm-FZZ">
+                                                                    <rect key="frame" x="4" y="6" width="672" height="44"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" id="BEj-tX-w3r">
+                                                                    <rect key="frame" x="4" y="44" width="672" height="20"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.96862745100000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="deviceRGB"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="imgFasting" destination="qUE-xq-VFe" id="kar-xF-9HR"/>
+                                            <outlet property="lbDate" destination="QFu-Kl-ZvV" id="esF-Hk-Rcj"/>
+                                            <outlet property="lbDayOfWeek" destination="ORD-2u-XLo" id="IKW-vF-Xg1"/>
+                                            <outlet property="lbOldStyleDate" destination="r6I-RE-LlQ" id="65F-ja-fu5"/>
+                                            <outlet property="lbReading" destination="BEj-tX-w3r" id="6es-f8-yvM"/>
+                                            <outlet property="lbTitle" destination="IQc-gm-FZZ" id="jA3-w7-XVl"/>
+                                            <outlet property="viewBackground" destination="vVG-u0-4cC" id="eLx-Zc-ZOj"/>
+                                            <outlet property="viewDate" destination="tXZ-7s-nF8" id="vvn-is-fSE"/>
+                                            <outlet property="viewInfo" destination="sPl-De-j6f" id="Bad-ZK-eqn"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="W0a-4R-bje"/>
+                    <connections>
+                        <outlet property="tableDays" destination="AYT-ig-9S9" id="G6Y-ad-ph1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sTV-j6-Wsu" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-110" y="-41"/>
+        </scene>
+        <!--Day View Controller-->
+        <scene sceneID="veO-Xy-RBd">
+            <objects>
+                <tabBarController storyboardIdentifier="DSDayViewController" definesPresentationContext="YES" id="oMf-sC-Y3z" customClass="DSDayViewController" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="cEJ-gD-VTY">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="CeB-ug-ndj" kind="relationship" relationship="viewControllers" id="d4F-Pj-2Hc"/>
+                        <segue destination="xbd-xN-I6M" kind="relationship" relationship="viewControllers" id="Eom-HJ-gIt"/>
+                        <segue destination="mrG-fp-Qi9" kind="relationship" relationship="viewControllers" id="URo-Jh-wxw"/>
+                        <segue destination="6mY-iK-qs4" kind="relationship" relationship="viewControllers" id="4xJ-Dm-pwA"/>
+                        <segue destination="1sV-Hr-Hku" kind="relationship" relationship="viewControllers" id="Q2Y-jl-FFN"/>
+                        <segue destination="Bas-75-ehb" kind="relationship" relationship="viewControllers" id="pIf-8A-k9g"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gYx-MU-yhX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="594" y="530"/>
+        </scene>
+        <!--Liturgy View Controller-->
+        <scene sceneID="DD7-XY-iRW">
+            <objects>
+                <viewController storyboardIdentifier="DSLiturgyViewController" id="CeB-ug-ndj" userLabel="Liturgy View Controller" customClass="DSDayContentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xs5-2q-2BA">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="PjC-1N-KQe">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="9pu-iB-v3c">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="prayer_book.png" id="CZm-P8-voF"/>
+                    <connections>
+                        <outlet property="scrollView" destination="PjC-1N-KQe" id="rMH-e6-fnT"/>
+                        <outlet property="webViewText" destination="9pu-iB-v3c" id="saR-3I-STo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GVp-6Y-YnV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="437" y="-904"/>
+        </scene>
+        <!--Night Hours View Controller-->
+        <scene sceneID="XdN-QN-aPY">
+            <objects>
+                <viewController storyboardIdentifier="DSNightWatchViewController" id="mrG-fp-Qi9" userLabel="Night Hours View Controller" customClass="DSDayContentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G5C-tX-ebg">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OmE-c1-SUi">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="zjP-JV-42u">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="candle.png" id="mmL-fg-iH0"/>
+                    <connections>
+                        <outlet property="scrollView" destination="OmE-c1-SUi" id="Fxi-9E-auE"/>
+                        <outlet property="tbiNightHours" destination="mmL-fg-iH0" id="uH0-f8-mCs"/>
+                        <outlet property="webViewText" destination="zjP-JV-42u" id="D57-tm-FCG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wIZ-0u-QNK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="969" y="-1772"/>
+        </scene>
+        <!--Hours View Controller-->
+        <scene sceneID="fX4-e5-y4m">
+            <objects>
+                <viewController storyboardIdentifier="DSHoursViewController" id="6mY-iK-qs4" userLabel="Hours View Controller" customClass="DSDayContentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VIx-10-G8o">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Nvc-aO-9Sx">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="ffZ-0l-vgF">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="minutes.png" id="tIm-HL-6jG"/>
+                    <connections>
+                        <outlet property="btiHour" destination="tIm-HL-6jG" id="2fn-hE-OKT"/>
+                        <outlet property="scrollView" destination="Nvc-aO-9Sx" id="TS0-Ix-wB4"/>
+                        <outlet property="tabBarItem" destination="tIm-HL-6jG" id="IpK-7y-eG9"/>
+                        <outlet property="webViewText" destination="ffZ-0l-vgF" id="dwA-E2-RkW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dgs-wI-ZHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="162" y="305"/>
+        </scene>
+        <!--Morning Hours View Controller-->
+        <scene sceneID="7Wc-gg-LVE">
+            <objects>
+                <viewController storyboardIdentifier="DSMorningWatchViewController" id="xbd-xN-I6M" userLabel="Morning Hours View Controller" customClass="DSDayContentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bQY-94-AOZ">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="tW2-vs-Lqx">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="5in-V5-LGP">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="sunrise.png" id="zBM-TV-vfF"/>
+                    <connections>
+                        <outlet property="scrollView" destination="tW2-vs-Lqx" id="G6e-b2-JL9"/>
+                        <outlet property="tbiMorningHours" destination="zBM-TV-vfF" id="auO-7p-kFz"/>
+                        <outlet property="webViewText" destination="5in-V5-LGP" id="fNp-fl-yqb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dIh-bV-h6V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1201" y="-2548"/>
+        </scene>
+        <!--Holiday View Controller-->
+        <scene sceneID="XFw-Lp-1c9">
+            <objects>
+                <viewController storyboardIdentifier="DSHolidayViewController" id="Bas-75-ehb" userLabel="Holiday View Controller" customClass="DSDayContentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n9M-4Y-zUX">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="VCG-5y-o7d">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="6Fs-TW-ZOc">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="saint.png" id="1xd-MH-VUy"/>
+                    <connections>
+                        <outlet property="scrollView" destination="VCG-5y-o7d" id="kCR-Jz-QFN"/>
+                        <outlet property="tbiHoliday" destination="1xd-MH-VUy" id="ZgN-1Y-qgz"/>
+                        <outlet property="webViewText" destination="6Fs-TW-ZOc" id="4mt-UM-3xh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wJM-W2-ceq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1201" y="72"/>
+        </scene>
+        <!--Readings View Controller-->
+        <scene sceneID="xvR-Qm-goC">
+            <objects>
+                <viewController storyboardIdentifier="DSReadingsViewController" id="1sV-Hr-Hku" userLabel="Readings View Controller" customClass="DSDayContentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IY5-RT-qnf">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="X82-Qq-h3I">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="uu8-zc-10B">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="Bible.png" id="RUt-fi-BSz"/>
+                    <connections>
+                        <outlet property="scrollView" destination="X82-Qq-h3I" id="71w-vW-w36"/>
+                        <outlet property="tbiReadings" destination="RUt-fi-BSz" id="gil-2v-Ypg"/>
+                        <outlet property="webViewText" destination="uu8-zc-10B" id="kBh-i6-T0u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WIS-82-5n9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1221" y="-716"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="26D-B4-1eM">
+            <objects>
+                <viewController storyboardIdentifier="DSInfoViewController" id="uzH-21-3o2" customClass="DSInfoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nVt-Aq-h53">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="dUs-dp-o4Y">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="mWebView" destination="dUs-dp-o4Y" id="rfs-q9-PYy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uZu-w4-ECD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-667" y="540"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Bible.png" width="21" height="25"/>
+        <image name="candle.png" width="17" height="25"/>
+        <image name="fasting.png" width="120" height="48"/>
+        <image name="minutes.png" width="25" height="25"/>
+        <image name="prayer_book.png" width="29" height="25"/>
+        <image name="saint.png" width="18" height="25"/>
+        <image name="sunrise.png" width="44" height="25"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

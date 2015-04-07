@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>737A0DF7-5FBC-4BC2-AAA8-BCD27F000139</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Calendar UGCC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</key>
+		<string>https://ugcc-calendar-ios.googlecode.com/svn/trunk</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Calendar UGCC/Calendar UGCC.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</key>
+		<string>https://ugcc-calendar-ios.googlecode.com/svn</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://ugcc-calendar-ios.googlecode.com/svn/trunk/Calendar%20UGCC/Calendar%20UGCC.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
+			<string>branches</string>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
+			<string>tags</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>trunk</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ugcc-calendar-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

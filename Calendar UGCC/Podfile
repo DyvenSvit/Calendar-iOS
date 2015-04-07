@@ -1,0 +1,37 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '8.0'
+
+inhibit_all_warnings!
+
+target 'CalendarUGCC' do
+
+pod 'AFNetworking', '~> 2.0' # Core, without NSURLSession, compatible with iOS6
+# pod 'AFNetworking/NSURLSession', '~> 2.0' # Add NSURLSession features, only compatible with iOS7
+
+pod 'MBProgressHUD', '~> 0.8'
+
+pod 'SSZipArchive', '~> 0.3'
+
+pod 'KissXML', '~> 5.0'
+
+pod 'ActionSheetPicker-3.0', '~> 1.0.9'
+
+pod 'CrashlyticsFramework', '~> 2.2'
+
+pod 'DTCoreText', '~> 1.6'
+
+pod 'Reachability', '~> 3.1'
+
+pod 'GoogleAnalytics-iOS-SDK', '~> 3.0'
+
+end
+
+target 'TodayWidget' do
+
+pod 'DTCoreText', '~> 1.6'
+pod 'CrashlyticsFramework', '~> 2.2'
+pod 'GoogleAnalytics-iOS-SDK', '~> 3.0'
+
+end
+

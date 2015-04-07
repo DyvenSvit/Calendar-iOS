@@ -1,0 +1,3 @@
+<h3>ВЕЧІРНЯ * <a name="v" style="color:#669900;" href="#u">(УТРЕНЯ)</a></h3>
+<h3>УТРЕНЯ * <a name="u" style="color:#669900;" href="#v">(ВЕЧІРНЯ)</a></h3>
+<link rel="stylesheet" type="text/css" href="file:///android_asset/txt.css">

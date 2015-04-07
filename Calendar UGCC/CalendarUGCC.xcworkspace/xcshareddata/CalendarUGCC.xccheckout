@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F00623A5-768D-42B6-A7A8-1E646D8E61E0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CalendarUGCC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</key>
+		<string>https://ugcc-calendar-ios.googlecode.com/svn/trunk</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Calendar UGCC/CalendarUGCC.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</key>
+		<string>https://ugcc-calendar-ios.googlecode.com/svn</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://ugcc-calendar-ios.googlecode.com/svn/trunk/Calendar%20UGCC/CalendarUGCC.xcworkspace</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ugcc-calendar-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
