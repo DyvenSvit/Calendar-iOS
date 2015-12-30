@@ -13,7 +13,6 @@
 #import "DSDay+TablePresentation.h"
 #import "UIViewController+Utils.h"
 #import "UIViewController+Dialog.h"
-#import "NSAttributedString+HTML.h"
 #import "UILabel+Resize.h"
 #import "DSDayViewController.h"
 #import "ActionSheetYearMonthPicker.h"

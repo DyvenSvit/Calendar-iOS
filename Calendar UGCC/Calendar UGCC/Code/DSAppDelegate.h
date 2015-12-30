@@ -14,7 +14,9 @@
 #import "NSDate+Utils.h"
 #import "DSManageData.h"
 #import "Reachability.h"
-#import "DSUpdateData.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface DSAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -23,7 +25,6 @@
 @property (strong, atomic) Reachability *reach;
 @property (assign, nonatomic) BOOL isDataLoading;
 @property (assign, nonatomic) BOOL isDataLoaded;
-@property (strong, atomic) DSUpdateData *updateDataObj;
 @property (strong, atomic) DSManageData *manageDataObj;
 -(void)startManageData;
 @end

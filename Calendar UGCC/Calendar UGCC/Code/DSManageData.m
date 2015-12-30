@@ -76,21 +76,6 @@
         NSLog(@"This app version resources was already copied to Library");
     }
     
-    NSString *localUpdatesPath = [[DSData cachesPath] stringByAppendingPathComponent:@"/Assets/updates.xml"];
-    
-    NSString * fileContents=[NSString stringWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:localUpdatesPath] encoding:
-                             NSUTF8StringEncoding error:&error];
-    
-    if (!fileContents && error != nil) {
-        NSLog(@"error accessing file %@: %@", localUpdatesPath, error);
-       
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Failed accessing updates.xml file" forKey:NSLocalizedDescriptionKey];
-        NSError *error = [NSError errorWithDomain:@"DSManageDataErrorDomain" code:-1 userInfo:userInfo];
-        if(errorBlock) errorBlock(error);
-        return;
-    }
-
-    NSLog(@"File %@ accessed:\n%@", localUpdatesPath, fileContents);
     if(completionBlock) completionBlock();
 }
 

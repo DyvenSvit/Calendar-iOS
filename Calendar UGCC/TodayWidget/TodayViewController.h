@@ -11,7 +11,8 @@
 #import "DSDay.h"
 #import "NSDate+Utils.h"
 #import "DSDay+TablePresentation.h"
-#import "NSAttributedString+HTML.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface TodayViewController : GAITrackedViewController
 

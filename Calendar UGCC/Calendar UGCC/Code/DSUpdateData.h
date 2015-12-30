@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "NSDate+Utils.h"
-#import "DDXML.h"
 #import "DSUpdate.h"
 #import "URLDownloader.h"
-#import "ZIPArchiveProcessor.h"
 #import "DSData.h"
 
 typedef void (^updatesCompletionBlock)();

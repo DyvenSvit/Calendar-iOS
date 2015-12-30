@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C9BFBA5B721AB8BABACFF2DCF312370E69BA257F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C9BFBA5B721AB8BABACFF2DCF312370E69BA257F" : 0,
+    "d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F00623A5-768D-42B6-A7A8-1E646D8E61E0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C9BFBA5B721AB8BABACFF2DCF312370E69BA257F" : "Calendar-iOS\/",
+    "d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505" : "ugcc-calendar-ios"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CalendarUGCC",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Calendar UGCC\/CalendarUGCC.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/DyvenSvit\/Calendar-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C9BFBA5B721AB8BABACFF2DCF312370E69BA257F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/ugcc-calendar-ios.googlecode.com\/svn",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "d5c3d263-7072-ec0f-9a2b-4d8dffa6372f++505"
+    }
+  ]
+}

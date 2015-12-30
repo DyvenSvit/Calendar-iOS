@@ -10,12 +10,12 @@
 
 @implementation DSAppDelegate
 
-@synthesize backgroundQueue, isDataLoading, isDataLoaded, reach, updateDataObj, manageDataObj;
+@synthesize backgroundQueue, isDataLoading, isDataLoaded, reach, manageDataObj;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //#ifndef DEBUG
-    [Crashlytics startWithAPIKey:@"a833e3cfadfc1218c22f19bfbdc9caf0183fe899"];
+    [Fabric with:@[[Crashlytics class]]];
     //#endif
     
     [self addSkipBackupAttributeToItemAtURL:[self applicationLibraryDirectory]];
@@ -63,19 +63,6 @@
         
         [DSData shared];
         [[NSNotificationCenter defaultCenter] postNotificationName:NT_DATA_LOADING_END object:nil];
-        
-        // Allocate a reachability object
-        reach = [Reachability reachabilityWithHostname:@"dyvensvit.org"];
-        
-        // Tell the reachability that we DON'T want to be reachable on 3G/EDGE/CDMA
-        reach.reachableOnWWAN = NO;
-        
-        NetworkStatus internetStatus = [reach currentReachabilityStatus];
-        if (internetStatus == ReachableViaWiFi) {
-        
-            // [self updateData];
-        }
-        
     } errorBlock:^(NSError *error) {
         
         
@@ -116,50 +103,6 @@
 }
 
 
--(void)updateData
-{
-    if(!APP.isDataLoading)
-       {
-            NSDate *startDate = [NSDate date];
-        
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NT_DATA_LOADING_BEGIN object:nil];
-            
-            APP.isDataLoading = YES;
-            
-
-            updateDataObj = [[DSUpdateData alloc] initWithCompletionBlock:^() {
-                APP.isDataLoading = NO;
-                
-                NSDate *endDate = [NSDate date];
-                [self onLoad:[endDate timeIntervalSinceDate:startDate]];
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-               
-                [[NSNotificationCenter defaultCenter] postNotificationName:NT_DATA_LOADING_END object:nil];
-            } errorBlock:^(NSError *error) {
-                APP.isDataLoading = NO;
-                
-                NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:NT_DATA_LOADING_ERROR object:nil userInfo:userInfo];
-                
-                NSString *errorMsg = [NSString stringWithFormat:@"Update data error: %@", (error)?[error description]:@""];
-                
-                [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createExceptionWithDescription:errorMsg withFatal:@NO] build]];
-                NSDate *endDate = [NSDate date];
-                [self onLoad:[endDate timeIntervalSinceDate:startDate]];
-                
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                
-            } progressBlock:^(NSString *status, float loaded, float total) {
-                NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:status, @"status", [NSNumber numberWithFloat:total/loaded], @"progress", nil];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:NT_DATA_LOADING_PROGRESS object:nil userInfo:userInfo];
-            }];
-            
-            [updateDataObj start];
-       }
-}
 
 /*
  * Called after a list of high scores finishes loading.
@@ -194,11 +137,9 @@
     }
     else
     {
-        
-        //NSString *currentYearString = [NSString stringWithFormat:@"%ld", (long)[NSDate getCurrentYearNumber]];
-        //NSInteger selectedYearIndex = [[[DSData shared] yearNames] indexOfObject:currentYearString];
-        
-        day = ((DSMonth*)((DSYear*)[DSData shared].years[0]).months[[NSDate getCurrentMonthNumber]-1]).days[[NSDate getCurrentDayNumber] -1];
+        NSString *currentYearString = [NSString stringWithFormat:@"%d", (int)[NSDate getCurrentYearNumber]];
+        NSInteger selectedYearIndex = [[[DSData shared] yearNames] indexOfObject:currentYearString];
+        day = ((DSMonth*)((DSYear*)[DSData shared].years[selectedYearIndex]).months[[NSDate getCurrentMonthNumber]-1]).days[[NSDate getCurrentDayNumber] -1];
     }
     
     DSDayViewController *navController = [[self.window.rootViewController storyboard] instantiateViewControllerWithIdentifier:@"DSDayViewController"];

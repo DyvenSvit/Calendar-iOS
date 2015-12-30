@@ -11,15 +11,10 @@ pod 'AFNetworking', '~> 2.0' # Core, without NSURLSession, compatible with iOS6
 
 pod 'MBProgressHUD', '~> 0.8'
 
-pod 'SSZipArchive', '~> 0.3'
-
-pod 'KissXML', '~> 5.0'
-
 pod 'ActionSheetPicker-3.0', '~> 1.0.9'
 
-pod 'CrashlyticsFramework', '~> 2.2'
-
-pod 'DTCoreText', '~> 1.6'
+pod 'Fabric'
+pod 'Crashlytics'
 
 pod 'Reachability', '~> 3.1'
 
@@ -29,8 +24,8 @@ end
 
 target 'TodayWidget' do
 
-pod 'DTCoreText', '~> 1.6'
-pod 'CrashlyticsFramework', '~> 2.2'
+pod 'Fabric'
+pod 'Crashlytics'
 pod 'GoogleAnalytics-iOS-SDK', '~> 3.0'
 
 end

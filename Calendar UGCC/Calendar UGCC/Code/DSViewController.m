@@ -48,7 +48,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.labelText = @"Loading";
-    HUD.detailsLabelText = @"Looking for data update";
+    //HUD.detailsLabelText = @"Looking for data update";
         
     }];
 }
@@ -60,7 +60,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         tableDays.delegate = self;
         tableDays.dataSource = self;
         
-        NSString *currentYearString = [NSString stringWithFormat:@"%ld", (long)[NSDate getCurrentYearNumber]];
+        NSString *currentYearString = [NSString stringWithFormat:@"%d", (int)[NSDate getCurrentYearNumber]];
         selectedYearIndex = [[[DSData shared] yearNames] indexOfObject:currentYearString];
        
         selectedMonthIndex = [NSDate getCurrentMonthNumber]-1;
@@ -75,7 +75,8 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     }];
     
     [APP.backgroundQueue addOperationWithBlock:^(){
-        [self prepareAttributedTexts];
+        if(((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days.count > 0)
+            [self prepareAttributedTexts];
     }];
 }
 
@@ -106,7 +107,8 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
 
     
     [APP.backgroundQueue addOperationWithBlock:^(){
-        [self prepareAttributedTexts];
+        if(((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days.count > 0)
+            [self prepareAttributedTexts];
     }];
 }
 
@@ -143,7 +145,9 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         selectedMonthIndex = selectedMIndex;
         self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@)",  [[[DSData shared] monthNames] objectAtIndex: selectedMonthIndex], [[[DSData shared] yearNames] objectAtIndex:selectedYearIndex]];
         [APP.backgroundQueue addOperationWithBlock:^(){
-            [self prepareAttributedTexts];
+            if(((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days.count > 0)
+                [self prepareAttributedTexts];
+        
         }];
     }
                                         cancelBlock:^(ActionSheetYearMonthPicker *picker) {
@@ -220,14 +224,24 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         cell.lbOldStyleDate.text = [day getOldStyleDateString];
         cell.lbDate.text = [day getDateString];
         cell.lbDayOfWeek.text = [day getWeekDayString];
+
+        if(!day.holidayTitle)
+            day.holidayTitle = [[NSAttributedString alloc] initWithData:[day.holidayTitleStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+        
         cell.lbTitle.attributedText = day.holidayTitle;
+        
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) { //*
             [cell.lbTitle setAdjustsFontSizeToFitWidth:NO];
         }
         cell.viewDate.alpha =  [day getDayBgAlpha];
         cell.viewInfo.alpha = [day getDayBgAlpha];
         
+        
+        if(!day.readingTitle)
+            day.readingTitle = [[NSAttributedString alloc] initWithData:[day.readingTitleStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+        
         cell.lbReading.attributedText = day.readingTitle;
+        
         cell.viewBackground.backgroundColor = [day getDayMainBgColor];
         return cell;
     }

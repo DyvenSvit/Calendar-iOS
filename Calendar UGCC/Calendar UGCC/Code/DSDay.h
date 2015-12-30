@@ -19,6 +19,8 @@ enum FastingType : NSInteger {
 @property (strong, nonatomic) NSDate *date;
 @property (assign, nonatomic) BOOL isHoliday;
 @property (assign, nonatomic) enum FastingType fastingType;
+@property (strong, nonatomic) NSString *holidayTitleStr;
+@property (strong, nonatomic) NSString *readingTitleStr;
 @property (strong, nonatomic) NSAttributedString *holidayTitle;
 @property (strong, nonatomic) NSAttributedString *readingTitle;
 

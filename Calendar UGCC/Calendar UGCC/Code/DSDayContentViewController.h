@@ -10,7 +10,6 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "UILabel+Resize.h"
 #import "DSDay.h"
-#import "NSAttributedString+HTML.h"
 #import "UIViewController+Utils.h"
 #import "UIViewController+Dialog.h"
 #import "NSAttributedString+FontSize.h"

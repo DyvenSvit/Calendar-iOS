@@ -21,7 +21,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
        
-        [Crashlytics startWithAPIKey:@"a833e3cfadfc1218c22f19bfbdc9caf0183fe899"];
+        [Fabric with:@[[Crashlytics class]]];
         
         // Optional: automatically send uncaught exceptions to Google Analytics.
         [GAI sharedInstance].trackUncaughtExceptions = YES;
@@ -53,16 +53,16 @@
 
 -(void)updateData
 {
-    DSDay *day = ((DSMonth*)((DSYear*)[DSData shared].years[0]).months[[NSDate getCurrentMonthNumber]-1]).days[[NSDate getCurrentDayNumber] -1];
-    
-    
-    
-    
+    NSString *currentYearString = [NSString stringWithFormat:@"%d", (int)[NSDate getCurrentYearNumber]];
+    NSInteger selectedYearIndex = [[[DSData shared] yearNames] indexOfObject:currentYearString];
+    DSDay* day = ((DSMonth*)((DSYear*)[DSData shared].years[selectedYearIndex]).months[[NSDate getCurrentMonthNumber]-1]).days[[NSDate getCurrentDayNumber] -1];
+
     imgFasting.image = [day getFastimgImage];
     lbOldStyleDate.text = [day getOldStyleDateString];
     lbDate.text = [day getDateString];
     lbDayOfWeek.text = [day getWeekDayString];
-    lbTitle.attributedText = day.holidayTitle;
+    
+        lbTitle.attributedText = [[NSAttributedString alloc] initWithData:[day.holidayTitleStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) { //*
         [lbTitle setAdjustsFontSizeToFitWidth:NO];
@@ -70,7 +70,9 @@
     viewDate.alpha =  [day getDayBgAlpha];
     viewInfo.alpha = [day getDayBgAlpha];
     
-    lbReading.attributedText = day.readingTitle;
+    
+   lbReading.attributedText = [[NSAttributedString alloc] initWithData:[day.readingTitleStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    
     viewBackground.backgroundColor = [day getDayMainBgColor];
 }
 
@@ -102,6 +104,11 @@
     // If there's an update, use NCUpdateResultNewData
 
     completionHandler(NCUpdateResultNewData);
+}
+
+-(UIEdgeInsets) widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets
+{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 @end
