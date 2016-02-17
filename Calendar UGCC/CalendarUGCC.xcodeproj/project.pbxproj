@@ -51,7 +51,6 @@
 		07F393D819A4E4F5006FBDBF /* prayer_book@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393D119A4E4F5006FBDBF /* prayer_book@2x.png */; };
 		07F393D919A4E4F5006FBDBF /* prayer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393D219A4E4F5006FBDBF /* prayer@2x.png */; };
 		07F393DA19A4E4F5006FBDBF /* saint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393D319A4E4F5006FBDBF /* saint@2x.png */; };
-		07F393E419A4E627006FBDBF /* DSDayContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F393E319A4E627006FBDBF /* DSDayContentViewController.m */; };
 		07F393F919A4FBB7006FBDBF /* appbar_calendar_month.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393F119A4FBB7006FBDBF /* appbar_calendar_month.png */; };
 		07F393FA19A4FBB7006FBDBF /* appbar_calendar_month@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393F219A4FBB7006FBDBF /* appbar_calendar_month@2x.png */; };
 		07F393FB19A4FBB7006FBDBF /* appbar_information_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393F319A4FBB7006FBDBF /* appbar_information_circle.png */; };
@@ -215,8 +214,6 @@
 		07F393D119A4E4F5006FBDBF /* prayer_book@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "prayer_book@2x.png"; path = "Resources/Images/prayer_book@2x.png"; sourceTree = "<group>"; };
 		07F393D219A4E4F5006FBDBF /* prayer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "prayer@2x.png"; path = "Resources/Images/prayer@2x.png"; sourceTree = "<group>"; };
 		07F393D319A4E4F5006FBDBF /* saint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "saint@2x.png"; path = "Resources/Images/saint@2x.png"; sourceTree = "<group>"; };
-		07F393E219A4E627006FBDBF /* DSDayContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSDayContentViewController.h; path = Code/DSDayContentViewController.h; sourceTree = "<group>"; };
-		07F393E319A4E627006FBDBF /* DSDayContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSDayContentViewController.m; path = Code/DSDayContentViewController.m; sourceTree = "<group>"; };
 		07F393F119A4FBB7006FBDBF /* appbar_calendar_month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appbar_calendar_month.png; path = Resources/Images/appbar_calendar_month.png; sourceTree = "<group>"; };
 		07F393F219A4FBB7006FBDBF /* appbar_calendar_month@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appbar_calendar_month@2x.png"; path = "Resources/Images/appbar_calendar_month@2x.png"; sourceTree = "<group>"; };
 		07F393F319A4FBB7006FBDBF /* appbar_information_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appbar_information_circle.png; path = Resources/Images/appbar_information_circle.png; sourceTree = "<group>"; };
@@ -324,8 +321,6 @@
 			children = (
 				078DD751199E3086009A1E72 /* DSDayViewController.h */,
 				078DD752199E3086009A1E72 /* DSDayViewController.m */,
-				07F393E219A4E627006FBDBF /* DSDayContentViewController.h */,
-				07F393E319A4E627006FBDBF /* DSDayContentViewController.m */,
 			);
 			name = "Day View Controller";
 			sourceTree = "<group>";
@@ -627,6 +622,7 @@
 				7C2EF0E4068CC9B02557440D /* Copy Pods Resources */,
 				8418D82C1A04130900AFDD02 /* ShellScript */,
 				C3B42976334CEE0E9ECF0E04 /* Embed Pods Frameworks */,
+				8B1AD0111C74D7C100FFB548 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -644,7 +640,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DS;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = DyvenSvit;
 				TargetAttributes = {
 					07E3266F199B56AC0017685A = {
@@ -804,6 +800,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" a833e3cfadfc1218c22f19bfbdc9caf0183fe899 7f95d5bf273744b537ecf1dc278e337ede89c89aca036d1dd3277ea220316d1d";
 		};
+		8B1AD0111C74D7C100FFB548 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then \n    rm -fr Frameworks\nfi";
+		};
 		915CC64693A4CC578224C88E /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -885,7 +894,6 @@
 				07E1A9DE199DFB6C0079037A /* DSDayTableViewCell.m in Sources */,
 				07937FA2199CB2720002C317 /* DSAppDelegate.m in Sources */,
 				07FFF6BE199CED360022A4D7 /* DSYear.m in Sources */,
-				07F393E419A4E627006FBDBF /* DSDayContentViewController.m in Sources */,
 				07FFF6E8199D0BCB0022A4D7 /* UIColor+Utils.m in Sources */,
 				07C9B48919C9BA0F00ACF202 /* DSInfoViewController.m in Sources */,
 				8404C02519FA84E4001E5BB1 /* DSUpdate.m in Sources */,
@@ -990,6 +998,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1075,7 +1084,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "be372069-783d-4090-8402-1e8cae752863";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1104,7 +1113,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a8f9c818-f40a-4de6-89fc-57de8d093e4b";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1142,7 +1151,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC.TodayWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3ef72c7a-79ba-4720-82d5-4a427544417b";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(PROJECT_DIR)/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 			};
@@ -1179,7 +1188,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC.TodayWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a8ca8baf-1eb6-43dd-b937-971d2c529331";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(PROJECT_DIR)/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 			};

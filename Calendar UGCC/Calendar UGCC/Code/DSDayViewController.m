@@ -11,7 +11,12 @@
 
 @implementation DSDayViewController
 
-@synthesize day;
+NSInteger mFontSize = 20;
+NSInteger DEFAULTWEBVIEWFONTSIZE = 18;
+
+NSArray *contentModeIDs;
+
+@synthesize day, contentType, menuView, webViewText, contentModeButtons;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,11 +31,33 @@
 {
     [super viewDidLoad];
     
+    contentModeIDs = @[@(ContentLiturgy),
+                     @(ContentMorningHours),
+                     @(ContentNightHours),
+                     @(ContentHours),
+                     @(ContentReadings),
+                     @(ContentHoliday)];
+    
     UIBarButtonItem *addEventItem = [self getBarItemWithImageNamed:@"appbar_add_event" action:@selector(addEventItemClick)];
     UIBarButtonItem *sizeUpFontItem = [self getBarItemWithImageNamed:@"appbar_text_size_up" action:@selector(sizeUpFontItemClick)];
     UIBarButtonItem *sizeDownFontItem = [self getBarItemWithImageNamed:@"appbar_text_size_down" action:@selector(sizeDownFontItemClick)];
     NSArray *actionButtonItems = @[addEventItem, sizeDownFontItem, sizeUpFontItem];
     self.navigationItem.rightBarButtonItems = actionButtonItems;
+    
+    
+    webViewText.delegate = self;
+    if(IOS7)
+    {
+        webViewText.paginationMode = UIWebPaginationModeLeftToRight;
+        webViewText.paginationBreakingMode = UIWebPaginationBreakingModePage;
+        webViewText.scrollView.pagingEnabled = YES;
+        webViewText.scrollView.pagingEnabled = YES;
+        webViewText.scrollView.alwaysBounceHorizontal = YES;
+        webViewText.scrollView.alwaysBounceVertical = NO;
+        webViewText.scrollView.bounces = YES;
+    }
+    
+    [self loadResources];
 }
 
 -(UIBarButtonItem*) getBarItemWithImageNamed:(NSString*) imgName action:(SEL) action
@@ -55,10 +82,7 @@
                                                                                         action:@"Size Up Font"
                                                                                          label:nil
                                                                                          value:nil] build]];
-    for(DSDayContentViewController *vc in  [self viewControllers])
-    {
-        [vc updateWithSizeUpFont];
-    }
+    [self updateWithSizeUpFont];
 }
 
 -(void)sizeDownFontItemClick{
@@ -66,10 +90,7 @@
                                                                                         action:@"Size Down Font"
                                                                                          label:nil
                                                                                          value:nil] build]];
-    for(DSDayContentViewController *vc in  [self viewControllers])
-    {
-        [vc updateWithSizeDownFont];
-    }
+    [self updateWithSizeDownFont];
 }
 
 -(void)addEventItemClick
@@ -190,41 +211,75 @@
 {
     [super viewWillAppear:animated];
     
-    
-    [self setSelectedIndex:ContentReadings];
-    
-    
-    [self tabBar:self.tabBar didSelectItem:self.tabBar.selectedItem];
+    if(contentModeButtons.count)
+    {
+        CGFloat btnWidth = menuView.frame.size.width/contentModeButtons.count;
+        
+        for(int i = 0; i < contentModeButtons.count; i++)
+        {
+            UIButton *btn = contentModeButtons[i];
+            [menuView addSubview: btn];
+            btn.frame = CGRectMake(i*btnWidth, 0, btnWidth, menuView.frame.size.height);
+            
+            btn.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+            
+            [btn addTarget:self action:@selector(btnContentModeClick:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
+        [self btnContentModeClick:contentModeButtons[0]];
+    }
 }
 
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+- (void)btnContentModeClick:(id) sender
 {
-    switch([tabBar.items indexOfObject:item])
+    [NSOperationQueue.mainQueue addOperationWithBlock:^(){
+        [MBProgressHUD showHUDAddedTo:self.view animated:NO];
+    }];
+    
+    NSString *text = @"";
+    contentType = ((UIButton*)sender).tag;
+    switch(contentType)
     {
         case ContentLiturgy:
             self.navigationItem.title = @"Служба";
+            text = day.dayLiturgy;
+            self.screenName = @"Liturgy";
             break;
         case ContentMorningHours:
             self.navigationItem.title = @"Утреня";
+            text = day.dayMorningHours;
+            self.screenName = @"Morning Hours";
             break;
         case ContentNightHours:
             self.navigationItem.title = @"Вечірня";
+            text = day.dayNightHours;
+            self.screenName = @"Night Hours";
             break;
         case ContentHours:
             self.navigationItem.title = @"Часи";
+            text = day.dayHours;
+            self.screenName = @"Hours";
             break;
         case ContentReadings:
             self.navigationItem.title = @"Читання";
+            text = day.dayReadings;
+            self.screenName = @"Readings";
             break;
         case ContentHoliday:
             self.navigationItem.title = @"Свято";
+            text = day.dayHoliday;
+            self.screenName = @"Holiday";
             break;
         default:
             break;
     }
     
+    
+
+    [webViewText loadHTMLString:text baseURL:nil];
+    
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
-                                                                                        action:[NSString stringWithFormat:@"Tab Bar Item select: %@", self.navigationItem.title]
+                                                                                        action:[NSString stringWithFormat:@"Day content select: %@", self.navigationItem.title]
                                                                                          label:nil
                                                                                          value:nil] build]];
 }
@@ -239,57 +294,103 @@
 -(void)loadResources
 {
     day = [[DSData shared] loadResourcesForDay:self.day];
-    NSMutableArray *toRemove = [NSMutableArray new];
-    for(DSDayContentViewController *vc in  [self viewControllers])
+    contentModeButtons = [NSMutableArray new];
+    for(NSNumber* n in contentModeIDs)
     {
-        vc.day = day;
-        vc.contentType = [[self viewControllers] indexOfObject:vc];
-        
-        
         NSString *text = @"";
-        
-        switch (vc.contentType) {
+        NSString *btnImage = @"";
+        switch ([n intValue]) {
             case ContentLiturgy:
                 text = self.day.dayLiturgy;
+                btnImage = @"prayer_book";
                 break;
             case ContentMorningHours:
                 text = self.day.dayMorningHours;
+                btnImage = @"sunrise";
                 break;
             case ContentNightHours:
                 text = self.day.dayNightHours;
+                btnImage = @"candle";
                 break;
             case ContentHours:
                 text = self.day.dayHours;
+                btnImage = @"minutes";
                 break;
             case ContentReadings:
                 text = self.day.dayReadings;
+                btnImage = @"Bible";
                 break;
             case ContentHoliday:
                 text = self.day.dayHoliday;
+                btnImage = @"saint";
                 break;
             default:
                 break;
         }
         
-        if(!text||[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length==0)
+        if(text&&[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length!=0)
         {
-            [toRemove addObject:vc];
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            
+            btn.tag = [n intValue];
+            [btn setImage:[UIImage imageNamed:btnImage] forState:UIControlStateNormal];
+            
+            [contentModeButtons addObject:btn];
         }
     }
     
-    
-    NSMutableArray *newViewControllers = [NSMutableArray arrayWithArray:self.viewControllers];
-    for(DSDayContentViewController *vc in toRemove)
-    {
-        [vc.webViewText removeFromSuperview];
-        [newViewControllers removeObject:vc];
-    }
-    [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-        [self setViewControllers:newViewControllers];
-    }];
-    
-    
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    if(webView == webViewText)
+    {
+        [self updateWithFontSize];
+    }
+}
+
+-(void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [NSOperationQueue.mainQueue addOperationWithBlock:^(){
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+}
+
+
+-(void)updateWithSizeUpFont
+{
+    if(mFontSize < 40)
+    {
+        [NSOperationQueue.mainQueue addOperationWithBlock:^(){
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        }];
+        mFontSize++;
+        [self updateWithFontSize];
+    }
+}
+
+-(void)updateWithSizeDownFont
+{
+    if(mFontSize > 12)
+    {
+        [NSOperationQueue.mainQueue addOperationWithBlock:^(){
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        }];
+        mFontSize--;
+        [self updateWithFontSize];
+    }
+}
+
+-(void)updateWithFontSize;
+{
+    JSContext *ctx = [webViewText valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    
+    NSString *jsForTextSize = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%ld%%'", (long)mFontSize*100/(long)DEFAULTWEBVIEWFONTSIZE];
+    
+    [ctx evaluateScript:jsForTextSize];
+    [NSOperationQueue.mainQueue addOperationWithBlock:^(){
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+}
 
 @end

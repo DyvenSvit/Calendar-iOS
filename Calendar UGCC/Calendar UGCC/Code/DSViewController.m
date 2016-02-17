@@ -292,16 +292,12 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         
         
         DSDayViewController *navController = [[self storyboard] instantiateViewControllerWithIdentifier:@"DSDayViewController"];
-
-        [APP.backgroundQueue addOperationWithBlock:^(){
-            navController.day = day;
-            [navController loadResources];
+        navController.day = day;
+        [NSOperationQueue.mainQueue addOperationWithBlock:^(){
+            [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
             
-            [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
-                [self.navigationController pushViewController:navController animated:YES];
-            }];
         }];
+        [self.navigationController pushViewController:navController animated:YES];
         
     }
 }

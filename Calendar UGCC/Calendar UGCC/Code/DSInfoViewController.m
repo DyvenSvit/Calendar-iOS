@@ -44,6 +44,13 @@
     NSString* htmlString =[NSString stringWithContentsOfURL:yearPath encoding:
                                                         NSUTF8StringEncoding error:nil];
     
+    NSString *majorVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *minorVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    
+    NSString *currentVersion = [NSString stringWithFormat:@"%@.%@", majorVersion, minorVersion];
+    
+    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"{version}" withString:currentVersion];
+    
     mWebView.delegate =self;
     
 

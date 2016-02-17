@@ -144,7 +144,6 @@
     
     DSDayViewController *navController = [[self.window.rootViewController storyboard] instantiateViewControllerWithIdentifier:@"DSDayViewController"];
     navController.day = day;
-    [navController loadResources];
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     [navigationController pushViewController:navController animated:YES];
     return YES;
