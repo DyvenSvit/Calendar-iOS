@@ -104,7 +104,7 @@ NSArray *contentModeIDs;
                                                                                          label:nil
                                                                                          value:nil] build]];
     
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"dscal://%@", [day.date toString]]];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"dscal://%@", [[day getDate] toString]]];
     
     EKEventStore *eventStore = [[EKEventStore alloc] init];
     
@@ -114,8 +114,8 @@ NSArray *contentModeIDs;
         if(granted)
         {
             
-            NSDate *startEventDate =day.date;
-            NSDate *endEventDate = [[NSDate alloc] initWithTimeInterval:60*60*24-1 sinceDate:day.date];
+            NSDate *startEventDate =[day getDate];
+            NSDate *endEventDate = [[NSDate alloc] initWithTimeInterval:60*60*24-1 sinceDate:[day getDate]];
             
             // Create the predicate from the event store's instance method
             NSPredicate *predicate = [eventStore predicateForEventsWithStartDate:startEventDate
@@ -151,7 +151,7 @@ NSArray *contentModeIDs;
                 // If I just use the startDate as the end date, then the height of the event in the calendar is really short.
                 
                 newCalendarEvent.endDate = endEventDate;
-                newCalendarEvent.title = [day.holidayTitle string];
+                newCalendarEvent.title = [day.holidayTitleAttr string];
                 newCalendarEvent.calendar = calendar;
                 newCalendarEvent.URL = url;
                 newCalendarEvent.allDay = YES;
@@ -242,32 +242,32 @@ NSArray *contentModeIDs;
     {
         case ContentLiturgy:
             self.navigationItem.title = @"Служба";
-            text = day.dayLiturgy;
+            text = day.liturgy;
             self.screenName = @"Liturgy";
             break;
         case ContentMorningHours:
             self.navigationItem.title = @"Утреня";
-            text = day.dayMorningHours;
+            text = day.morning;
             self.screenName = @"Morning Hours";
             break;
         case ContentNightHours:
             self.navigationItem.title = @"Вечірня";
-            text = day.dayNightHours;
+            text = day.night;
             self.screenName = @"Night Hours";
             break;
         case ContentHours:
             self.navigationItem.title = @"Часи";
-            text = day.dayHours;
+            text = day.hours;
             self.screenName = @"Hours";
             break;
         case ContentReadings:
             self.navigationItem.title = @"Читання";
-            text = day.dayReadings;
+            text = day.readings;
             self.screenName = @"Readings";
             break;
         case ContentHoliday:
             self.navigationItem.title = @"Свято";
-            text = day.dayHoliday;
+            text = day.saints;
             self.screenName = @"Holiday";
             break;
         default:
@@ -301,27 +301,27 @@ NSArray *contentModeIDs;
         NSString *btnImage = @"";
         switch ([n intValue]) {
             case ContentLiturgy:
-                text = self.day.dayLiturgy;
+                text = self.day.liturgy;
                 btnImage = @"prayer_book";
                 break;
             case ContentMorningHours:
-                text = self.day.dayMorningHours;
+                text = self.day.morning;
                 btnImage = @"sunrise";
                 break;
             case ContentNightHours:
-                text = self.day.dayNightHours;
+                text = self.day.night;
                 btnImage = @"candle";
                 break;
             case ContentHours:
-                text = self.day.dayHours;
+                text = self.day.hours;
                 btnImage = @"minutes";
                 break;
             case ContentReadings:
-                text = self.day.dayReadings;
+                text = self.day.readings;
                 btnImage = @"Bible";
                 break;
             case ContentHoliday:
-                text = self.day.dayHoliday;
+                text = self.day.saints;
                 btnImage = @"saint";
                 break;
             default:

@@ -7,12 +7,12 @@
 //
 
 #import "ActionSheetCustomPicker.h"
-#import "DSData.h"
+#import "DSYear+CD.h"
 #import "NSDate+Utils.h"
 
 @class ActionSheetYearMonthPicker;
 
-typedef void(^ActionYearMonthDoneBlock)(ActionSheetYearMonthPicker *picker, NSInteger selectedYearIndex, NSInteger selectedMonthIndex);
+typedef void(^ActionYearMonthDoneBlock)(ActionSheetYearMonthPicker *picker, NSInteger selectedYear, NSInteger selectedMonth);
 typedef void(^ActionYearMonthCancelBlock)(ActionSheetYearMonthPicker *picker);
 
 @interface ActionSheetYearMonthPicker : ActionSheetCustomPicker <ActionSheetCustomPickerDelegate>
@@ -20,7 +20,7 @@ typedef void(^ActionYearMonthCancelBlock)(ActionSheetYearMonthPicker *picker);
 @property (nonatomic) NSInteger selectedYear;
 @property (nonatomic) NSInteger selectedMonth;
 
-+ (id)showPickerWithSelectedYear:(NSInteger)yearIndex month:(NSInteger)monthIndex doneBlock:(ActionYearMonthDoneBlock)doneBlock cancelBlock:(ActionYearMonthCancelBlock)cancelBlock origin:(id)origin;
++ (id)showPickerWithSelectedYear:(NSInteger)year month:(NSInteger)month doneBlock:(ActionYearMonthDoneBlock)doneBlock cancelBlock:(ActionYearMonthCancelBlock)cancelBlock origin:(id)origin;
 
 @property (nonatomic, copy) ActionYearMonthDoneBlock onActionDone;
 @property (nonatomic, copy) ActionYearMonthCancelBlock onActionCancel;

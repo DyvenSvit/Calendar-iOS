@@ -59,9 +59,6 @@
 		07F393FE19A4FBB7006FBDBF /* appbar_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393F619A4FBB7006FBDBF /* appbar_settings@2x.png */; };
 		07F393FF19A4FBB7006FBDBF /* appbar_text_size_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393F719A4FBB7006FBDBF /* appbar_text_size_down@2x.png */; };
 		07F3940019A4FBB7006FBDBF /* appbar_text_size_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F393F819A4FBB7006FBDBF /* appbar_text_size_up@2x.png */; };
-		07FFF6B8199CE5B30022A4D7 /* DSDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFF6B7199CE5B30022A4D7 /* DSDay.m */; };
-		07FFF6BE199CED360022A4D7 /* DSYear.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFF6BD199CED360022A4D7 /* DSYear.m */; };
-		07FFF6C1199CED6E0022A4D7 /* DSMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFF6C0199CED6E0022A4D7 /* DSMonth.m */; };
 		07FFF6C9199D04690022A4D7 /* DSDay+TablePresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFF6C8199D04690022A4D7 /* DSDay+TablePresentation.m */; };
 		07FFF6CC199D07830022A4D7 /* pist.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FFF6CA199D07830022A4D7 /* pist.png */; };
 		07FFF6CD199D07830022A4D7 /* spist.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FFF6CB199D07830022A4D7 /* spist.png */; };
@@ -85,8 +82,6 @@
 		8404C00919FA4082001E5BB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E32677199B56AC0017685A /* UIKit.framework */; };
 		8404C00A19FA4088001E5BB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E32673199B56AC0017685A /* Foundation.framework */; };
 		8404C02219FA813A001E5BB1 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E1AA19199E20770079037A /* libxml2.dylib */; };
-		8404C02519FA84E4001E5BB1 /* DSUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404C02419FA84E4001E5BB1 /* DSUpdate.m */; };
-		840BAEC51A0BF938006E76DB /* DSManageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 840BAEC41A0BF938006E76DB /* DSManageData.m */; };
 		840CC3421A08DD2C0033B7C0 /* ActionSheetYearMonthPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 840CC3411A08DD2C0033B7C0 /* ActionSheetYearMonthPicker.m */; };
 		841BA25A19F6B35C00E77BC3 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841BA25919F6B35B00E77BC3 /* NotificationCenter.framework */; };
 		841BA26019F6B35C00E77BC3 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BA25F19F6B35C00E77BC3 /* TodayViewController.m */; };
@@ -99,9 +94,6 @@
 		841BA27E19F6BA9C00E77BC3 /* UILabel+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DD747199E2B65009A1E72 /* UILabel+Resize.m */; };
 		841BA28219F6BA9C00E77BC3 /* DSDay+TablePresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFF6C8199D04690022A4D7 /* DSDay+TablePresentation.m */; };
 		841BA28419F6BA9C00E77BC3 /* DSData.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E1A9F4199E17970079037A /* DSData.m */; };
-		841BA28619F6BA9C00E77BC3 /* DSDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFF6B7199CE5B30022A4D7 /* DSDay.m */; };
-		841BA28819F6BA9C00E77BC3 /* DSYear.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFF6BD199CED360022A4D7 /* DSYear.m */; };
-		841BA28A19F6BA9C00E77BC3 /* DSMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFF6C0199CED6E0022A4D7 /* DSMonth.m */; };
 		841BA29819F6BC2700E77BC3 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 07937F9B199CB2540002C317 /* Assets */; };
 		841BA29919F6BC3400E77BC3 /* fasting_strong.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E1A9D7199DF92A0079037A /* fasting_strong.png */; };
 		841BA29A19F6BC3400E77BC3 /* fasting.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E1A9D8199DF92A0079037A /* fasting.png */; };
@@ -111,13 +103,37 @@
 		845BFDBC1A87E57B0069D3C4 /* appbar_fb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845BFDB81A87E57B0069D3C4 /* appbar_fb@2x.png */; };
 		845BFDBD1A87E57B0069D3C4 /* appbar_www.png in Resources */ = {isa = PBXBuildFile; fileRef = 845BFDB91A87E57B0069D3C4 /* appbar_www.png */; };
 		845BFDBE1A87E57B0069D3C4 /* appbar_www@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845BFDBA1A87E57B0069D3C4 /* appbar_www@2x.png */; };
-		8477AF8319FA8F0E009EAB7A /* DSUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404C02419FA84E4001E5BB1 /* DSUpdate.m */; };
 		8477AF8519FA9006009EAB7A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8477AF8419FA9006009EAB7A /* libz.dylib */; };
 		8477AF8619FA9011009EAB7A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8477AF8419FA9006009EAB7A /* libz.dylib */; };
 		8496DC541AA399C3006D9043 /* minutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496DC521AA399C3006D9043 /* minutes.png */; };
 		8496DC551AA399C3006D9043 /* minutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496DC531AA399C3006D9043 /* minutes@2x.png */; };
 		84F3C7331A0A07E800FE9648 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F3C7321A0A07E800FE9648 /* JavaScriptCore.framework */; };
 		87B753AD9E4FA644E92E6162 /* libPods-CalendarUGCC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA9B13F116E103E9D0C5A47 /* libPods-CalendarUGCC.a */; };
+		8BC48ED71CA16A0300FE8887 /* DSMonth+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ECC1CA16A0300FE8887 /* DSMonth+CoreDataProperties.m */; };
+		8BC48ED81CA16A0300FE8887 /* DSMonth+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ECC1CA16A0300FE8887 /* DSMonth+CoreDataProperties.m */; };
+		8BC48ED91CA16A0300FE8887 /* DSMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ECE1CA16A0300FE8887 /* DSMonth.m */; };
+		8BC48EDA1CA16A0300FE8887 /* DSMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ECE1CA16A0300FE8887 /* DSMonth.m */; };
+		8BC48EDB1CA16A0300FE8887 /* DSYear+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ED01CA16A0300FE8887 /* DSYear+CoreDataProperties.m */; };
+		8BC48EDC1CA16A0300FE8887 /* DSYear+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ED01CA16A0300FE8887 /* DSYear+CoreDataProperties.m */; };
+		8BC48EDD1CA16A0300FE8887 /* DSYear.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ED21CA16A0300FE8887 /* DSYear.m */; };
+		8BC48EDE1CA16A0300FE8887 /* DSYear.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ED21CA16A0300FE8887 /* DSYear.m */; };
+		8BC48EDF1CA16A0300FE8887 /* DSDay+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ED41CA16A0300FE8887 /* DSDay+CoreDataProperties.m */; };
+		8BC48EE01CA16A0300FE8887 /* DSDay+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ED41CA16A0300FE8887 /* DSDay+CoreDataProperties.m */; };
+		8BC48EE11CA16A0300FE8887 /* DSDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ED61CA16A0300FE8887 /* DSDay.m */; };
+		8BC48EE21CA16A0300FE8887 /* DSDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ED61CA16A0300FE8887 /* DSDay.m */; };
+		8BC48EE61CA16DE300FE8887 /* DSCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EE51CA16DE300FE8887 /* DSCoreDataManager.m */; };
+		8BC48EE71CA16DE300FE8887 /* DSCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EE51CA16DE300FE8887 /* DSCoreDataManager.m */; };
+		8BC48EEA1CA1705600FE8887 /* DSCoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EE91CA1705600FE8887 /* DSCoreDataUtils.m */; };
+		8BC48EEB1CA1705600FE8887 /* DSCoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EE91CA1705600FE8887 /* DSCoreDataUtils.m */; };
+		8BC48EEE1CA1777200FE8887 /* DSYear+CD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EED1CA1777200FE8887 /* DSYear+CD.m */; };
+		8BC48EEF1CA1777200FE8887 /* DSYear+CD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EED1CA1777200FE8887 /* DSYear+CD.m */; };
+		8BC48EF21CA17C5300FE8887 /* DSMonth+CD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EF11CA17C5300FE8887 /* DSMonth+CD.m */; };
+		8BC48EF31CA17C5300FE8887 /* DSMonth+CD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EF11CA17C5300FE8887 /* DSMonth+CD.m */; };
+		8BC48EF61CA1816D00FE8887 /* DSDay+CD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EF51CA1816D00FE8887 /* DSDay+CD.m */; };
+		8BC48EF71CA1816D00FE8887 /* DSDay+CD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EF51CA1816D00FE8887 /* DSDay+CD.m */; };
+		8BC48EFA1CA182DF00FE8887 /* DSMonth+Presentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48EF91CA182DF00FE8887 /* DSMonth+Presentation.m */; };
+		8BE4273A1C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BE427381C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld */; };
+		8BE4273B1C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BE427381C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld */; };
 		EFAF457FBD3434D306234683 /* libPods-TodayWidget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 504B0B079FAED4EA1667C87A /* libPods-TodayWidget.a */; };
 /* End PBXBuildFile section */
 
@@ -222,12 +238,6 @@
 		07F393F619A4FBB7006FBDBF /* appbar_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appbar_settings@2x.png"; path = "Resources/Images/appbar_settings@2x.png"; sourceTree = "<group>"; };
 		07F393F719A4FBB7006FBDBF /* appbar_text_size_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appbar_text_size_down@2x.png"; path = "Resources/Images/appbar_text_size_down@2x.png"; sourceTree = "<group>"; };
 		07F393F819A4FBB7006FBDBF /* appbar_text_size_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appbar_text_size_up@2x.png"; path = "Resources/Images/appbar_text_size_up@2x.png"; sourceTree = "<group>"; };
-		07FFF6B6199CE5B30022A4D7 /* DSDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSDay.h; path = Code/DSDay.h; sourceTree = "<group>"; };
-		07FFF6B7199CE5B30022A4D7 /* DSDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSDay.m; path = Code/DSDay.m; sourceTree = "<group>"; };
-		07FFF6BC199CED360022A4D7 /* DSYear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSYear.h; path = Code/DSYear.h; sourceTree = "<group>"; };
-		07FFF6BD199CED360022A4D7 /* DSYear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSYear.m; path = Code/DSYear.m; sourceTree = "<group>"; };
-		07FFF6BF199CED6E0022A4D7 /* DSMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMonth.h; path = Code/DSMonth.h; sourceTree = "<group>"; };
-		07FFF6C0199CED6E0022A4D7 /* DSMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMonth.m; path = Code/DSMonth.m; sourceTree = "<group>"; };
 		07FFF6C7199D04690022A4D7 /* DSDay+TablePresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSDay+TablePresentation.h"; path = "Code/DSDay+TablePresentation.h"; sourceTree = "<group>"; };
 		07FFF6C8199D04690022A4D7 /* DSDay+TablePresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSDay+TablePresentation.m"; path = "Code/DSDay+TablePresentation.m"; sourceTree = "<group>"; };
 		07FFF6CA199D07830022A4D7 /* pist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pist.png; path = Resources/Images/pist.png; sourceTree = "<group>"; };
@@ -247,10 +257,6 @@
 		84034C3A1A861F8700CA9209 /* appbar_add_event.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appbar_add_event.png; path = Resources/Images/appbar_add_event.png; sourceTree = "<group>"; };
 		84034C3B1A861F8700CA9209 /* appbar_add_event@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appbar_add_event@2x.png"; path = "Resources/Images/appbar_add_event@2x.png"; sourceTree = "<group>"; };
 		84034C3E1A86201D00CA9209 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		8404C02319FA84E4001E5BB1 /* DSUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUpdate.h; path = Code/DSUpdate.h; sourceTree = "<group>"; };
-		8404C02419FA84E4001E5BB1 /* DSUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUpdate.m; path = Code/DSUpdate.m; sourceTree = "<group>"; };
-		840BAEC31A0BF938006E76DB /* DSManageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSManageData.h; path = Code/DSManageData.h; sourceTree = "<group>"; };
-		840BAEC41A0BF938006E76DB /* DSManageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSManageData.m; path = Code/DSManageData.m; sourceTree = "<group>"; };
 		840CC3401A08DD2C0033B7C0 /* ActionSheetYearMonthPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionSheetYearMonthPicker.h; path = Code/ActionSheetYearMonthPicker.h; sourceTree = "<group>"; };
 		840CC3411A08DD2C0033B7C0 /* ActionSheetYearMonthPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionSheetYearMonthPicker.m; path = Code/ActionSheetYearMonthPicker.m; sourceTree = "<group>"; };
 		841BA25819F6B35B00E77BC3 /* TodayWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +276,33 @@
 		8496DC521AA399C3006D9043 /* minutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = minutes.png; path = Resources/Images/minutes.png; sourceTree = "<group>"; };
 		8496DC531AA399C3006D9043 /* minutes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "minutes@2x.png"; path = "Resources/Images/minutes@2x.png"; sourceTree = "<group>"; };
 		84F3C7321A0A07E800FE9648 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		8BC48ECB1CA16A0300FE8887 /* DSMonth+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSMonth+CoreDataProperties.h"; path = "Code/DSMonth+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8BC48ECC1CA16A0300FE8887 /* DSMonth+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSMonth+CoreDataProperties.m"; path = "Code/DSMonth+CoreDataProperties.m"; sourceTree = "<group>"; };
+		8BC48ECD1CA16A0300FE8887 /* DSMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMonth.h; path = Code/DSMonth.h; sourceTree = "<group>"; };
+		8BC48ECE1CA16A0300FE8887 /* DSMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMonth.m; path = Code/DSMonth.m; sourceTree = "<group>"; };
+		8BC48ECF1CA16A0300FE8887 /* DSYear+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSYear+CoreDataProperties.h"; path = "Code/DSYear+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8BC48ED01CA16A0300FE8887 /* DSYear+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSYear+CoreDataProperties.m"; path = "Code/DSYear+CoreDataProperties.m"; sourceTree = "<group>"; };
+		8BC48ED11CA16A0300FE8887 /* DSYear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSYear.h; path = Code/DSYear.h; sourceTree = "<group>"; };
+		8BC48ED21CA16A0300FE8887 /* DSYear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSYear.m; path = Code/DSYear.m; sourceTree = "<group>"; };
+		8BC48ED31CA16A0300FE8887 /* DSDay+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSDay+CoreDataProperties.h"; path = "Code/DSDay+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8BC48ED41CA16A0300FE8887 /* DSDay+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSDay+CoreDataProperties.m"; path = "Code/DSDay+CoreDataProperties.m"; sourceTree = "<group>"; };
+		8BC48ED51CA16A0300FE8887 /* DSDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSDay.h; path = Code/DSDay.h; sourceTree = "<group>"; };
+		8BC48ED61CA16A0300FE8887 /* DSDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSDay.m; path = Code/DSDay.m; sourceTree = "<group>"; };
+		8BC48EE41CA16DE300FE8887 /* DSCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCoreDataManager.h; path = Code/DSCoreDataManager.h; sourceTree = "<group>"; };
+		8BC48EE51CA16DE300FE8887 /* DSCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCoreDataManager.m; path = Code/DSCoreDataManager.m; sourceTree = "<group>"; };
+		8BC48EE81CA1705600FE8887 /* DSCoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCoreDataUtils.h; path = Code/DSCoreDataUtils.h; sourceTree = "<group>"; };
+		8BC48EE91CA1705600FE8887 /* DSCoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCoreDataUtils.m; path = Code/DSCoreDataUtils.m; sourceTree = "<group>"; };
+		8BC48EEC1CA1777200FE8887 /* DSYear+CD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSYear+CD.h"; path = "Code/DSYear+CD.h"; sourceTree = "<group>"; };
+		8BC48EED1CA1777200FE8887 /* DSYear+CD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSYear+CD.m"; path = "Code/DSYear+CD.m"; sourceTree = "<group>"; };
+		8BC48EF01CA17C5300FE8887 /* DSMonth+CD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSMonth+CD.h"; path = "Code/DSMonth+CD.h"; sourceTree = "<group>"; };
+		8BC48EF11CA17C5300FE8887 /* DSMonth+CD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSMonth+CD.m"; path = "Code/DSMonth+CD.m"; sourceTree = "<group>"; };
+		8BC48EF41CA1816D00FE8887 /* DSDay+CD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSDay+CD.h"; path = "Code/DSDay+CD.h"; sourceTree = "<group>"; };
+		8BC48EF51CA1816D00FE8887 /* DSDay+CD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSDay+CD.m"; path = "Code/DSDay+CD.m"; sourceTree = "<group>"; };
+		8BC48EF81CA182DF00FE8887 /* DSMonth+Presentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSMonth+Presentation.h"; path = "Code/DSMonth+Presentation.h"; sourceTree = "<group>"; };
+		8BC48EF91CA182DF00FE8887 /* DSMonth+Presentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSMonth+Presentation.m"; path = "Code/DSMonth+Presentation.m"; sourceTree = "<group>"; };
+		8BE427361C9C4BBA0040C29C /* CalendarUGCC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CalendarUGCC.entitlements; sourceTree = "<group>"; };
+		8BE427371C9C4BCB0040C29C /* TodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TodayWidget.entitlements; sourceTree = "<group>"; };
+		8BE427391C9C4EC00040C29C /* CalendarUGCC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalendarUGCC.xcdatamodel; sourceTree = "<group>"; };
 		9BCE3EC209098E3826911A38 /* Pods-CalendarUGCC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarUGCC.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarUGCC/Pods-CalendarUGCC.release.xcconfig"; sourceTree = "<group>"; };
 		ED3E84946812EED0C9BC4E0D /* Pods-CalendarUGCC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarUGCC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarUGCC/Pods-CalendarUGCC.debug.xcconfig"; sourceTree = "<group>"; };
 		F6A2B0B342019F72A9465433 /* Pods-TodayWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-TodayWidget/Pods-TodayWidget.release.xcconfig"; sourceTree = "<group>"; };
@@ -340,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				07937F95199CB11A0002C317 /* View Controllers */,
-				840028F419FFCD5800FD0EC9 /* Update */,
 				07FFF6E9199D0BDE0022A4D7 /* Utils */,
 				07FFF6C6199D03BC0022A4D7 /* Presentation Layer */,
 				07FFF6B3199CE5760022A4D7 /* Business Layer */,
@@ -353,9 +385,11 @@
 		07937F97199CB13E0002C317 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07E3268E199B56AC0017685A /* Images.xcassets */,
 				07937F9B199CB2540002C317 /* Assets */,
 				07937F99199CB14E0002C317 /* Storyboards */,
 				07937F98199CB1460002C317 /* Images */,
+				8BE427381C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -436,6 +470,7 @@
 		07E32667199B56AC0017685A = {
 			isa = PBXGroup;
 			children = (
+				8BE427361C9C4BBA0040C29C /* CalendarUGCC.entitlements */,
 				07E32679199B56AC0017685A /* Calendar UGCC */,
 				841BA25B19F6B35C00E77BC3 /* TodayWidget */,
 				07E32672199B56AC0017685A /* Frameworks */,
@@ -480,7 +515,6 @@
 			children = (
 				07937F97199CB13E0002C317 /* Resources */,
 				07937F96199CB1280002C317 /* Code */,
-				07E3268E199B56AC0017685A /* Images.xcassets */,
 				07E3267A199B56AC0017685A /* Supporting Files */,
 			);
 			path = "Calendar UGCC";
@@ -500,16 +534,11 @@
 		07FFF6B3199CE5760022A4D7 /* Business Layer */ = {
 			isa = PBXGroup;
 			children = (
+				8BC48EE31CA16D2E00FE8887 /* Model */,
 				07E1A9F3199E17970079037A /* DSData.h */,
 				07E1A9F4199E17970079037A /* DSData.m */,
-				07FFF6B6199CE5B30022A4D7 /* DSDay.h */,
-				07FFF6B7199CE5B30022A4D7 /* DSDay.m */,
-				07FFF6BC199CED360022A4D7 /* DSYear.h */,
-				07FFF6BD199CED360022A4D7 /* DSYear.m */,
-				07FFF6BF199CED6E0022A4D7 /* DSMonth.h */,
-				07FFF6C0199CED6E0022A4D7 /* DSMonth.m */,
-				8404C02319FA84E4001E5BB1 /* DSUpdate.h */,
-				8404C02419FA84E4001E5BB1 /* DSUpdate.m */,
+				8BC48EE41CA16DE300FE8887 /* DSCoreDataManager.h */,
+				8BC48EE51CA16DE300FE8887 /* DSCoreDataManager.m */,
 			);
 			name = "Business Layer";
 			sourceTree = "<group>";
@@ -519,6 +548,8 @@
 			children = (
 				07FFF6C7199D04690022A4D7 /* DSDay+TablePresentation.h */,
 				07FFF6C8199D04690022A4D7 /* DSDay+TablePresentation.m */,
+				8BC48EF81CA182DF00FE8887 /* DSMonth+Presentation.h */,
+				8BC48EF91CA182DF00FE8887 /* DSMonth+Presentation.m */,
 			);
 			name = "Presentation Layer";
 			sourceTree = "<group>";
@@ -544,18 +575,10 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		840028F419FFCD5800FD0EC9 /* Update */ = {
-			isa = PBXGroup;
-			children = (
-				840BAEC31A0BF938006E76DB /* DSManageData.h */,
-				840BAEC41A0BF938006E76DB /* DSManageData.m */,
-			);
-			name = Update;
-			sourceTree = "<group>";
-		};
 		841BA25B19F6B35C00E77BC3 /* TodayWidget */ = {
 			isa = PBXGroup;
 			children = (
+				8BE427371C9C4BCB0040C29C /* TodayWidget.entitlements */,
 				841BA25E19F6B35C00E77BC3 /* TodayViewController.h */,
 				841BA25F19F6B35C00E77BC3 /* TodayViewController.m */,
 				841BA26119F6B35C00E77BC3 /* MainInterface.storyboard */,
@@ -571,6 +594,33 @@
 				841BA29719F6BB0900E77BC3 /* TodayWidget-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8BC48EE31CA16D2E00FE8887 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8BC48ECB1CA16A0300FE8887 /* DSMonth+CoreDataProperties.h */,
+				8BC48ECC1CA16A0300FE8887 /* DSMonth+CoreDataProperties.m */,
+				8BC48ECD1CA16A0300FE8887 /* DSMonth.h */,
+				8BC48ECE1CA16A0300FE8887 /* DSMonth.m */,
+				8BC48ECF1CA16A0300FE8887 /* DSYear+CoreDataProperties.h */,
+				8BC48ED01CA16A0300FE8887 /* DSYear+CoreDataProperties.m */,
+				8BC48ED11CA16A0300FE8887 /* DSYear.h */,
+				8BC48ED21CA16A0300FE8887 /* DSYear.m */,
+				8BC48ED31CA16A0300FE8887 /* DSDay+CoreDataProperties.h */,
+				8BC48ED41CA16A0300FE8887 /* DSDay+CoreDataProperties.m */,
+				8BC48ED51CA16A0300FE8887 /* DSDay.h */,
+				8BC48ED61CA16A0300FE8887 /* DSDay.m */,
+				8BC48EE81CA1705600FE8887 /* DSCoreDataUtils.h */,
+				8BC48EE91CA1705600FE8887 /* DSCoreDataUtils.m */,
+				8BC48EEC1CA1777200FE8887 /* DSYear+CD.h */,
+				8BC48EED1CA1777200FE8887 /* DSYear+CD.m */,
+				8BC48EF01CA17C5300FE8887 /* DSMonth+CD.h */,
+				8BC48EF11CA17C5300FE8887 /* DSMonth+CD.m */,
+				8BC48EF41CA1816D00FE8887 /* DSDay+CD.h */,
+				8BC48EF51CA1816D00FE8887 /* DSDay+CD.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		DC790D258CDDE88CA8A7D3E9 /* Pods */ = {
@@ -645,10 +695,20 @@
 				TargetAttributes = {
 					07E3266F199B56AC0017685A = {
 						DevelopmentTeam = ZV926KLGMR;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					841BA25719F6B35B00E77BC3 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = ZV926KLGMR;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -880,27 +940,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC48ED91CA16A0300FE8887 /* DSMonth.m in Sources */,
 				07E1A9F5199E17970079037A /* DSData.m in Sources */,
 				078DD748199E2B65009A1E72 /* UILabel+Resize.m in Sources */,
+				8BC48EE61CA16DE300FE8887 /* DSCoreDataManager.m in Sources */,
+				8BC48EEA1CA1705600FE8887 /* DSCoreDataUtils.m in Sources */,
 				07FFF6C9199D04690022A4D7 /* DSDay+TablePresentation.m in Sources */,
-				07FFF6C1199CED6E0022A4D7 /* DSMonth.m in Sources */,
+				8BE4273A1C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld in Sources */,
+				8BC48EDF1CA16A0300FE8887 /* DSDay+CoreDataProperties.m in Sources */,
 				078DD753199E3086009A1E72 /* DSDayViewController.m in Sources */,
-				840BAEC51A0BF938006E76DB /* DSManageData.m in Sources */,
+				8BC48EDB1CA16A0300FE8887 /* DSYear+CoreDataProperties.m in Sources */,
+				8BC48EF21CA17C5300FE8887 /* DSMonth+CD.m in Sources */,
 				07DD679019ACEB2B00EA756C /* NSAttributedString+FontSize.m in Sources */,
+				8BC48EF61CA1816D00FE8887 /* DSDay+CD.m in Sources */,
+				8BC48EFA1CA182DF00FE8887 /* DSMonth+Presentation.m in Sources */,
+				8BC48ED71CA16A0300FE8887 /* DSMonth+CoreDataProperties.m in Sources */,
 				07E32680199B56AC0017685A /* main.m in Sources */,
 				07937F9F199CB2670002C317 /* DSViewController.m in Sources */,
+				8BC48EDD1CA16A0300FE8887 /* DSYear.m in Sources */,
 				840CC3421A08DD2C0033B7C0 /* ActionSheetYearMonthPicker.m in Sources */,
+				8BC48EEE1CA1777200FE8887 /* DSYear+CD.m in Sources */,
 				07E1A9E4199E07560079037A /* NSDate+Utils.m in Sources */,
 				07E1A9DE199DFB6C0079037A /* DSDayTableViewCell.m in Sources */,
 				07937FA2199CB2720002C317 /* DSAppDelegate.m in Sources */,
-				07FFF6BE199CED360022A4D7 /* DSYear.m in Sources */,
+				8BC48EE11CA16A0300FE8887 /* DSDay.m in Sources */,
 				07FFF6E8199D0BCB0022A4D7 /* UIColor+Utils.m in Sources */,
 				07C9B48919C9BA0F00ACF202 /* DSInfoViewController.m in Sources */,
-				8404C02519FA84E4001E5BB1 /* DSUpdate.m in Sources */,
 				07E1AA17199E1D770079037A /* UIViewController+Utils.m in Sources */,
 				07E1AA14199E1C060079037A /* UIViewController+Dialog.m in Sources */,
 				07FFF6EC199D12760022A4D7 /* UIView+Utils.m in Sources */,
-				07FFF6B8199CE5B30022A4D7 /* DSDay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,19 +976,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC48EDE1CA16A0300FE8887 /* DSYear.m in Sources */,
 				841BA27419F6BA9C00E77BC3 /* UIColor+Utils.m in Sources */,
 				841BA27619F6BA9C00E77BC3 /* UIView+Utils.m in Sources */,
-				8477AF8319FA8F0E009EAB7A /* DSUpdate.m in Sources */,
+				8BC48EDA1CA16A0300FE8887 /* DSMonth.m in Sources */,
+				8BC48EE01CA16A0300FE8887 /* DSDay+CoreDataProperties.m in Sources */,
 				841BA27819F6BA9C00E77BC3 /* NSDate+Utils.m in Sources */,
 				841BA27C19F6BA9C00E77BC3 /* UIViewController+Utils.m in Sources */,
 				8404C00019FA3FE3001E5BB1 /* NSAttributedString+FontSize.m in Sources */,
 				841BA27E19F6BA9C00E77BC3 /* UILabel+Resize.m in Sources */,
+				8BC48ED81CA16A0300FE8887 /* DSMonth+CoreDataProperties.m in Sources */,
+				8BE4273B1C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld in Sources */,
 				841BA28219F6BA9C00E77BC3 /* DSDay+TablePresentation.m in Sources */,
+				8BC48EE71CA16DE300FE8887 /* DSCoreDataManager.m in Sources */,
 				841BA28419F6BA9C00E77BC3 /* DSData.m in Sources */,
-				841BA28619F6BA9C00E77BC3 /* DSDay.m in Sources */,
-				841BA28819F6BA9C00E77BC3 /* DSYear.m in Sources */,
-				841BA28A19F6BA9C00E77BC3 /* DSMonth.m in Sources */,
+				8BC48EF31CA17C5300FE8887 /* DSMonth+CD.m in Sources */,
 				841BA26019F6B35C00E77BC3 /* TodayViewController.m in Sources */,
+				8BC48EEB1CA1705600FE8887 /* DSCoreDataUtils.m in Sources */,
+				8BC48EE21CA16A0300FE8887 /* DSDay.m in Sources */,
+				8BC48EDC1CA16A0300FE8887 /* DSYear+CoreDataProperties.m in Sources */,
+				8BC48EF71CA1816D00FE8887 /* DSDay+CD.m in Sources */,
+				8BC48EEF1CA1777200FE8887 /* DSYear+CD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1067,6 +1143,7 @@
 			baseConfigurationReference = ED3E84946812EED0C9BC4E0D /* Pods-CalendarUGCC.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_ENTITLEMENTS = CalendarUGCC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1084,7 +1161,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "be372069-783d-4090-8402-1e8cae752863";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1096,6 +1173,7 @@
 			baseConfigurationReference = 9BCE3EC209098E3826911A38 /* Pods-CalendarUGCC.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_ENTITLEMENTS = CalendarUGCC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1113,7 +1191,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8f9c818-f40a-4de6-89fc-57de8d093e4b";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1127,6 +1205,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1151,7 +1230,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC.TodayWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3ef72c7a-79ba-4720-82d5-4a427544417b";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(PROJECT_DIR)/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 			};
@@ -1164,6 +1243,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1188,7 +1268,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC.TodayWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8ca8baf-1eb6-43dd-b937-971d2c529331";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(PROJECT_DIR)/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 			};
@@ -1225,6 +1305,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8BE427381C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8BE427391C9C4EC00040C29C /* CalendarUGCC.xcdatamodel */,
+			);
+			currentVersion = 8BE427391C9C4EC00040C29C /* CalendarUGCC.xcdatamodel */;
+			path = CalendarUGCC.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 07E32668199B56AC0017685A /* Project object */;
 }

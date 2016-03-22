@@ -11,6 +11,7 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 
 #import "DSDay.h"
+#import "DSDay+TablePresentation.h"
 #import "DSData.h"
 #import "UILabel+Resize.h"
 #import "UIViewController+Utils.h"

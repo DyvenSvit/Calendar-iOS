@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DSData.h"
-#import "DSDay.h"
+#import "DSDay+CD.h"
 #import "NSDate+Utils.h"
 #import "DSDay+TablePresentation.h"
 #import <Fabric/Fabric.h>

@@ -53,25 +53,22 @@
 
 -(void)updateData
 {
-    NSString *currentYearString = [NSString stringWithFormat:@"%d", (int)[NSDate getCurrentYearNumber]];
-    NSInteger selectedYearIndex = [[[DSData shared] yearNames] indexOfObject:currentYearString];
-    DSDay* day = ((DSMonth*)((DSYear*)[DSData shared].years[selectedYearIndex]).months[[NSDate getCurrentMonthNumber]-1]).days[[NSDate getCurrentDayNumber] -1];
+    [DSData shared];
+    
+    DSDay* day = [DSDay getByYear:[NSDate getCurrentYearNumber] month:[NSDate getCurrentMonthNumber] day:[NSDate getCurrentDayNumber]];
 
     imgFasting.image = [day getFastimgImage];
     lbOldStyleDate.text = [day getOldStyleDateString];
     lbDate.text = [day getDateString];
     lbDayOfWeek.text = [day getWeekDayString];
     
-        lbTitle.attributedText = [[NSAttributedString alloc] initWithData:[day.holidayTitleStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    lbTitle.attributedText = [[NSAttributedString alloc] initWithData:[day.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) { //*
-        [lbTitle setAdjustsFontSizeToFitWidth:NO];
-    }
     viewDate.alpha =  [day getDayBgAlpha];
     viewInfo.alpha = [day getDayBgAlpha];
     
     
-   lbReading.attributedText = [[NSAttributedString alloc] initWithData:[day.readingTitleStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+   lbReading.attributedText = [[NSAttributedString alloc] initWithData:[day.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     
     viewBackground.backgroundColor = [day getDayMainBgColor];
 }

@@ -1,16 +1,24 @@
 //
 //  DSYear.h
-//  Calendar UGCC
+//  CalendarUGCC
 //
-//  Created by Max Gontar on 8/14/14.
-//  Copyright (c) 2014 DyvenSvit. All rights reserved.
+//  Created by Developer on 3/22/16.
+//  Copyright © 2016 DyvenSvit. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface DSYear : NSObject
+@class DSMonth;
 
-@property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) NSArray *months;
+NS_ASSUME_NONNULL_BEGIN
+
+@interface DSYear : NSManagedObject
+
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "DSYear+CoreDataProperties.h"

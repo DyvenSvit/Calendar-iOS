@@ -10,6 +10,13 @@
 #import "UIColor+Utils.h"
 #import "NSDate+Utils.h"
 
+enum FastingType : NSInteger {
+    FastingNone = 0,
+    FastingSimple = 1,
+    FastingStrong = 2,
+    FastingFree = 3
+};
+
 @interface DSDay (TablePresentation)
 
 -(NSString*) getDateString;
@@ -18,4 +25,5 @@
 -(UIColor*) getDayMainBgColor;
 -(CGFloat) getDayBgAlpha;
 -(UIImage*) getFastimgImage;
+-(NSDate*) getDate;
 @end

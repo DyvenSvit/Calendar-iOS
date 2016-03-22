@@ -1,33 +1,24 @@
 //
 //  DSDay.h
-//  Calendar UGCC
+//  CalendarUGCC
 //
-//  Created by Max Gontar on 8/14/14.
-//  Copyright (c) 2014 DyvenSvit. All rights reserved.
+//  Created by Developer on 3/22/16.
+//  Copyright © 2016 DyvenSvit. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-enum FastingType : NSInteger {
-    FastingNone = 0,
-    FastingSimple = 1,
-    FastingStrong = 2,
-    FastingFree = 3
-};
+@class DSMonth;
 
-@interface DSDay : NSObject
-@property (strong, nonatomic) NSDate *date;
-@property (assign, nonatomic) BOOL isHoliday;
-@property (assign, nonatomic) enum FastingType fastingType;
-@property (strong, nonatomic) NSString *holidayTitleStr;
-@property (strong, nonatomic) NSString *readingTitleStr;
-@property (strong, nonatomic) NSAttributedString *holidayTitle;
-@property (strong, nonatomic) NSAttributedString *readingTitle;
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) NSString *dayLiturgy;
-@property (strong, nonatomic) NSString *dayMorningHours;
-@property (strong, nonatomic) NSString *dayNightHours;
-@property (strong, nonatomic) NSString *dayReadings;
-@property (strong, nonatomic) NSString *dayHoliday;
-@property (strong, nonatomic) NSString *dayHours;
+@interface DSDay : NSManagedObject
+
+// Insert code here to declare functionality of your managed object subclass
+
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "DSDay+CoreDataProperties.h"

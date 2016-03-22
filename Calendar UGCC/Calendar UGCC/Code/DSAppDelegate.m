@@ -10,7 +10,7 @@
 
 @implementation DSAppDelegate
 
-@synthesize backgroundQueue, isDataLoading, isDataLoaded, reach, manageDataObj;
+@synthesize backgroundQueue, reach;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -34,8 +34,6 @@
     
     backgroundQueue = [NSOperationQueue new];
     
-    if(IOS7)
-    {
         [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"008000"]];//@"067AB5"]];
         
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -43,40 +41,12 @@
         [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                                [UIColor whiteColor], NSForegroundColorAttributeName, nil]];
         [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"008000"]];
-    }
-    else {
-        // iOS 6.1 or earlier
-        [[UINavigationBar appearance] setTintColor:[UIColor colorWithHexString:@"008000"]];
-    }
+
     [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"008000"]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
     [[UIPickerView appearance] setBackgroundColor:[UIColor redColor]];
-    
+    [DSData shared];
     return YES;
-}
-
--(void)startManageData
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:NT_DATA_LOADING_BEGIN object:nil];
-    manageDataObj = [[DSManageData alloc] initWithCompletionBlock:^() {
-       
-        
-        [DSData shared];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NT_DATA_LOADING_END object:nil];
-    } errorBlock:^(NSError *error) {
-        
-        
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NT_DATA_LOADING_ERROR object:nil userInfo:userInfo];
-        
-        NSString *errorMsg = [NSString stringWithFormat:@"Update data error: %@", (error)?[error description]:@""];
-        
-        [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createExceptionWithDescription:errorMsg withFatal:@NO] build]];
-        
-    }];
-
-    [manageDataObj start];
-
 }
 
 - (NSURL *)applicationLibraryDirectory
@@ -102,25 +72,6 @@
     return success;
 }
 
-
-
-/*
- * Called after a list of high scores finishes loading.
- *
- * @param loadTime The time it takes, in milliseconds, to load a resource.
- */
-- (void)onLoad:(NSTimeInterval) loadTime {
-    
-    // May return nil if a tracker has not already been initialized with a
-    // property ID.
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    NSNumber *timeUsed = [NSNumber numberWithInt:(int)(loadTime*1000)];
-    [tracker send:[[GAIDictionaryBuilder createTimingWithCategory:@"Networking"    // Timing category (required)
-                                                         interval:timeUsed        // Timing interval (required)
-                                                             name:@"Update Data"  // Timing name
-                                                            label:nil] build]];    // Timing label
-}
-
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -130,16 +81,11 @@
     {
         NSDate *date = [NSDate dateFromString:dateStr];
         
-        NSInteger yearIndex = [[[DSData shared] yearNames] indexOfObject:[@([date getYearNumber]) stringValue]];
-        NSInteger monthIndex = [date getMonthNumber] - 1;
-        NSInteger dayIndex = [date getDayNumber] - 1;
-        day= ((DSMonth*)((DSYear*)[DSData shared].years[yearIndex]).months[monthIndex]).days[dayIndex];
+        day = [DSDay getByYear:[date getYearNumber] month:[date getMonthNumber] day:[date getDayNumber]];
     }
     else
     {
-        NSString *currentYearString = [NSString stringWithFormat:@"%d", (int)[NSDate getCurrentYearNumber]];
-        NSInteger selectedYearIndex = [[[DSData shared] yearNames] indexOfObject:currentYearString];
-        day = ((DSMonth*)((DSYear*)[DSData shared].years[selectedYearIndex]).months[[NSDate getCurrentMonthNumber]-1]).days[[NSDate getCurrentDayNumber] -1];
+        day = [DSDay getByYear:[NSDate getCurrentYearNumber] month:[NSDate getCurrentMonthNumber] day:[NSDate getCurrentDayNumber]];
     }
     
     DSDayViewController *navController = [[self.window.rootViewController storyboard] instantiateViewControllerWithIdentifier:@"DSDayViewController"];

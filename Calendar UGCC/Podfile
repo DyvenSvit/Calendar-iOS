@@ -1,10 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '8.0'
 
 inhibit_all_warnings!
 
 target 'CalendarUGCC' do
+
+platform :ios, '7.0'
 
 pod 'AFNetworking', '~> 2.0' # Core, without NSURLSession, compatible with iOS6
 # pod 'AFNetworking/NSURLSession', '~> 2.0' # Add NSURLSession features, only compatible with iOS7
@@ -23,6 +24,8 @@ pod 'GoogleAnalytics-iOS-SDK', '~> 3.0'
 end
 
 target 'TodayWidget' do
+
+platform :ios, '8.0'
 
 pod 'Fabric'
 pod 'Crashlytics'

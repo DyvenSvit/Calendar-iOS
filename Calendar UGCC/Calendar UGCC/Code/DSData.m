@@ -9,7 +9,7 @@
 #import "DSData.h"
 
 @implementation DSData
-@synthesize years, monthNames, yearNames;
+
 static DSData* result;
 
 + (NSString *)cachesPath
@@ -30,7 +30,7 @@ static DSData* result;
     if(result == nil)
     {
         result = [DSData new];
-        [result loadDataLocal:NO];
+        [result loadDataLocal:YES];
     }
     
     return result;
@@ -49,10 +49,7 @@ static DSData* result;
 
 - (void)loadDataLocal:(BOOL) local
 {
-    
-    monthNames  = [NSArray arrayWithObjects: @"Січень", @"Лютий", @"Березень", @"Квітень", @"Травень", @"Червень", @"Липень", @"Серпень", @"Вересень", @"Жовтень", @"Листопад", @"Грудень" , nil];
-   
-    
+
     NSURL *bundleURLBuildIn = [[NSBundle mainBundle] resourceURL];
     
     NSURL *bundleURLFile = [[NSURL alloc] initFileURLWithPath:[DSData cachesPath]];
@@ -67,9 +64,7 @@ static DSData* result;
 
 -(void) loadYearsDataFromPath:(NSURL*) yearURL Local:(BOOL) local
 {
-        NSMutableArray *yearNameArray = [NSMutableArray new];
-    NSMutableArray *yearsArray = [NSMutableArray new];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:yearURL
                                           includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
                                                              options:NSDirectoryEnumerationSkipsSubdirectoryDescendants|NSDirectoryEnumerationSkipsHiddenFiles
@@ -94,27 +89,26 @@ static DSData* result;
         }
         if([isDirectory boolValue] && [filename integerValue] > 0)
         {
-            DSYear *year = [DSYear new];
-            
             NSInteger yearNumber = [filename integerValue];
+            DSYear* year;
+            if([DSYear isWithYear:yearNumber])
+            {
+                year = [DSYear getByYear:yearNumber];
+            }
+            else
+            {
+                year = [[DSYear alloc] initWithEntity:[DSYear getEntity] insertIntoManagedObjectContext:CDM.managedObjectContext];
+            }
+            year.value = yearNumber;
             
-            [yearNameArray addObject:[NSString stringWithFormat:@"%ld", (long)yearNumber]];
-            
-            NSDateComponents *comps = [NSDateComponents new];
-            [comps setYear:yearNumber];
-            year.date = [[NSCalendar currentCalendar] dateFromComponents:comps];
             [self loadMonthsDataForYear:&year fromPath:fileURL Local:local];
-            [yearsArray addObject:year];
         }
     }
-    
-    years = [NSArray arrayWithArray:yearsArray];
-    yearNames = [NSArray arrayWithArray:yearNameArray];
+    [CDM saveContext];
 }
     
 -(void)loadMonthsDataForYear:(DSYear**)year fromPath:(NSURL*) monthURL Local:(BOOL) local
     {
-        NSMutableArray *monthsArray = [NSMutableArray new];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:monthURL
                                               includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
@@ -140,20 +134,24 @@ static DSData* result;
             }
             if([isDirectory boolValue])
             {
-                DSMonth *month =[DSMonth new];
-                
                 NSInteger monthNumber = [filename integerValue];
-                NSDateComponents *comps = [NSDateComponents new];
-                [comps setMonth:monthNumber];
-                [comps setYear:[(*year).date getYearNumber]];
-                month.date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+                DSMonth *month;
+                if([DSMonth isWithYear:(*year).value month:monthNumber])
+                {
+                    month = [DSMonth getByYear:(*year).value month:monthNumber];
+                }
+                else
+                {
+                    month = [[DSMonth alloc] initWithEntity:[DSMonth getEntity] insertIntoManagedObjectContext:CDM.managedObjectContext];
+                }
+                
+                month.value = monthNumber;
+                
+                month.year = *year;
                 
                 [self loadDaysDataForMonth:&month fromPath:fileURL Local:local];
-                
-                [monthsArray addObject:month];
             }
         }
-        (*year).months = monthsArray;
 }
 
 -(void)loadDaysDataForMonth:(DSMonth**)month fromPath:(NSURL*) monthURL Local:(BOOL) local
@@ -161,28 +159,33 @@ static DSData* result;
     NSURL *filePath=[monthURL URLByAppendingPathComponent:@"c.txt"];
     NSString *fileContents=[NSString stringWithContentsOfURL:filePath encoding:NSUTF8StringEncoding error:nil];
     NSArray *values = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    
-    NSMutableArray *days = [NSMutableArray new];
-    
+
     for (NSString *lineStr in values) {
         
         if([lineStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length > 0)
         {
-            
-            DSDay *day = [DSDay new];
-            
-            
             NSArray *parts = [lineStr componentsSeparatedByString:@"|"];
-            
             NSInteger dayNumber = [[parts objectAtIndex:0] integerValue];
+            DSDay *day;
+            if([DSDay isWithYear:(*month).year.value month:(*month).value day:dayNumber])
+            {
+                day = [DSDay getByYear:(*month).year.value month:(*month).value day:dayNumber];
+            }
+            else
+            {
+                day = [[DSDay alloc] initWithEntity:[DSDay getEntity] insertIntoManagedObjectContext:CDM.managedObjectContext];
+            }
+            
+            day.value = dayNumber;
+            
+            day.month = *month;
             
             NSDateComponents *comps = [NSDateComponents new];
             [comps setDay:dayNumber];
-            [comps setMonth:[(*month).date getMonthNumber]];
-            [comps setYear:[(*month).date getYearNumber]];
-            day.date = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            
-            
+            [comps setMonth:(*month).value];
+            [comps setYear:(*month).year.value];
+            day.date = [[[NSCalendar currentCalendar] dateFromComponents:comps] timeIntervalSince1970];
+
             day.isHoliday = [[parts objectAtIndex:2] boolValue];
             day.fastingType =[[parts objectAtIndex:3] integerValue];
             
@@ -190,17 +193,16 @@ static DSData* result;
             
             holidayTitle = day.isHoliday?[NSString stringWithFormat:@"<font color='#FF0000'>%@</font>", holidayTitle]:holidayTitle;
         
-            
-            day.holidayTitleStr = holidayTitle;
+            day.holidayTitle = holidayTitle;
             
             /*
             if(local)
             {
-                day.holidayTitle = [[NSAttributedString alloc] initWithString:holidayTitle];
+                day.holidayTitleAttr = [[NSAttributedString alloc] initWithString:holidayTitle];
             }
             else
             {
-                day.holidayTitle = [[NSAttributedString alloc] initWithData:[holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+                day.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
             }
             */
             
@@ -208,71 +210,70 @@ static DSData* result;
             NSString *glas =[parts objectAtIndex:6];
             NSString *readingTitle = [[NSString stringWithFormat:@"%@ %@", [glas isEqualToString:@"*"]?@"": glas,  [reading isEqualToString:@"*"]?@"":reading] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             
-            day.readingTitleStr = readingTitle;
+            day.readingTitle = readingTitle;
             
            /* if(local)
             {
-                day.readingTitle = [[NSAttributedString alloc] initWithString:readingTitle];
+                day.readingTitleAttr = [[NSAttributedString alloc] initWithString:readingTitle];
             }
             else
             {
-                day.readingTitle = [[NSAttributedString alloc] initWithData:[readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+                day.readingTitleAttr = [[NSAttributedString alloc] initWithData:[readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
             }
             */
-            [days addObject: day];
         }
     }
-    
-    (*month).days = [NSArray arrayWithArray:days];
 }
 
 -(DSDay*)loadResourcesForDay:(DSDay*)day
 {
-    NSURL *bundleURL = [[NSURL alloc] initFileURLWithPath:[DSData cachesPath]];
+    NSURL *bundleURLBuildIn = [[NSBundle mainBundle] resourceURL];
     
-    NSURL * documentsPath = [bundleURL URLByAppendingPathComponent:@"Assets"];
-    NSURL * yearPath = [documentsPath URLByAppendingPathComponent:[NSString stringWithFormat:@"%04d", (int)[day.date getYearNumber]]];
-    NSURL * monthPath = [yearPath URLByAppendingPathComponent:[NSString stringWithFormat:@"%02d", (int)[day.date getMonthNumber]]];
+
+    
+    NSURL * documentsPath = [bundleURLBuildIn URLByAppendingPathComponent:@"Assets"];
+    NSURL * yearPath = [documentsPath URLByAppendingPathComponent:[NSString stringWithFormat:@"%04d", day.month.year.value]];
+    NSURL * monthPath = [yearPath URLByAppendingPathComponent:[NSString stringWithFormat:@"%02d", day.month.value]];
     
     
-    NSURL * dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"u%02d.html", (int)[day.date getDayNumber]]];
+    NSURL * dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"u%02d.html", day.value]];
     
     NSString *fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
                             NSUTF8StringEncoding error:nil];
-    day.dayLiturgy = fileContents;
+    day.liturgy = fileContents;
     
     
-    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02du.html", (int)[day.date getDayNumber]]];
-    
-    fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
-                  NSUTF8StringEncoding error:nil];
-    day.dayMorningHours = fileContents;
-    
-    
-    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02dv.html", (int)[day.date getDayNumber]]];
+    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02du.html", day.value]];
     
     fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
                   NSUTF8StringEncoding error:nil];
-    day.dayNightHours = fileContents;
-    
-    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02dc.html", (int)[day.date getDayNumber]]];
-    
-    fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
-                  NSUTF8StringEncoding error:nil];
-    day.dayHours = fileContents;
+    day.morning = fileContents;
     
     
-    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"b%02d.html", (int)[day.date getDayNumber ]]];
+    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02dv.html", day.value]];
     
     fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
                   NSUTF8StringEncoding error:nil];
-    day.dayReadings = fileContents;
+    day.night = fileContents;
     
-    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"s%02d.html", (int)[day.date getDayNumber]]];
+    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02dc.html", day.value]];
     
     fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
                   NSUTF8StringEncoding error:nil];
-    day.dayHoliday = fileContents;
+    day.hours = fileContents;
+    
+    
+    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"b%02d.html", day.value]];
+    
+    fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
+                  NSUTF8StringEncoding error:nil];
+    day.readings = fileContents;
+    
+    dayPath = [monthPath URLByAppendingPathComponent:[NSString stringWithFormat:@"s%02d.html", day.value]];
+    
+    fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
+                  NSUTF8StringEncoding error:nil];
+    day.saints = fileContents;
     
     return day;
 }

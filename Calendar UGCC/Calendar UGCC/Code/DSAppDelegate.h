@@ -12,7 +12,6 @@
 #import "DSData.h"
 #import "DSDay.h"
 #import "NSDate+Utils.h"
-#import "DSManageData.h"
 #import "Reachability.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -23,8 +22,4 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSOperationQueue *backgroundQueue;
 @property (strong, atomic) Reachability *reach;
-@property (assign, nonatomic) BOOL isDataLoading;
-@property (assign, nonatomic) BOOL isDataLoaded;
-@property (strong, atomic) DSManageData *manageDataObj;
--(void)startManageData;
 @end

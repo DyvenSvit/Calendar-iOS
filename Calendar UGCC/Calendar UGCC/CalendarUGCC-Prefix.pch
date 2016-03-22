@@ -6,6 +6,10 @@
 
 #import <Availability.h>
 
+#import <CoreData/CoreData.h>
+
+#import "DSCoreDataManager.h"
+
 #ifndef __IPHONE_5_0
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
@@ -21,7 +25,9 @@
 // ALog always displays output regardless of the DEBUG setting
 //#define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 
-#define APP  ((DSAppDelegate*)[UIApplication sharedApplication].delegate)
+#define APP ((DSAppDelegate*)[UIApplication sharedApplication].delegate)
+
+#define CDM [DSCoreDataManager sharedInstance]
 
 #define NT_DATA_LOADING_BEGIN @"dyvensvit.com.calendar.data.loading.begin"
 
@@ -30,6 +36,8 @@
 #define NT_DATA_LOADING_ERROR @"dyvensvit.com.calendar.data.loading.error"
 
 #define NT_DATA_LOADING_PROGRESS @"dyvensvit.com.calendar.data.loading.progress"
+
+#define MONTH_NAMES @[@"Січень", @"Лютий", @"Березень", @"Квітень", @"Травень", @"Червень", @"Липень", @"Серпень", @"Вересень", @"Жовтень", @"Листопад", @"Грудень"]
 
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>

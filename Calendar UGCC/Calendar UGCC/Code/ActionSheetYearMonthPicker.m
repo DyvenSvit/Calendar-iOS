@@ -18,10 +18,10 @@
 
 @implementation ActionSheetYearMonthPicker
 
-+ (id)showPickerWithSelectedYear:(NSInteger)yearIndex month:(NSInteger)monthIndex doneBlock:(ActionYearMonthDoneBlock)doneBlock cancelBlock:(ActionYearMonthCancelBlock)cancelBlock origin:(id)origin
++ (id)showPickerWithSelectedYear:(NSInteger)year month:(NSInteger)month doneBlock:(ActionYearMonthDoneBlock)doneBlock cancelBlock:(ActionYearMonthCancelBlock)cancelBlock origin:(id)origin
 {
     
-    ActionSheetYearMonthPicker *picker = [[ActionSheetYearMonthPicker alloc] initWithSelectedYear:yearIndex month:monthIndex doneBlock:doneBlock
+    ActionSheetYearMonthPicker *picker = [[ActionSheetYearMonthPicker alloc] initWithSelectedYear:year month:month doneBlock:doneBlock
                                                                        cancelBlock:cancelBlock origin:origin];
     
     [picker setDoneButton:[[UIBarButtonItem alloc] initWithTitle:@"Вибрати"  style:UIBarButtonItemStylePlain target:nil action:nil]];
@@ -32,19 +32,22 @@
     return picker;
 }
 
-- (id)initWithSelectedYear:(NSInteger)yearIndex month:(NSInteger)monthIndex doneBlock:(ActionYearMonthDoneBlock)doneBlock cancelBlock:(ActionYearMonthCancelBlock)cancelBlockOrNil origin:(id)origin {
-    NSArray *initialSelection = [NSArray arrayWithObjects:[NSNumber numberWithInteger:yearIndex], [NSNumber numberWithInteger: monthIndex ], nil];
+- (id)initWithSelectedYear:(NSInteger)year month:(NSInteger)month doneBlock:(ActionYearMonthDoneBlock)doneBlock cancelBlock:(ActionYearMonthCancelBlock)cancelBlockOrNil origin:(id)origin {
+    
+    NSMutableArray *years = [NSMutableArray new];
+    for(DSYear* y in [DSYear getAll])
+    {
+        [years addObject:[NSString stringWithFormat:@"%d", y.value]];
+    }
+
+    
+    NSArray *initialSelection = [NSArray arrayWithObjects:[NSNumber numberWithInteger:[years indexOfObject:[@(year) stringValue]]], [NSNumber numberWithInteger:month-1], nil];
     self = [super initWithTitle:@"Рік та місяць" delegate:self showCancelButton:YES origin:origin initialSelections:initialSelection];
     if (self) {
-        self.selectedYear = yearIndex;
-        self.selectedMonth = monthIndex;
-        NSMutableArray *years = [NSMutableArray new];
-        for(DSYear* y in [[DSData shared] years])
-        {
-            [years addObject:[NSString stringWithFormat:@"%ld", (long)[y.date getYearNumber]]];
-        }
+        self.selectedYear = year;
+        self.selectedMonth = month;
         yearsToDisplay = [NSArray arrayWithArray:years];
-        monthsToDisplay = [[DSData shared] monthNames];
+        monthsToDisplay = MONTH_NAMES;
         self.onActionDone = doneBlock;
         self.onActionCancel = cancelBlockOrNil;
     }
@@ -168,11 +171,11 @@
     NSLog(@"Row %li selected in component %li", (long)row, (long)component);
     switch (component) {
         case 0:
-            self.selectedYear = (NSUInteger) row;
+            self.selectedYear = [yearsToDisplay[(NSUInteger) row] integerValue];
             return;
             
         case 1:
-            self.selectedMonth = (NSUInteger) row;
+            self.selectedMonth = (NSUInteger) row + 1;
             return;
         default:break;
     }

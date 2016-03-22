@@ -10,16 +10,21 @@
 
 @implementation DSDay (TablePresentation)
 
+-(NSDate*) getDate
+{
+    return [NSDate dateWithTimeIntervalSince1970:self.date];
+}
+
 -(NSString*) getDateString
-{int iDATA = (int)[[[NSCalendar currentCalendar]  components:NSCalendarUnitDay fromDate:self.date] day];
+{int iDATA = (int)[[[NSCalendar currentCalendar]  components:NSCalendarUnitDay fromDate:[self getDate]] day];
  return [NSString stringWithFormat:@"%d", iDATA];
 }
 
 -(NSString*) getOldStyleDateString
 {
-    int iDATAOLD = (int)[[[NSCalendar currentCalendar]  components:NSCalendarUnitDay fromDate:self.date] day] - 13;
+    int iDATAOLD = (int)[[[NSCalendar currentCalendar]  components:NSCalendarUnitDay fromDate:[self getDate]] day] - 13;
     if (iDATAOLD < 1) {
-        switch ([[[NSCalendar currentCalendar]  components:NSCalendarUnitMonth fromDate:self.date] month]) {
+        switch ([[[NSCalendar currentCalendar]  components:NSCalendarUnitMonth fromDate:[self getDate]] month]) {
             case 1:
                 iDATAOLD = iDATAOLD+31;
                 break;
@@ -63,7 +68,7 @@
 -(NSString*) getWeekDayString
 {
     NSString *result = @"";
-    switch ([[[NSCalendar currentCalendar]  components:NSCalendarUnitWeekday fromDate:self.date] weekday]) {
+    switch ([[[NSCalendar currentCalendar]  components:NSCalendarUnitWeekday fromDate:[self getDate]] weekday]) {
         case 1:
             result = @"Нд";
             break;
@@ -98,7 +103,7 @@
 {
     UIColor *result =  [UIColor colorWithHexString:@"9FFF00"];
     
-    if(self.isHoliday || [self.date isWeekend])
+    if(self.isHoliday || [[self getDate] isWeekend])
     {
         result = [UIColor colorWithHexString:@"FF7400"];
     }
@@ -109,7 +114,7 @@
 
 -(CGFloat) getDayBgAlpha
 {
-    CGFloat result = [self.date isToday]?0.90:0.70;
+    CGFloat result = [[self getDate] isToday]?0.90:0.70;
     
     return result;
 }

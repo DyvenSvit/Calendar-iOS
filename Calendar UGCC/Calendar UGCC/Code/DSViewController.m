@@ -12,7 +12,7 @@
 
 static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
 
-@synthesize tableDays, selectedYearIndex, selectedMonthIndex, HUD;
+@synthesize tableDays, selectedYear, selectedMonth, HUD;
 
 - (void)viewDidLoad
 {
@@ -29,87 +29,15 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     UIBarButtonItem *fbItem = [self getBarItemWithImageNamed:@"appbar_fb" action:@selector(fbItemClick)];
     NSArray *actionButtonItems = @[infoItem, wwwItem, fbItem, monthItem];
     self.navigationItem.rightBarButtonItems = actionButtonItems;
-
-
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingBegin:) name:NT_DATA_LOADING_BEGIN object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingEnd:) name:NT_DATA_LOADING_END object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingProgress:) name:NT_DATA_LOADING_PROGRESS object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingError:) name:NT_DATA_LOADING_ERROR object:nil];
+    tableDays.delegate = self;
+    tableDays.dataSource = self;
     
-    [APP.backgroundQueue addOperationWithBlock:^(){
-        [APP startManageData];
-    }];
-}
-
-
-- (void) dataLoadingBegin:(NSNotification *) notification
-{
-    [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.labelText = @"Loading";
-    //HUD.detailsLabelText = @"Looking for data update";
-        
-    }];
-}
-
-- (void) dataLoadingEnd:(NSNotification *) notification
-{
-    [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-        
-        tableDays.delegate = self;
-        tableDays.dataSource = self;
-        
-        NSString *currentYearString = [NSString stringWithFormat:@"%d", (int)[NSDate getCurrentYearNumber]];
-        selectedYearIndex = [[[DSData shared] yearNames] indexOfObject:currentYearString];
-       
-        selectedMonthIndex = [NSDate getCurrentMonthNumber]-1;
-        
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@)",  [[[DSData shared] monthNames] objectAtIndex: selectedMonthIndex], [[[DSData shared] yearNames] objectAtIndex:selectedYearIndex]];
-        
-        if(HUD)
-        {
-            [HUD removeFromSuperview];
-            HUD = nil;
-        }
-    }];
+    selectedYear = [NSDate getCurrentYearNumber];
     
-    [APP.backgroundQueue addOperationWithBlock:^(){
-        if(((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days.count > 0)
-            [self prepareAttributedTexts];
-    }];
-}
-
-- (void) dataLoadingProgress:(NSNotification *) notification
-{
-    [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-        HUD.labelText =notification.userInfo[@"status"];
-        HUD.progress = [(NSNumber*)notification.userInfo[@"progress"] floatValue];
-    }];
+    selectedMonth = [NSDate getCurrentMonthNumber];
     
-
-}
-
-- (void) dataLoadingError:(NSNotification *) notification
-{
-    
-    [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-       // NSError * error  = notification.userInfo[@"error"];
-        if(HUD)
-        {
-            [HUD removeFromSuperview];
-            HUD = nil;
-        }
-        
-        [self showAlert:@"Error" message:@"Під час оновлення календаря сталася помилка"];
-    }];
-    
-
-    
-    [APP.backgroundQueue addOperationWithBlock:^(){
-        if(((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days.count > 0)
-            [self prepareAttributedTexts];
-    }];
+    self.navigationItem.title = [[DSMonth getByYear:selectedYear month:selectedMonth] getTitleString];
 }
 
 -(UIBarButtonItem*) getBarItemWithImageNamed:(NSString*) imgName action:(SEL) action
@@ -135,17 +63,18 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
                                                                                          label:nil
                                                                                          value:nil] build]];
     
-    [ActionSheetYearMonthPicker showPickerWithSelectedYear:selectedYearIndex month:selectedMonthIndex doneBlock:^(ActionSheetYearMonthPicker *picker, NSInteger selectedYIndex, NSInteger selectedMIndex) {
+    [ActionSheetYearMonthPicker showPickerWithSelectedYear:selectedYear month:selectedMonth doneBlock:^(ActionSheetYearMonthPicker *picker, NSInteger selectedYearValue, NSInteger selectedMonthValue) {
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
-                                                                                            action:[NSString stringWithFormat:@"Select Year: %ld Month: %ld", (long)selectedYIndex,  (long)selectedMIndex]
+                                                                                            action:[NSString stringWithFormat:@"Select Year: %ld Month: %ld", (long)selectedYearValue,  (long)selectedMonthValue]
                                                                                              label:nil
                                                                                              value:nil] build]];
         
-        selectedYearIndex = selectedYIndex;
-        selectedMonthIndex = selectedMIndex;
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@)",  [[[DSData shared] monthNames] objectAtIndex: selectedMonthIndex], [[[DSData shared] yearNames] objectAtIndex:selectedYearIndex]];
+        selectedYear = selectedYearValue;
+        selectedMonth = selectedMonthValue;
+        self.navigationItem.title = [[DSMonth getByYear:selectedYear month:selectedMonth] getTitleString];
+        
         [APP.backgroundQueue addOperationWithBlock:^(){
-            if(((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days.count > 0)
+            if([DSMonth getByYear:selectedYear month:selectedMonth].days.count > 0)
                 [self prepareAttributedTexts];
         
         }];
@@ -209,7 +138,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger result = 0;
-    result = ((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days.count;
+    result = [DSMonth getByYear:selectedYear month:selectedMonth].days.count;
     return result;
 }
 
@@ -218,29 +147,23 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     if(tableView == tableDays)
     {
         DSDayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDSDayTableViewCell];
-        DSDay *day = [((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days objectAtIndex:indexPath.row];
+        DSDay *day = [[DSMonth getByYear:selectedYear month:selectedMonth].days objectAtIndex:indexPath.row];
         
         cell.imgFasting.image = [day getFastimgImage];
         cell.lbOldStyleDate.text = [day getOldStyleDateString];
         cell.lbDate.text = [day getDateString];
         cell.lbDayOfWeek.text = [day getWeekDayString];
 
-        if(!day.holidayTitle)
-            day.holidayTitle = [[NSAttributedString alloc] initWithData:[day.holidayTitleStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+        if(!day.holidayTitleAttr)
+            day.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[day.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+        if(!day.readingTitleAttr)
+            day.readingTitleAttr = [[NSAttributedString alloc] initWithData:[day.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+        [CDM saveContext];
         
-        cell.lbTitle.attributedText = day.holidayTitle;
-        
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) { //*
-            [cell.lbTitle setAdjustsFontSizeToFitWidth:NO];
-        }
+        cell.lbTitle.attributedText = day.holidayTitleAttr;
         cell.viewDate.alpha =  [day getDayBgAlpha];
         cell.viewInfo.alpha = [day getDayBgAlpha];
-        
-        
-        if(!day.readingTitle)
-            day.readingTitle = [[NSAttributedString alloc] initWithData:[day.readingTitleStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-        
-        cell.lbReading.attributedText = day.readingTitle;
+        cell.lbReading.attributedText = day.readingTitleAttr;
         
         cell.viewBackground.backgroundColor = [day getDayMainBgColor];
         return cell;
@@ -255,7 +178,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         
         [tableDays reloadData];
         [tableDays layoutIfNeeded];
-        if([[NSDate new] getMonthNumber]-1 == selectedMonthIndex)
+        if([[NSDate new] getMonthNumber] == selectedMonth)
         {
             NSInteger dn = [[NSDate new] getDayNumber]-1;
             NSIndexPath *scrollToPath = [NSIndexPath indexPathForRow:dn  inSection:0];
@@ -283,10 +206,10 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         
         
         
-        DSDay *day = [((DSMonth*)((DSYear*) [DSData shared].years[selectedYearIndex]).months[selectedMonthIndex]).days objectAtIndex:indexPath.row];
+        DSDay *day = [[DSMonth getByYear:selectedYear month:selectedMonth].days objectAtIndex:indexPath.row];
         
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
-                                                                                            action:[NSString stringWithFormat: @"Day click: %@", ([[day date] isToday])?@"Today":[[day date] toString]]
+                                                                                            action:[NSString stringWithFormat: @"Day click: %@", ([[day getDate] isToday])?@"Today":[[day getDate] toString]]
                                                                                              label:nil
                                                                                              value:nil] build]];
         

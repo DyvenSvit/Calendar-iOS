@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DSMonth+Presentation.h"
 #import "DSData.h"
 #import "NSDate+Utils.h"
 #import "DSDayTableViewCell.h"
@@ -24,7 +25,7 @@
 
 @interface DSViewController : GAITrackedViewController <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableDays;
-@property (assign, nonatomic) NSInteger selectedYearIndex;
-@property (assign, nonatomic) NSInteger selectedMonthIndex;
+@property (assign, nonatomic) NSInteger selectedYear;
+@property (assign, nonatomic) NSInteger selectedMonth;
 @property (strong, atomic) MBProgressHUD *HUD;
 @end
