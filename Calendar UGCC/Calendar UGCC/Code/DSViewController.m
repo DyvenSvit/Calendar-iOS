@@ -37,7 +37,20 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     
     selectedMonth = [NSDate getCurrentMonthNumber];
     
-    self.navigationItem.title = [[DSMonth getByYear:selectedYear month:selectedMonth] getTitleString];
+
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [APP.backgroundQueue addOperationWithBlock:^(){
+        
+        [DSData shared];
+        
+        [NSOperationQueue.mainQueue addOperationWithBlock:^(){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            self.navigationItem.title = [[DSMonth getByYear:selectedYear month:selectedMonth] getTitleString];
+            [tableDays reloadData];
+        }];
+    }];
 }
 
 -(UIBarButtonItem*) getBarItemWithImageNamed:(NSString*) imgName action:(SEL) action
@@ -158,7 +171,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
             day.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[day.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         if(!day.readingTitleAttr)
             day.readingTitleAttr = [[NSAttributedString alloc] initWithData:[day.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-        [CDM saveContext];
+        [CDM saveMainContext];
         
         cell.lbTitle.attributedText = day.holidayTitleAttr;
         cell.viewDate.alpha =  [day getDayBgAlpha];

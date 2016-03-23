@@ -18,7 +18,7 @@
     
     NSFetchRequest * request = [self getFetchRequestForManagedObjectOfClass:classArg forKeyValues:keyValues];
     
-    result = [CDM.managedObjectContext countForFetchRequest:request error:&error] > 0;
+    result = [[NSThread isMainThread]?CDM.mainObjectContext:CDM.bgObjectContext countForFetchRequest:request error:&error] > 0;
     
     return result;
 }
@@ -30,7 +30,7 @@
     NSError * error;
     
     NSFetchRequest * request = [self getFetchRequestForManagedObjectOfClass:classArg forKeyValues:keyValues];
-    NSArray *array = [CDM.managedObjectContext executeFetchRequest:request error:&error];
+    NSArray *array = [[NSThread isMainThread]?CDM.mainObjectContext:CDM.bgObjectContext executeFetchRequest:request error:&error];
     if(!error &&[array count]>0)
     {
         result = [array objectAtIndex:0];
@@ -72,7 +72,7 @@
     
     NSError * error;
     
-    NSArray *array = [CDM.managedObjectContext executeFetchRequest:request error:&error];
+    NSArray *array = [[NSThread isMainThread]?CDM.mainObjectContext:CDM.bgObjectContext executeFetchRequest:request error:&error];
     if(!error &&[array count]>0)
     {
         result = array;
@@ -83,7 +83,7 @@
 
 +(NSEntityDescription*)getEntityForClass:(Class)classArg
 {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass(classArg) inManagedObjectContext:CDM.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass(classArg) inManagedObjectContext:[NSThread isMainThread]?CDM.mainObjectContext:CDM.bgObjectContext];
     return entity;
 }
 

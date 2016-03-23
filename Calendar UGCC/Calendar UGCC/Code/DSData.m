@@ -97,14 +97,14 @@ static DSData* result;
             }
             else
             {
-                year = [[DSYear alloc] initWithEntity:[DSYear getEntity] insertIntoManagedObjectContext:CDM.managedObjectContext];
+                year = [[DSYear alloc] initWithEntity:[DSYear getEntity] insertIntoManagedObjectContext:CDM.bgObjectContext];
             }
             year.value = yearNumber;
             
             [self loadMonthsDataForYear:&year fromPath:fileURL Local:local];
         }
     }
-    [CDM saveContext];
+    [CDM saveBgContext];
 }
     
 -(void)loadMonthsDataForYear:(DSYear**)year fromPath:(NSURL*) monthURL Local:(BOOL) local
@@ -142,14 +142,15 @@ static DSData* result;
                 }
                 else
                 {
-                    month = [[DSMonth alloc] initWithEntity:[DSMonth getEntity] insertIntoManagedObjectContext:CDM.managedObjectContext];
+                    month = [[DSMonth alloc] initWithEntity:[DSMonth getEntity] insertIntoManagedObjectContext:CDM.bgObjectContext];
                 }
-                
-                month.value = monthNumber;
-                
-                month.year = *year;
-                
-                [self loadDaysDataForMonth:&month fromPath:fileURL Local:local];
+                if(!month.loaded)
+                {
+                    month.value = monthNumber;
+                    month.year = *year;
+                    [self loadDaysDataForMonth:&month fromPath:fileURL Local:local];
+                    month.loaded = YES;
+                }
             }
         }
 }
@@ -173,7 +174,7 @@ static DSData* result;
             }
             else
             {
-                day = [[DSDay alloc] initWithEntity:[DSDay getEntity] insertIntoManagedObjectContext:CDM.managedObjectContext];
+                day = [[DSDay alloc] initWithEntity:[DSDay getEntity] insertIntoManagedObjectContext:CDM.bgObjectContext];
             }
             
             day.value = dayNumber;

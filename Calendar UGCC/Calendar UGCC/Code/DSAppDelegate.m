@@ -45,7 +45,7 @@
     [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"008000"]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
     [[UIPickerView appearance] setBackgroundColor:[UIColor redColor]];
-    [DSData shared];
+
     return YES;
 }
 

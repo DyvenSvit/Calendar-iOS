@@ -11,7 +11,8 @@
 @implementation DSCoreDataManager
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize managedObjectContext = _managedObjectContext;
+@synthesize mainObjectContext = _mainObjectContext;
+@synthesize bgObjectContext = _bgObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 
 NSString * const kDataManagerBundleName;// = @"CalendarUGCC";
@@ -65,23 +66,51 @@ NSString * const kDataManagerSQLiteName = @"CalendarUGCC.sqlite";
     return _persistentStoreCoordinator;
 }
 
-- (NSManagedObjectContext*)managedObjectContext {
+- (NSManagedObjectContext*)mainObjectContext {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
+    if (_mainObjectContext != nil) {
+        return _mainObjectContext;
     }
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (!coordinator) {
         return nil;
     }
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    return _managedObjectContext;
+    _mainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [_mainObjectContext setPersistentStoreCoordinator:coordinator];
+    return _mainObjectContext;
 }
 
-- (void)saveContext {
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+- (NSManagedObjectContext*)bgObjectContext {
+    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
+    if (_bgObjectContext != nil) {
+        return _bgObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _bgObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [_bgObjectContext setPersistentStoreCoordinator:coordinator];
+    return _bgObjectContext;
+}
+
+- (void)saveMainContext {
+    NSManagedObjectContext *managedObjectContext = self.mainObjectContext;
+    if (managedObjectContext != nil) {
+        NSError *error = nil;
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+
+- (void)saveBgContext {
+    NSManagedObjectContext *managedObjectContext = self.bgObjectContext;
     if (managedObjectContext != nil) {
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
