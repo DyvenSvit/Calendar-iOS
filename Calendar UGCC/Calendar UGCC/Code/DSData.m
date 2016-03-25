@@ -49,17 +49,30 @@ static DSData* result;
 
 - (void)loadDataLocal:(BOOL) local
 {
-
-    NSURL *bundleURLBuildIn = [[NSBundle mainBundle] resourceURL];
+    NSString *lastSavedVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"app.version"];
     
-    NSURL *bundleURLFile = [[NSURL alloc] initFileURLWithPath:[DSData cachesPath]];
+    NSString *majorVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *minorVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
-    NSURL *path = (local)?bundleURLBuildIn:bundleURLFile;
-    
-    NSURL * assetsPath = [path URLByAppendingPathComponent:@"Assets"];
-    
-    [self loadYearsDataFromPath:assetsPath Local:local];
-
+    NSString *currentVersion = [NSString stringWithFormat:@"%@ (%@)", majorVersion, minorVersion];
+    NSLog(@"Checking last app version");
+    if(![currentVersion isEqualToString:lastSavedVersion])
+    {
+        
+        // Copy all resources Assets to the Library directory
+        NSLog(@"Copy all resources Assets to the Core Data database");
+        NSURL *bundleURLBuildIn = [[NSBundle mainBundle] resourceURL];
+        NSURL *bundleURLFile = [[NSURL alloc] initFileURLWithPath:[DSData cachesPath]];
+        NSURL *path = (local)?bundleURLBuildIn:bundleURLFile;
+        NSURL * assetsPath = [path URLByAppendingPathComponent:@"Assets"];
+        [self loadYearsDataFromPath:assetsPath Local:local];
+        NSLog(@"Assets was copied successfully!");
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:@"app.version"];
+    }
+    else
+    {
+        NSLog(@"This app version resources was already copied to the Core Data database");
+    }
 }
 
 -(void) loadYearsDataFromPath:(NSURL*) yearURL Local:(BOOL) local
@@ -144,13 +157,10 @@ static DSData* result;
                 {
                     month = [[DSMonth alloc] initWithEntity:[DSMonth getEntity] insertIntoManagedObjectContext:CDM.bgObjectContext];
                 }
-                if(!month.loaded)
-                {
-                    month.value = monthNumber;
-                    month.year = *year;
-                    [self loadDaysDataForMonth:&month fromPath:fileURL Local:local];
-                    month.loaded = YES;
-                }
+
+                month.value = monthNumber;
+                month.year = *year;
+                [self loadDaysDataForMonth:&month fromPath:fileURL Local:local];
             }
         }
 }

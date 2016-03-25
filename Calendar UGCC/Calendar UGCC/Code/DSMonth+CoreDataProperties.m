@@ -2,7 +2,7 @@
 //  DSMonth+CoreDataProperties.m
 //  CalendarUGCC
 //
-//  Created by Developer on 3/23/16.
+//  Created by Developer on 3/24/16.
 //  Copyright © 2016 DyvenSvit. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,7 +14,6 @@
 @implementation DSMonth (CoreDataProperties)
 
 @dynamic value;
-@dynamic loaded;
 @dynamic days;
 @dynamic year;
 

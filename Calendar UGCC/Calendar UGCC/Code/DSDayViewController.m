@@ -46,8 +46,7 @@ NSArray *contentModeIDs;
     
     
     webViewText.delegate = self;
-    if(IOS7)
-    {
+
         webViewText.paginationMode = UIWebPaginationModeLeftToRight;
         webViewText.paginationBreakingMode = UIWebPaginationBreakingModePage;
         webViewText.scrollView.pagingEnabled = YES;
@@ -55,9 +54,22 @@ NSArray *contentModeIDs;
         webViewText.scrollView.alwaysBounceHorizontal = YES;
         webViewText.scrollView.alwaysBounceVertical = NO;
         webViewText.scrollView.bounces = YES;
-    }
     
-    [self loadResources];
+        [MBProgressHUD showHUDAddedTo: self.view animated:YES];
+    
+    [DSWebAPI getYear:day.month.year.value month:day.month.value day:day.value withCompletionBlock:^(DSDay* result, NSError* error){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if(error)
+        {
+        
+        }
+        else
+        {
+            self.day = result;
+        }
+        [self loadResources];
+    }];
+    
 }
 
 -(UIBarButtonItem*) getBarItemWithImageNamed:(NSString*) imgName action:(SEL) action
@@ -96,7 +108,7 @@ NSArray *contentModeIDs;
 -(void)addEventItemClick
 {
     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-        [MBProgressHUD showHUDAddedTo: self.parentViewController.view animated:YES];
+        [MBProgressHUD showHUDAddedTo: self.view animated:YES];
     }];
     
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
@@ -202,7 +214,7 @@ NSArray *contentModeIDs;
         }
         
         [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-            [MBProgressHUD hideAllHUDsForView:self.parentViewController.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }];
     }];
 }
@@ -293,7 +305,7 @@ NSArray *contentModeIDs;
 
 -(void)loadResources
 {
-    day = [[DSData shared] loadResourcesForDay:self.day];
+    //day = [[DSData shared] loadResourcesForDay:self.day];
     contentModeButtons = [NSMutableArray new];
     for(NSNumber* n in contentModeIDs)
     {
@@ -337,6 +349,24 @@ NSArray *contentModeIDs;
             
             [contentModeButtons addObject:btn];
         }
+    }
+    
+    if(contentModeButtons.count)
+    {
+        CGFloat btnWidth = menuView.frame.size.width/contentModeButtons.count;
+        
+        for(int i = 0; i < contentModeButtons.count; i++)
+        {
+            UIButton *btn = contentModeButtons[i];
+            [menuView addSubview: btn];
+            btn.frame = CGRectMake(i*btnWidth, 0, btnWidth, menuView.frame.size.height);
+            
+            btn.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+            
+            [btn addTarget:self action:@selector(btnContentModeClick:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
+        [self btnContentModeClick:contentModeButtons[0]];
     }
     
 }

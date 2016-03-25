@@ -10,7 +10,7 @@
 
 @implementation DSAppDelegate
 
-@synthesize backgroundQueue, reach;
+@synthesize backgroundQueue;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

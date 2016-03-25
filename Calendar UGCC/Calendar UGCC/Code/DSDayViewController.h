@@ -22,6 +22,8 @@
 #import "NSAttributedString+FontSize.h"
 #import "MBProgressHUD.h"
 
+#import "DSWebAPI.h"
+
 enum DayContentType : NSInteger {
     ContentLiturgy = 0,
     ContentMorningHours = 1,

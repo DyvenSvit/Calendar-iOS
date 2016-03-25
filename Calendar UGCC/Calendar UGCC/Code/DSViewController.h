@@ -19,7 +19,6 @@
 #import "ActionSheetYearMonthPicker.h"
 #import "DSInfoViewController.h"
 #import "MBProgressHUD.h"
-#import <Reachability.h>
 #import <Crashlytics/Crashlytics.h>
 #import "DSAppDelegate.h"
 

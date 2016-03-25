@@ -12,7 +12,6 @@
 #import "DSData.h"
 #import "DSDay.h"
 #import "NSDate+Utils.h"
-#import "Reachability.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
@@ -21,5 +20,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSOperationQueue *backgroundQueue;
-@property (strong, atomic) Reachability *reach;
 @end

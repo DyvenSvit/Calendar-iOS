@@ -109,6 +109,9 @@
 		8496DC551AA399C3006D9043 /* minutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496DC531AA399C3006D9043 /* minutes@2x.png */; };
 		84F3C7331A0A07E800FE9648 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F3C7321A0A07E800FE9648 /* JavaScriptCore.framework */; };
 		87B753AD9E4FA644E92E6162 /* libPods-CalendarUGCC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA9B13F116E103E9D0C5A47 /* libPods-CalendarUGCC.a */; };
+		8B4F94211CA43DA3006F2D60 /* DSWebAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F94201CA43DA3006F2D60 /* DSWebAPI.m */; };
+		8B9F45231CA588F0001E2A37 /* DSDay+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F45221CA588F0001E2A37 /* DSDay+JSON.m */; };
+		8B9F45241CA588F0001E2A37 /* DSDay+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F45221CA588F0001E2A37 /* DSDay+JSON.m */; };
 		8BC48ED71CA16A0300FE8887 /* DSMonth+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ECC1CA16A0300FE8887 /* DSMonth+CoreDataProperties.m */; };
 		8BC48ED81CA16A0300FE8887 /* DSMonth+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ECC1CA16A0300FE8887 /* DSMonth+CoreDataProperties.m */; };
 		8BC48ED91CA16A0300FE8887 /* DSMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC48ECE1CA16A0300FE8887 /* DSMonth.m */; };
@@ -276,6 +279,10 @@
 		8496DC521AA399C3006D9043 /* minutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = minutes.png; path = Resources/Images/minutes.png; sourceTree = "<group>"; };
 		8496DC531AA399C3006D9043 /* minutes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "minutes@2x.png"; path = "Resources/Images/minutes@2x.png"; sourceTree = "<group>"; };
 		84F3C7321A0A07E800FE9648 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		8B4F941F1CA43DA3006F2D60 /* DSWebAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSWebAPI.h; path = Code/DSWebAPI.h; sourceTree = "<group>"; };
+		8B4F94201CA43DA3006F2D60 /* DSWebAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSWebAPI.m; path = Code/DSWebAPI.m; sourceTree = "<group>"; };
+		8B9F45211CA588F0001E2A37 /* DSDay+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSDay+JSON.h"; path = "Code/DSDay+JSON.h"; sourceTree = "<group>"; };
+		8B9F45221CA588F0001E2A37 /* DSDay+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSDay+JSON.m"; path = "Code/DSDay+JSON.m"; sourceTree = "<group>"; };
 		8BC48ECB1CA16A0300FE8887 /* DSMonth+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DSMonth+CoreDataProperties.h"; path = "Code/DSMonth+CoreDataProperties.h"; sourceTree = "<group>"; };
 		8BC48ECC1CA16A0300FE8887 /* DSMonth+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DSMonth+CoreDataProperties.m"; path = "Code/DSMonth+CoreDataProperties.m"; sourceTree = "<group>"; };
 		8BC48ECD1CA16A0300FE8887 /* DSMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMonth.h; path = Code/DSMonth.h; sourceTree = "<group>"; };
@@ -534,6 +541,7 @@
 		07FFF6B3199CE5760022A4D7 /* Business Layer */ = {
 			isa = PBXGroup;
 			children = (
+				8B4F941E1CA43D8A006F2D60 /* Web */,
 				8BC48EE31CA16D2E00FE8887 /* Model */,
 				07E1A9F3199E17970079037A /* DSData.h */,
 				07E1A9F4199E17970079037A /* DSData.m */,
@@ -594,6 +602,17 @@
 				841BA29719F6BB0900E77BC3 /* TodayWidget-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8B4F941E1CA43D8A006F2D60 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				8B4F941F1CA43DA3006F2D60 /* DSWebAPI.h */,
+				8B4F94201CA43DA3006F2D60 /* DSWebAPI.m */,
+				8B9F45211CA588F0001E2A37 /* DSDay+JSON.h */,
+				8B9F45221CA588F0001E2A37 /* DSDay+JSON.m */,
+			);
+			name = Web;
 			sourceTree = "<group>";
 		};
 		8BC48EE31CA16D2E00FE8887 /* Model */ = {
@@ -942,6 +961,7 @@
 			files = (
 				8BC48ED91CA16A0300FE8887 /* DSMonth.m in Sources */,
 				07E1A9F5199E17970079037A /* DSData.m in Sources */,
+				8B4F94211CA43DA3006F2D60 /* DSWebAPI.m in Sources */,
 				078DD748199E2B65009A1E72 /* UILabel+Resize.m in Sources */,
 				8BC48EE61CA16DE300FE8887 /* DSCoreDataManager.m in Sources */,
 				8BC48EEA1CA1705600FE8887 /* DSCoreDataUtils.m in Sources */,
@@ -960,6 +980,7 @@
 				8BC48EDD1CA16A0300FE8887 /* DSYear.m in Sources */,
 				840CC3421A08DD2C0033B7C0 /* ActionSheetYearMonthPicker.m in Sources */,
 				8BC48EEE1CA1777200FE8887 /* DSYear+CD.m in Sources */,
+				8B9F45231CA588F0001E2A37 /* DSDay+JSON.m in Sources */,
 				07E1A9E4199E07560079037A /* NSDate+Utils.m in Sources */,
 				07E1A9DE199DFB6C0079037A /* DSDayTableViewCell.m in Sources */,
 				07937FA2199CB2720002C317 /* DSAppDelegate.m in Sources */,
@@ -988,6 +1009,7 @@
 				8BC48ED81CA16A0300FE8887 /* DSMonth+CoreDataProperties.m in Sources */,
 				8BE4273B1C9C4EC00040C29C /* CalendarUGCC.xcdatamodeld in Sources */,
 				841BA28219F6BA9C00E77BC3 /* DSDay+TablePresentation.m in Sources */,
+				8B9F45241CA588F0001E2A37 /* DSDay+JSON.m in Sources */,
 				8BC48EE71CA16DE300FE8887 /* DSCoreDataManager.m in Sources */,
 				841BA28419F6BA9C00E77BC3 /* DSData.m in Sources */,
 				8BC48EF31CA17C5300FE8887 /* DSMonth+CD.m in Sources */,
