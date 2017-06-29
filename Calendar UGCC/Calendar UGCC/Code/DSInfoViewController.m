@@ -33,7 +33,7 @@
     }];
     
     
-    self.screenName = @"Info";
+    //self.screenName = @"Info";
     
     self.navigationItem.title = @"Інфо";
     
@@ -54,7 +54,7 @@
     mWebView.delegate =self;
     
 
-    [mWebView loadHTMLString:htmlString baseURL:nil];
+    [mWebView loadHTMLString:htmlString baseURL:documentsPath];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,12 +75,17 @@
 {
     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [Answers logContentViewWithName:@"Announcement View" contentType:@"Announcement" contentId:@"announce-1.9.1" customAttributes:@{@"From":@"Info screen",@"Campaign":@"2017-DS-Computer"}];
     }];
 }
 
 -(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
     if ( inType == UIWebViewNavigationTypeLinkClicked ) {
         [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        if([[[inRequest URL] absoluteString] containsString:@"www.liqpay.com"])
+        {
+            [Answers logCustomEventWithName:@"Online payment" customAttributes:@{@"From":@"Info screen",@"Campaign":@"2017-DS-Computer"}];
+        }
         return NO;
     }
     

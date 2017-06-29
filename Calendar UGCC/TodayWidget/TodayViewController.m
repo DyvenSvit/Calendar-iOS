@@ -24,19 +24,19 @@
         [Fabric with:@[[Crashlytics class]]];
         
         // Optional: automatically send uncaught exceptions to Google Analytics.
-        [GAI sharedInstance].trackUncaughtExceptions = YES;
+        //[GAI sharedInstance].trackUncaughtExceptions = YES;
         
         // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-        [GAI sharedInstance].dispatchInterval = 120;
+        //[GAI sharedInstance].dispatchInterval = 120;
         
         // Optional: set Logger to VERBOSE for debug information.
-        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+        //[[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
         
         // Initialize tracker. Replace with your tracking ID.
-        [[GAI sharedInstance] trackerWithTrackingId:@"UA-56294253-1"];
+        //[[GAI sharedInstance] trackerWithTrackingId:@"UA-56294253-1"];
         
-        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-        [[GAI sharedInstance].defaultTracker set:kGAIAppVersion value:version];
+        //NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+        //[[GAI sharedInstance].defaultTracker set:kGAIAppVersion value:version];
         
     }
     return self;
@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.screenName = @"Календар УГКЦ";
+    //self.screenName = @"Календар УГКЦ";
     [DSData sharedWithLocal:YES];
     [btnOpenApp addTarget:self action:@selector(openAppClick) forControlEvents:UIControlEventTouchUpInside];
     [self updateData];
@@ -75,13 +75,14 @@
 
 -(void)openAppClick
 {
+    /*
     id tracker = [[GAI sharedInstance] defaultTracker];
 
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"     // Event category (required)
                                                           action:@"Today Widget touch"  // Event action (required)
                                                            label:nil
                                                            value:nil] build]];    // Event value
-
+*/
     
     
     NSURL *url = [NSURL URLWithString:@"dscal://"];

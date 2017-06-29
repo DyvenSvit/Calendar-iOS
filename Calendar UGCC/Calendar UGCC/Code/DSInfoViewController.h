@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import <Crashlytics/Crashlytics.h>
 
-@interface DSInfoViewController : GAITrackedViewController <UIWebViewDelegate>
+@interface DSInfoViewController : UIViewController <UIWebViewDelegate> //GAITrackedViewController <UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *mWebView;
 @end

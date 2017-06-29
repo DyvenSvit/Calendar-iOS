@@ -31,6 +31,13 @@ NSArray *contentModeIDs;
 {
     [super viewDidLoad];
     
+    if(0 == [[NSUserDefaults standardUserDefaults] integerForKey:@"settings.font.size"])
+    {
+        [[NSUserDefaults standardUserDefaults] setInteger:20 forKey:@"settings.font.size"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    mFontSize = [[NSUserDefaults standardUserDefaults] integerForKey:@"settings.font.size"];
+    
     contentModeIDs = @[@(ContentLiturgy),
                      @(ContentMorningHours),
                      @(ContentNightHours),
@@ -39,46 +46,89 @@ NSArray *contentModeIDs;
                      @(ContentHoliday)];
     
     UIBarButtonItem *addEventItem = [self getBarItemWithImageNamed:@"appbar_add_event" action:@selector(addEventItemClick)];
+    BOOL isScroll = [[NSUserDefaults standardUserDefaults] boolForKey:@"settings.scroll"];
+    UIBarButtonItem *scrollMode = [self getBarItemWithImageNamed:isScroll?@"navbar.scroll.hor":@"navbar.scroll.ver" action:@selector(scrollModeClick:)];
     UIBarButtonItem *sizeUpFontItem = [self getBarItemWithImageNamed:@"appbar_text_size_up" action:@selector(sizeUpFontItemClick)];
     UIBarButtonItem *sizeDownFontItem = [self getBarItemWithImageNamed:@"appbar_text_size_down" action:@selector(sizeDownFontItemClick)];
-    NSArray *actionButtonItems = @[addEventItem, sizeDownFontItem, sizeUpFontItem];
-    self.navigationItem.rightBarButtonItems = actionButtonItems;
-    
+    self.navigationItem.rightBarButtonItems = @[scrollMode, sizeDownFontItem, sizeUpFontItem];
+    self.navigationItem.leftItemsSupplementBackButton = YES;
+    self.navigationItem.leftBarButtonItems = @[addEventItem];
     
     webViewText.delegate = self;
+    [self updateScrollMode];
+    webViewText.scrollView.bounces = YES;
+    
+    if(day.liturgy == nil)
+    {
+        [MBProgressHUD showHUDAddedTo: self.view animated:YES];
+        
+        [DSWebAPI getYear:day.month.year.value month:day.month.value day:day.value withCompletionBlock:^(DSDay* result, NSError* error){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if(error)
+            {
+                
+            }
+            else
+            {
+                self.day = result;
+            }
+            
+            [self loadResources];
+        }];
+        
+    } else {
+        [self loadResources];
+    }
+}
 
+-(void) updateScrollMode
+{
+    BOOL isScroll = [[NSUserDefaults standardUserDefaults] boolForKey:@"settings.scroll"];
+    
+    CGFloat offsetV = webViewText.scrollView.contentOffset.y;
+    CGFloat offsetH = webViewText.scrollView.contentOffset.x;
+    
+    int totalHPages = (int)(webViewText.scrollView.contentSize.width / webViewText.scrollView.frame.size.width);
+    int totalVPages = (int)(webViewText.scrollView.contentSize.height / webViewText.scrollView.frame.size.height);
+    
+    int curHPage = (int)(webViewText.scrollView.contentOffset.x / webViewText.scrollView.frame.size.width);
+    int curVPage = (int)(webViewText.scrollView.contentOffset.y / webViewText.scrollView.frame.size.height);
+
+    
+    NSLog(@"OV:%f, OH:%f, TVP:%d, THP:%d, CVP:%d, CHP:%d", offsetV, offsetH, totalVPages, totalHPages, curVPage, curHPage);
+    
+    if(isScroll)
+    {
+        webViewText.paginationMode = UIWebPaginationModeUnpaginated;
+        webViewText.paginationBreakingMode = UIWebPaginationBreakingModePage;
+        webViewText.scrollView.pagingEnabled = NO;
+        webViewText.scrollView.pagingEnabled = NO;
+        webViewText.scrollView.alwaysBounceHorizontal = NO;
+        webViewText.scrollView.alwaysBounceVertical = YES;
+        webViewText.scrollView.contentOffset = CGPointMake(0, webViewText.scrollView.frame.size.height*curHPage);
+    }
+    else
+    {
         webViewText.paginationMode = UIWebPaginationModeLeftToRight;
         webViewText.paginationBreakingMode = UIWebPaginationBreakingModePage;
         webViewText.scrollView.pagingEnabled = YES;
         webViewText.scrollView.pagingEnabled = YES;
         webViewText.scrollView.alwaysBounceHorizontal = YES;
         webViewText.scrollView.alwaysBounceVertical = NO;
-        webViewText.scrollView.bounces = YES;
-    
-        [MBProgressHUD showHUDAddedTo: self.view animated:YES];
-    
-    [DSWebAPI getYear:day.month.year.value month:day.month.value day:day.value withCompletionBlock:^(DSDay* result, NSError* error){
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if(error)
-        {
-        
-        }
-        else
-        {
-            self.day = result;
-        }
-        [self loadResources];
-    }];
-    
+        webViewText.scrollView.contentOffset = CGPointMake(webViewText.scrollView.frame.size.width*curVPage, 0);
+    }
 }
 
 -(UIBarButtonItem*) getBarItemWithImageNamed:(NSString*) imgName action:(SEL) action
 {
-    UIImage *img = [UIImage imageNamed:imgName];
+    UIImage *img = [[UIImage imageNamed:imgName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTintColor:[UIColor whiteColor]];
     [btn setImage:img forState:UIControlStateNormal];
+    [btn setContentMode:UIViewContentModeScaleAspectFit];
+    [btn.imageView setContentMode:UIViewContentModeScaleAspectFit];
     btn.showsTouchWhenHighlighted = YES;
-    btn.frame = CGRectMake(0.0, 0.0, img.size.width, img.size.height);
+    btn.frame = CGRectMake(0.0, 0.0, 22, 22);
     
     [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     
@@ -90,32 +140,50 @@ NSArray *contentModeIDs;
 
 -(void)sizeUpFontItemClick
 {
+    /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                         action:@"Size Up Font"
                                                                                          label:nil
                                                                                          value:nil] build]];
-    [self updateWithSizeUpFont];
+    */
+     [self updateWithSizeUpFont];
 }
 
 -(void)sizeDownFontItemClick{
+    /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                         action:@"Size Down Font"
                                                                                          label:nil
                                                                                          value:nil] build]];
+     */
     [self updateWithSizeDownFont];
 }
 
+-(void)scrollModeClick:(UIButton*)btn
+{
+    BOOL isScroll = [[NSUserDefaults standardUserDefaults] boolForKey:@"settings.scroll"];
+    isScroll = !isScroll;
+    [[NSUserDefaults standardUserDefaults] setBool:isScroll forKey:@"settings.scroll"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    UIImage* img = [[UIImage imageNamed:(isScroll?@"navbar.scroll.hor":@"navbar.scroll.ver")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [btn setImage:img forState:UIControlStateNormal];
+    [btn setTintColor:[UIColor whiteColor]];
+    
+    [self updateScrollMode];
+}
 -(void)addEventItemClick
 {
     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
         [MBProgressHUD showHUDAddedTo: self.view animated:YES];
     }];
     
+    /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                         action:@"Add Event"
                                                                                          label:nil
                                                                                          value:nil] build]];
-    
+    */
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"dscal://%@", [[day getDate] toString]]];
     
     EKEventStore *eventStore = [[EKEventStore alloc] init];
@@ -149,7 +217,7 @@ NSArray *contentModeIDs;
             if(exists)
             {
                 [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-                                    [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Event already exists" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+                                    [[[UIAlertView alloc] initWithTitle:@"Успіх" message:@"Подія вже існує у Вашому системному календарі" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
                 }];
 
             }
@@ -178,7 +246,7 @@ NSArray *contentModeIDs;
                     NSLog(@"CalendarIntegration.integrateDate: Error saving event: %@", error);
                     
                     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-                    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to add event" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+                    [[[UIAlertView alloc] initWithTitle:@"Помилка" message:@"Не вдалося додати подію у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
                     }];
                     
 
@@ -187,7 +255,7 @@ NSArray *contentModeIDs;
                 {
                     
                     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-                    [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Event successfully added" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+                    [[[UIAlertView alloc] initWithTitle:@"Успіх" message:@"Подію додано у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
                     }];
                     
 
@@ -198,7 +266,7 @@ NSArray *contentModeIDs;
             NSLog(@"CalendarIntegration.integrateDate: Error requesting access: %@", error);
             
             [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to add event" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+            [[[UIAlertView alloc] initWithTitle:@"Помилка" message:@"Не вдалося додати подію у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
             }];
             
 
@@ -207,7 +275,7 @@ NSArray *contentModeIDs;
         else
         {
             [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to add event" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+            [[[UIAlertView alloc] initWithTitle:@"Помилка" message:@"Не вдалося додати подію у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
             }];
             
 
@@ -255,32 +323,32 @@ NSArray *contentModeIDs;
         case ContentLiturgy:
             self.navigationItem.title = @"Служба";
             text = day.liturgy;
-            self.screenName = @"Liturgy";
+            //self.screenName = @"Liturgy";
             break;
         case ContentMorningHours:
             self.navigationItem.title = @"Утреня";
             text = day.morning;
-            self.screenName = @"Morning Hours";
+            //self.screenName = @"Morning Hours";
             break;
         case ContentNightHours:
             self.navigationItem.title = @"Вечірня";
             text = day.night;
-            self.screenName = @"Night Hours";
+            //self.screenName = @"Night Hours";
             break;
         case ContentHours:
             self.navigationItem.title = @"Часи";
             text = day.hours;
-            self.screenName = @"Hours";
+            //self.screenName = @"Hours";
             break;
         case ContentReadings:
             self.navigationItem.title = @"Читання";
             text = day.readings;
-            self.screenName = @"Readings";
+            //self.screenName = @"Readings";
             break;
         case ContentHoliday:
             self.navigationItem.title = @"Свято";
             text = day.saints;
-            self.screenName = @"Holiday";
+            //self.screenName = @"Holiday";
             break;
         default:
             break;
@@ -290,10 +358,12 @@ NSArray *contentModeIDs;
 
     [webViewText loadHTMLString:text baseURL:nil];
     
+    /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                         action:[NSString stringWithFormat:@"Day content select: %@", self.navigationItem.title]
                                                                                          label:nil
                                                                                          value:nil] build]];
+     */
 }
 
 - (void)didReceiveMemoryWarning
@@ -395,6 +465,8 @@ NSArray *contentModeIDs;
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         }];
         mFontSize++;
+        [[NSUserDefaults standardUserDefaults] setInteger:mFontSize forKey:@"settings.font.size"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self updateWithFontSize];
     }
 }
@@ -407,6 +479,8 @@ NSArray *contentModeIDs;
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         }];
         mFontSize--;
+        [[NSUserDefaults standardUserDefaults] setInteger:mFontSize forKey:@"settings.font.size"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self updateWithFontSize];
     }
 }

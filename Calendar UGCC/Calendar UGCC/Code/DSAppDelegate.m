@@ -21,16 +21,16 @@
     [self addSkipBackupAttributeToItemAtURL:[self applicationLibraryDirectory]];
     
     // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-    [GAI sharedInstance].dispatchInterval = 120;
+    //[GAI sharedInstance].dispatchInterval = 120;
     
     // Optional: set Logger to VERBOSE for debug information.
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    //[[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     
     // Initialize tracker. Replace with your tracking ID.
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-56294253-1"];
+    //[[GAI sharedInstance] trackerWithTrackingId:@"UA-56294253-1"];
     
-    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-    [[GAI sharedInstance].defaultTracker set:kGAIAppVersion value:version];
+    //NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+    //[[GAI sharedInstance].defaultTracker set:kGAIAppVersion value:version];
     
     backgroundQueue = [NSOperationQueue new];
     
@@ -42,8 +42,17 @@
                                                                [UIColor whiteColor], NSForegroundColorAttributeName, nil]];
         [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"008000"]];
 
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIColor clearColor], NSForegroundColorAttributeName,
+                                nil];
+    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:attributes
+                                                                                            forState:UIControlStateNormal];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:attributes
+                                                                                            forState:UIControlStateHighlighted];
+    
     [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"008000"]];
-    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+    //[[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
     [[UIPickerView appearance] setBackgroundColor:[UIColor redColor]];
 
     return YES;

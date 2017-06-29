@@ -18,7 +18,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
 {
     [super viewDidLoad];
     
-    self.screenName = @"Day List";
+    //self.screenName = @"Day List";
     
 
     
@@ -27,9 +27,8 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     UIBarButtonItem *infoItem = [self getBarItemWithImageNamed:@"appbar_information_circle" action:@selector(infoItemClick)];
     UIBarButtonItem *wwwItem = [self getBarItemWithImageNamed:@"appbar_www" action:@selector(wwwItemClick)];
     UIBarButtonItem *fbItem = [self getBarItemWithImageNamed:@"appbar_fb" action:@selector(fbItemClick)];
-    NSArray *actionButtonItems = @[infoItem, wwwItem, fbItem, monthItem];
-    self.navigationItem.rightBarButtonItems = actionButtonItems;
-    
+    self.navigationItem.rightBarButtonItems = @[infoItem, monthItem];
+    self.navigationItem.leftBarButtonItems = @[wwwItem, fbItem];
     tableDays.delegate = self;
     tableDays.dataSource = self;
     
@@ -39,8 +38,8 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     
 
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"оновлення даних";
     [APP.backgroundQueue addOperationWithBlock:^(){
         
         [DSData shared];
@@ -49,6 +48,97 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             self.navigationItem.title = [[DSMonth getByYear:selectedYear month:selectedMonth] getTitleString];
             [tableDays reloadData];
+            
+            
+            BOOL dontShow = [[NSUserDefaults standardUserDefaults] boolForKey:@"1.9.1-Announce-Off"];
+            if(!dontShow)
+            {
+                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+                alert.hideAnimationType = SCLAlertViewHideAnimationSlideOutToBottom;
+                alert.showAnimationType =  SCLAlertViewShowAnimationSlideInFromTop;
+                alert.backgroundType = SCLAlertViewBackgroundBlur;
+                alert.customViewColor = [UIColor colorWithHexString:@"008000"];
+                alert.iconTintColor = [UIColor whiteColor];
+
+                NSString* subTitle = nil;
+                
+                if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable)
+                {
+                    subTitle = @"ДивенСвіт потребує Вашої допомоги! Потрібно терміново придбати комп'ютер для розробника сайту та Android-версії додатку!\nНеобхідна сума 23 333 грн\nКартка 4731 1856 0341 0116";
+                }
+                else
+                {
+                    UIImageView *img1 = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 215.0f, 143.0f)];
+                    NSURL *imgUrl1 = [NSURL URLWithString:@"https://i2.wp.com/dyvensvit.org/wp-content/uploads/2017/06/comp-300x200.jpg"];
+                    [img1 setImageWithURL:imgUrl1];
+                    [img1 setContentMode:UIViewContentModeScaleAspectFit];
+                    [alert addCustomView:img1];
+                    /*
+                    UIImageView *img2 = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 215.0f, 34.0f)];
+                    NSURL *imgUrl2 = [NSURL URLWithString:@"https://i2.wp.com/dyvensvit.org/wp-content/uploads/2017/02/donate-liqpay1.png"];
+                    [img2 setImageWithURL:imgUrl2];
+                    [img2 setContentMode:UIViewContentModeScaleAspectFit];
+                    [alert addCustomView:img2];
+                    */
+                    UIImageView *img3 = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 215.0f, 38.0f)];
+                    NSURL *imgUrl3 = [NSURL URLWithString:@"http://dyvensvit.org/wp-content/plugins/olimometer/thermometer.php?olimometer_id=1"];
+                    [img3 setImageWithURL:imgUrl3];
+                    [img3 setContentMode:UIViewContentModeScaleAspectFit];
+                    [alert addCustomView:img3];
+                }
+                
+                SCLSwitchView *switchView = [alert addSwitchViewWithLabel:@"більше не турбувати".uppercaseString];
+                switchView.tintColor = [UIColor redColor];
+                
+                [alert addButton:@"Пожертва через LiqPay" actionBlock:^(void) {
+                    [Answers logCustomEventWithName:@"Online payment" customAttributes:@{@"From":@"Info screen",@"Campaign":@"2017-DS-Computer"}];
+                    UIApplication *application = [UIApplication sharedApplication];
+                    NSURL *URL = [NSURL URLWithString:@"https://www.liqpay.com/uk/checkout/card/dyvensvit"];
+                    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+                        [application openURL:URL options:@{}
+                           completionHandler:^(BOOL success) {
+                               if(success)
+                               {
+                                   NSLog(@"Opened URL: %@",URL.description);
+                               }
+                               else
+                               {
+                                   NSLog(@"Failed to open URL: %@",URL.description);
+                               }
+                           }];
+                    } else {
+                        BOOL success = [application openURL:URL];
+                        if(success)
+                        {
+                            NSLog(@"Opened URL: %@",URL.description);
+                        }
+                        else
+                        {
+                            NSLog(@"Failed to open URL: %@",URL.description);
+                        }
+                    }
+                }];
+                
+                [alert addButton:@"Закрити" actionBlock:^(void) {
+                    NSLog(@"Show again? %@", switchView.isSelected ? @"-No": @"-Yes");
+                    
+                    if(switchView.isSelected)
+                    {
+                        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"1.9.1-Announce-Off"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        [Answers logCustomEventWithName:@"Announcement don't show" customAttributes:@{@"From":@"Info screen",@"Campaign":@"2017-DS-Computer"}];
+                    }
+                    else
+                    {
+                        [Answers logCustomEventWithName:@"Announcement close" customAttributes:@{@"From":@"Info screen",@"Campaign":@"2017-DS-Computer"}];
+                    }
+                }];
+                
+                [alert showCustom:[UIApplication sharedApplication].keyWindow.rootViewController image:[UIImage imageNamed:@"calendar"] color:[UIColor brownColor] title:@"Оголошення" subTitle:subTitle closeButtonTitle:nil duration:0.0f];
+                                
+                
+                [Answers logContentViewWithName:@"Announcement view" contentType:@"Announcement" contentId:@"announce-2.0.0" customAttributes:@{@"From":@"Home screen",@"Campaign":@"2017-DS-Computer"}];
+            }
         }];
     }];
 }
@@ -71,17 +161,19 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
 
 -(void)monthItemClick:(id)sender
 {
+    /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                         action:@"Select Year Month click"
                                                                                          label:nil
                                                                                          value:nil] build]];
-    
+    */
     [ActionSheetYearMonthPicker showPickerWithSelectedYear:selectedYear month:selectedMonth doneBlock:^(ActionSheetYearMonthPicker *picker, NSInteger selectedYearValue, NSInteger selectedMonthValue) {
+        /*
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                             action:[NSString stringWithFormat:@"Select Year: %ld Month: %ld", (long)selectedYearValue,  (long)selectedMonthValue]
                                                                                              label:nil
                                                                                              value:nil] build]];
-        
+        */
         selectedYear = selectedYearValue;
         selectedMonth = selectedMonthValue;
         self.navigationItem.title = [[DSMonth getByYear:selectedYear month:selectedMonth] getTitleString];
@@ -93,10 +185,12 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         }];
     }
                                         cancelBlock:^(ActionSheetYearMonthPicker *picker) {
+                                            /*
                                             [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                                                                 action:@"Select Year Month cancel"
                                                                                                                                  label:nil
                                                                                                                                  value:nil] build]];
+                                             */
                                         } origin:sender];
 }
 
@@ -106,33 +200,36 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
 }
 
 -(void)fbItemClick{
+    /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                         action:@"FB click"
                                                                                          label:nil
                                                                                          value:nil] build]];
     
-    
+    */
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/groups/ugcc.calendar/"]];
     
 
 }
 
 -(void)wwwItemClick{
-    
+    /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                         action:@"WWW click"
                                                                                          label:nil
                                                                                          value:nil] build]];
+     */
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://calendar.dyvensvit.org"]];
 }
 
 
 -(void)infoItemClick{
+    /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                         action:@"Info click"
                                                                                          label:nil
                                                                                          value:nil] build]];
-    
+    */
     DSInfoViewController *navController = [[self storyboard] instantiateViewControllerWithIdentifier:@"DSInfoViewController"];
     [self.navigationController pushViewController:navController animated:YES];
 }
@@ -220,12 +317,12 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         
         
         DSDay *day = [[DSMonth getByYear:selectedYear month:selectedMonth].days objectAtIndex:indexPath.row];
-        
+        /*
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
                                                                                             action:[NSString stringWithFormat: @"Day click: %@", ([[day getDate] isToday])?@"Today":[[day getDate] toString]]
                                                                                              label:nil
                                                                                              value:nil] build]];
-        
+        */
         
         DSDayViewController *navController = [[self storyboard] instantiateViewControllerWithIdentifier:@"DSDayViewController"];
         navController.day = day;

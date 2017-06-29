@@ -1,4 +1,4 @@
-//
+///
 //  DSData.m
 //  Calendar UGCC
 //
@@ -68,6 +68,7 @@ static DSData* result;
         [self loadYearsDataFromPath:assetsPath Local:local];
         NSLog(@"Assets was copied successfully!");
         [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:@"app.version"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     else
     {
@@ -222,6 +223,47 @@ static DSData* result;
             NSString *readingTitle = [[NSString stringWithFormat:@"%@ %@", [glas isEqualToString:@"*"]?@"": glas,  [reading isEqualToString:@"*"]?@"":reading] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             
             day.readingTitle = readingTitle;
+            
+            
+            NSURL * dayPath = [monthURL URLByAppendingPathComponent:[NSString stringWithFormat:@"u%02d.html", day.value]];
+            
+            NSString *fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
+                                    NSUTF8StringEncoding error:nil];
+            day.liturgy = fileContents;
+            
+            
+            dayPath = [monthURL URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02du.html", day.value]];
+            
+            fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
+                          NSUTF8StringEncoding error:nil];
+            day.morning = fileContents;
+            
+            
+            dayPath = [monthURL URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02dv.html", day.value]];
+            
+            fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
+                          NSUTF8StringEncoding error:nil];
+            day.night = fileContents;
+            
+            dayPath = [monthURL URLByAppendingPathComponent:[NSString stringWithFormat:@"t%02dc.html", day.value]];
+            
+            fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
+                          NSUTF8StringEncoding error:nil];
+            day.hours = fileContents;
+            
+            
+            dayPath = [monthURL URLByAppendingPathComponent:[NSString stringWithFormat:@"b%02d.html", day.value]];
+            
+            fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
+                          NSUTF8StringEncoding error:nil];
+            day.readings = fileContents;
+            
+            dayPath = [monthURL URLByAppendingPathComponent:[NSString stringWithFormat:@"s%02d.html", day.value]];
+            
+            fileContents=[NSString stringWithContentsOfURL:dayPath encoding:
+                          NSUTF8StringEncoding error:nil];
+            day.saints = fileContents;
+            
             
            /* if(local)
             {

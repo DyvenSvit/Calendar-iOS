@@ -34,7 +34,7 @@ enum DayContentType : NSInteger {
 };
 
 
-@interface DSDayViewController : GAITrackedViewController <UIWebViewDelegate>
+@interface DSDayViewController : UIViewController <UIWebViewDelegate> //GAITrackedViewController <UIWebViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *menuView;
 @property (strong, nonatomic) IBOutlet UIWebView *webViewText;

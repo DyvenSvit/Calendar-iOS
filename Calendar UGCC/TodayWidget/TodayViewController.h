@@ -14,7 +14,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-@interface TodayViewController : GAITrackedViewController
+@interface TodayViewController : UIViewController //GAITrackedViewController
 
 @property (strong, nonatomic) IBOutlet UIView *viewBackground;
 @property (strong, nonatomic) IBOutlet UIView *viewDate;

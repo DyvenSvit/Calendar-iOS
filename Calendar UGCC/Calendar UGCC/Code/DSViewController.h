@@ -21,8 +21,12 @@
 #import "MBProgressHUD.h"
 #import <Crashlytics/Crashlytics.h>
 #import "DSAppDelegate.h"
+#import <AFNetworking.h>
+#import <UIImageView+AFNetworking.h>
+#import <SCLAlertView.h>
+#import <Reachability.h>
 
-@interface DSViewController : GAITrackedViewController <UITableViewDelegate, UITableViewDataSource>
+@interface DSViewController :UIViewController<UITableViewDelegate, UITableViewDataSource> //GAITrackedViewController <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableDays;
 @property (assign, nonatomic) NSInteger selectedYear;
 @property (assign, nonatomic) NSInteger selectedMonth;
