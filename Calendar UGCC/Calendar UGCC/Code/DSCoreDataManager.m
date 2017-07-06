@@ -13,6 +13,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize mainObjectContext = _mainObjectContext;
 @synthesize bgObjectContext = _bgObjectContext;
+@synthesize objectContext = _objectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 
 NSString * const kDataManagerBundleName;// = @"CalendarUGCC";
@@ -60,10 +61,26 @@ NSString * const kDataManagerSQLiteName = @"CalendarUGCC.sqlite";
                                                          options:options
                                                            error:&error]) {
         NSLog(@"Fatal error while creating persistent store: %@", error);
+        [CrashlyticsKit recordError:error];
         abort();
     }
     
     return _persistentStoreCoordinator;
+}
+
+- (NSManagedObjectContext*)objectContext {
+    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
+    if (_objectContext != nil) {
+        return _objectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _objectContext = [[NSManagedObjectContext alloc] init];
+    [_objectContext setPersistentStoreCoordinator:coordinator];
+    return _objectContext;
 }
 
 - (NSManagedObjectContext*)mainObjectContext {
@@ -77,7 +94,7 @@ NSString * const kDataManagerSQLiteName = @"CalendarUGCC.sqlite";
         return nil;
     }
     _mainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_mainObjectContext setPersistentStoreCoordinator:coordinator];
+    [_mainObjectContext setParentContext:self.bgObjectContext];
     return _mainObjectContext;
 }
 
@@ -96,15 +113,31 @@ NSString * const kDataManagerSQLiteName = @"CalendarUGCC.sqlite";
     return _bgObjectContext;
 }
 
-- (void)saveMainContext {
-    NSManagedObjectContext *managedObjectContext = self.mainObjectContext;
+- (void)saveContext {
+    NSManagedObjectContext *managedObjectContext = self.objectContext;
     if (managedObjectContext != nil) {
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+            [CrashlyticsKit recordError:error];
+            //abort();
+        }
+    }
+}
+
+- (void)saveMainContext {
+    NSManagedObjectContext *managedObjectContext = self.mainObjectContext;
+    if (managedObjectContext != nil) {
+        NSError *error = nil;
+        
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            [CrashlyticsKit recordError:error];
+            //abort();
         }
     }
 }
@@ -117,7 +150,8 @@ NSString * const kDataManagerSQLiteName = @"CalendarUGCC.sqlite";
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+            [CrashlyticsKit recordError:error];
+            //abort();
         }
     }
 }

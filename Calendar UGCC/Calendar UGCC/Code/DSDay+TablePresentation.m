@@ -16,15 +16,16 @@
 }
 
 -(NSString*) getDateString
-{int iDATA = (int)[[[NSCalendar currentCalendar]  components:NSCalendarUnitDay fromDate:[self getDate]] day];
- return [NSString stringWithFormat:@"%d", iDATA];
+{
+    int iDATA = (int)[self getDayInt];
+    return [NSString stringWithFormat:@"%d", iDATA];
 }
 
 -(NSString*) getOldStyleDateString
 {
-    int iDATAOLD = (int)[[[NSCalendar currentCalendar]  components:NSCalendarUnitDay fromDate:[self getDate]] day] - 13;
+    int iDATAOLD = (int)[self getDayInt] - 13;
     if (iDATAOLD < 1) {
-        switch ([[[NSCalendar currentCalendar]  components:NSCalendarUnitMonth fromDate:[self getDate]] month]) {
+        switch ([self getMonthInt]) {
             case 1:
                 iDATAOLD = iDATAOLD+31;
                 break;
@@ -65,10 +66,31 @@
     }
     return [NSString stringWithFormat:@"%d", iDATAOLD];
 }
+
+- (NSInteger) getDayInt
+{
+    return [[[NSCalendar currentCalendar]  components:NSCalendarUnitDay fromDate:[self getDate]] day];
+}
+
+- (NSInteger) getMonthInt
+{
+    return [[[NSCalendar currentCalendar]  components:NSCalendarUnitMonth fromDate:[self getDate]] month];
+}
+
+- (NSInteger) getYearInt
+{
+    return [[[NSCalendar currentCalendar]  components:NSCalendarUnitYear fromDate:[self getDate]] year];
+}
+
+- (NSInteger) getWeekDayInt
+{
+    return [[[NSCalendar currentCalendar]  components:NSCalendarUnitWeekday fromDate:[self getDate]] weekday];
+}
+
 -(NSString*) getWeekDayString
 {
     NSString *result = @"";
-    switch ([[[NSCalendar currentCalendar]  components:NSCalendarUnitWeekday fromDate:[self getDate]] weekday]) {
+    switch ([self getWeekDayInt]) {
         case 1:
             result = @"Нд";
             break;
@@ -98,7 +120,6 @@
 
 }
 
-
 -(UIColor*) getDayMainBgColor
 {
     UIColor *result =  [UIColor colorWithHexString:@"9FFF00"];
@@ -107,8 +128,21 @@
     {
         result = [UIColor colorWithHexString:@"FF7400"];
     }
-    
-    
+
+    switch ([self getFastingTypeU]) {
+        case FastingNone:
+            break;
+        case FastingSimple:
+            result = [UIColor colorWithHexString:@"AA00FF"];
+            break;
+        case FastingStrong:
+            result = [UIColor colorWithHexString:@"AB47BC"];
+            break;
+        case FastingFree:
+            break;
+        default:
+            break;
+    }
     return result;
 }
 
@@ -119,10 +153,59 @@
     return result;
 }
 
--(UIImage*) getFastimgImage
+- (NSInteger) getFastingTypeU
+{
+    NSInteger result = 0;
+    switch (self.fastingType) {
+        case FastingNone:
+            result = FastingNone;
+            break;
+        case FastingSimple:
+        {
+            int year = [self getYearInt];
+            int month = [self getMonthInt];
+            int day = [self getDayInt];
+            int wday = [self getWeekDayInt];
+            
+            if ((month > 1 && month < 6) && (wday == 2||wday == 4||wday == 6))
+            {
+                result = FastingSimple;
+            }
+            else if (wday == 4||wday == 6)
+            {
+                result = FastingSimple;
+            }
+            else if (year == 2017 && ((month == 2 && day == 28) ||
+                                      (month == 3 && day == 2) ||
+                                      (month == 4 && day == 11) ||
+                                      (month == 4 && day == 13) ||
+                                      (month == 4 && day == 15)))
+            {
+                result = FastingSimple;
+            }
+            else
+            {
+                result = FastingFree;
+            }
+
+            break;
+        }
+        case FastingStrong:
+            result = FastingStrong;
+            break;
+        case FastingFree:
+            result = FastingFree;
+            break;
+        default:
+            break;
+    }
+    return result;
+}
+
+-(UIImage*) getFastingImage
 {
     UIImage *result = nil;
-    switch (self.fastingType) {
+    switch ([self getFastingTypeU]) {
         case FastingNone:
             result = nil;
             break;

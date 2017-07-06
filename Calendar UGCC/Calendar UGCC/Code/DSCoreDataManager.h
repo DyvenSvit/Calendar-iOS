@@ -8,15 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface DSCoreDataManager : NSObject
 
 @property (nonatomic, readonly, retain) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, readonly, retain) NSManagedObjectContext *mainObjectContext;
 @property (nonatomic, readonly, retain) NSManagedObjectContext *bgObjectContext;
+@property (nonatomic, readonly, retain) NSManagedObjectContext *objectContext;
 @property (nonatomic, readonly, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (DSCoreDataManager*)sharedInstance;
 - (void)saveMainContext;
 - (void)saveBgContext;
+- (void)saveContext;
 @end

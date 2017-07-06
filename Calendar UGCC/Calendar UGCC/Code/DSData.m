@@ -49,7 +49,9 @@ static DSData* result;
 
 - (void)loadDataLocal:(BOOL) local
 {
-    NSString *lastSavedVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"app.version"];
+    NSUserDefaults *shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.dyvensvit.CalendarUGCC"];
+    
+    NSString *lastSavedVersion = [shared objectForKey:@"app.version"];
     
     NSString *majorVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *minorVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -65,10 +67,12 @@ static DSData* result;
         NSURL *bundleURLFile = [[NSURL alloc] initFileURLWithPath:[DSData cachesPath]];
         NSURL *path = (local)?bundleURLBuildIn:bundleURLFile;
         NSURL * assetsPath = [path URLByAppendingPathComponent:@"Assets"];
-        [self loadYearsDataFromPath:assetsPath Local:local];
+        [CDM.bgObjectContext performBlockAndWait:^{
+            [self loadYearsDataFromPath:assetsPath Local:local];
+        }];
         NSLog(@"Assets was copied successfully!");
-        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:@"app.version"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [shared setObject:currentVersion forKey:@"app.version"];
+        [shared synchronize];
     }
     else
     {
@@ -207,17 +211,6 @@ static DSData* result;
         
             day.holidayTitle = holidayTitle;
             
-            /*
-            if(local)
-            {
-                day.holidayTitleAttr = [[NSAttributedString alloc] initWithString:holidayTitle];
-            }
-            else
-            {
-                day.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-            }
-            */
-            
             NSString *reading = [parts objectAtIndex:5];
             NSString *glas =[parts objectAtIndex:6];
             NSString *readingTitle = [[NSString stringWithFormat:@"%@ %@", [glas isEqualToString:@"*"]?@"": glas,  [reading isEqualToString:@"*"]?@"":reading] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -264,16 +257,13 @@ static DSData* result;
                           NSUTF8StringEncoding error:nil];
             day.saints = fileContents;
             
-            
-           /* if(local)
+            if(!local)
             {
-                day.readingTitleAttr = [[NSAttributedString alloc] initWithString:readingTitle];
+            if(!day.holidayTitleAttr)
+                day.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[day.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+            if(!day.readingTitleAttr)
+                day.readingTitleAttr = [[NSAttributedString alloc] initWithData:[day.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
             }
-            else
-            {
-                day.readingTitleAttr = [[NSAttributedString alloc] initWithData:[readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-            }
-            */
         }
     }
 }

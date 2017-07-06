@@ -17,6 +17,13 @@ enum FastingType : NSInteger {
     FastingFree = 3
 };
 
+enum HolidayType : NSInteger {
+    HolidayNone = 0,
+    HolidaySimple = 1,
+    HolidayLord = 2,
+    HolidayLady = 3
+};
+
 @interface DSDay (TablePresentation)
 
 -(NSString*) getDateString;
@@ -24,6 +31,6 @@ enum FastingType : NSInteger {
 -(NSString*) getWeekDayString;
 -(UIColor*) getDayMainBgColor;
 -(CGFloat) getDayBgAlpha;
--(UIImage*) getFastimgImage;
+-(UIImage*) getFastingImage;
 -(NSDate*) getDate;
 @end

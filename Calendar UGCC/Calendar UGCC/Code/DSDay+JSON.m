@@ -61,6 +61,11 @@
         if(dictionary[@"readings"] && ![dictionary[@"readings"] isEqual:[NSNull null]])
     objDay.readings = dictionary[@"readings"];
     
+    if(!objDay.holidayTitleAttr)
+        objDay.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[objDay.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    if(!objDay.readingTitleAttr)
+        objDay.readingTitleAttr = [[NSAttributedString alloc] initWithData:[objDay.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+
     [CDM saveBgContext];
     
     return objDay;

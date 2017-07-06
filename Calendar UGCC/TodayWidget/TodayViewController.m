@@ -57,7 +57,7 @@
     
     DSDay* day = [DSDay getByYear:[NSDate getCurrentYearNumber] month:[NSDate getCurrentMonthNumber] day:[NSDate getCurrentDayNumber]];
 
-    imgFasting.image = [day getFastimgImage];
+    imgFasting.image = [day getFastingImage];
     lbOldStyleDate.text = [day getOldStyleDateString];
     lbDate.text = [day getDateString];
     lbDayOfWeek.text = [day getWeekDayString];

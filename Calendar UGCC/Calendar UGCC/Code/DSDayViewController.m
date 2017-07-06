@@ -58,7 +58,7 @@ NSArray *contentModeIDs;
     [self updateScrollMode];
     webViewText.scrollView.bounces = YES;
     
-    if(day.liturgy == nil)
+    if(day.liturgy == nil || day.morning == nil || day.night == nil || day.hours == nil || day.readings == nil || day.saints == nil)
     {
         [MBProgressHUD showHUDAddedTo: self.view animated:YES];
         
@@ -66,7 +66,7 @@ NSArray *contentModeIDs;
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             if(error)
             {
-                
+                [CrashlyticsKit recordError:error];
             }
             else
             {
@@ -179,11 +179,11 @@ NSArray *contentModeIDs;
     }];
     
     /*
-    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
-                                                                                        action:@"Add Event"
-                                                                                         label:nil
-                                                                                         value:nil] build]];
-    */
+     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"
+     action:@"Add Event"
+     label:nil
+     value:nil] build]];
+     */
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"dscal://%@", [[day getDate] toString]]];
     
     EKEventStore *eventStore = [[EKEventStore alloc] init];
@@ -217,9 +217,9 @@ NSArray *contentModeIDs;
             if(exists)
             {
                 [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-                                    [[[UIAlertView alloc] initWithTitle:@"Успіх" message:@"Подія вже існує у Вашому системному календарі" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
+                    [[[UIAlertView alloc] initWithTitle:@"Успіх" message:@"Подія вже існує у Вашому системному календарі" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
                 }];
-
+                
             }
             else
             {
@@ -244,41 +244,47 @@ NSArray *contentModeIDs;
                 
                 if (error) {
                     NSLog(@"CalendarIntegration.integrateDate: Error saving event: %@", error);
-                    
+                    [CrashlyticsKit recordError:error];
                     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-                    [[[UIAlertView alloc] initWithTitle:@"Помилка" message:@"Не вдалося додати подію у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
+                        [[[UIAlertView alloc] initWithTitle:@"Помилка" message:@"Не вдалося додати подію у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
                     }];
                     
-
+                    
                 }
                 else
                 {
                     
                     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-                    [[[UIAlertView alloc] initWithTitle:@"Успіх" message:@"Подію додано у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
+                        [[[UIAlertView alloc] initWithTitle:@"Успіх" message:@"Подію додано у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
                     }];
                     
-
+                    
                 }
             }
         }
         else if (error) {
             NSLog(@"CalendarIntegration.integrateDate: Error requesting access: %@", error);
-            
+            [CrashlyticsKit recordError:error];
             [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-            [[[UIAlertView alloc] initWithTitle:@"Помилка" message:@"Не вдалося додати подію у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
+                [[[UIAlertView alloc] initWithTitle:@"Помилка" message:@"Не вдалося додати подію у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
             }];
-            
-
-            
         }
         else
         {
             [NSOperationQueue.mainQueue addOperationWithBlock:^(){
-            [[[UIAlertView alloc] initWithTitle:@"Помилка" message:@"Не вдалося додати подію у Ваш системний календар" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Закрити", nil] show];
+                
+                UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Доступ до системного календаря обмежено" message:@"Щоб дозволити додавання подій, будь ласка перейдіть у Налаштування і дозвольте цьому додатку доступ до системного календаря" preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"Відмінити" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
+                                            {
+                                                
+                                            }]];
+                [alertController addAction:[UIAlertAction actionWithTitle:@"Налаштування" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                            {
+                                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                            }]];
+                [self presentViewController:alertController animated:NO completion:nil];
             }];
-            
-
         }
         
         [NSOperationQueue.mainQueue addOperationWithBlock:^(){

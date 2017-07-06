@@ -47,9 +47,10 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         [NSOperationQueue.mainQueue addOperationWithBlock:^(){
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             self.navigationItem.title = [[DSMonth getByYear:selectedYear month:selectedMonth] getTitleString];
-            [tableDays reloadData];
+            //[tableDays reloadData];
+            [self prepareAttributedTexts];
             
-            
+            /*
             BOOL dontShow = [[NSUserDefaults standardUserDefaults] boolForKey:@"1.9.1-Announce-Off"];
             if(!dontShow)
             {
@@ -73,13 +74,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
                     [img1 setImageWithURL:imgUrl1];
                     [img1 setContentMode:UIViewContentModeScaleAspectFit];
                     [alert addCustomView:img1];
-                    /*
-                    UIImageView *img2 = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 215.0f, 34.0f)];
-                    NSURL *imgUrl2 = [NSURL URLWithString:@"https://i2.wp.com/dyvensvit.org/wp-content/uploads/2017/02/donate-liqpay1.png"];
-                    [img2 setImageWithURL:imgUrl2];
-                    [img2 setContentMode:UIViewContentModeScaleAspectFit];
-                    [alert addCustomView:img2];
-                    */
+
                     UIImageView *img3 = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 215.0f, 38.0f)];
                     NSURL *imgUrl3 = [NSURL URLWithString:@"http://dyvensvit.org/wp-content/plugins/olimometer/thermometer.php?olimometer_id=1"];
                     [img3 setImageWithURL:imgUrl3];
@@ -139,6 +134,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
                 
                 [Answers logContentViewWithName:@"Announcement view" contentType:@"Announcement" contentId:@"announce-2.0.0" customAttributes:@{@"From":@"Home screen",@"Campaign":@"2017-DS-Computer"}];
             }
+         */
         }];
     }];
 }
@@ -259,16 +255,11 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         DSDayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDSDayTableViewCell];
         DSDay *day = [[DSMonth getByYear:selectedYear month:selectedMonth].days objectAtIndex:indexPath.row];
         
-        cell.imgFasting.image = [day getFastimgImage];
+        cell.imgFasting.image = [day getFastingImage];
         cell.lbOldStyleDate.text = [day getOldStyleDateString];
         cell.lbDate.text = [day getDateString];
         cell.lbDayOfWeek.text = [day getWeekDayString];
 
-        if(!day.holidayTitleAttr)
-            day.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[day.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-        if(!day.readingTitleAttr)
-            day.readingTitleAttr = [[NSAttributedString alloc] initWithData:[day.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-        [CDM saveMainContext];
         
         cell.lbTitle.attributedText = day.holidayTitleAttr;
         cell.viewDate.alpha =  [day getDayBgAlpha];
@@ -288,20 +279,40 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         
         [tableDays reloadData];
         [tableDays layoutIfNeeded];
+        NSIndexPath *scrollToPath;
         if([[NSDate new] getMonthNumber] == selectedMonth)
         {
             NSInteger dn = [[NSDate new] getDayNumber]-1;
-            NSIndexPath *scrollToPath = [NSIndexPath indexPathForRow:dn  inSection:0];
-            [tableDays scrollToRowAtIndexPath:scrollToPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            scrollToPath = [NSIndexPath indexPathForRow:dn  inSection:0];
         }
         else
         {
-            NSIndexPath *scrollToPath = [NSIndexPath indexPathForRow:0  inSection:0];
+            scrollToPath = [NSIndexPath indexPathForRow:0  inSection:0];
+        }
+        
+        if([self indexPathIsValid:scrollToPath])
+        {
             [tableDays scrollToRowAtIndexPath:scrollToPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
+}
+
+-(BOOL) indexPathIsValid:(NSIndexPath*) indexPath
+{
+    if(indexPath.section >= tableDays.numberOfSections)
+    {
+        return NO;
+    }
+    else if (indexPath.row >= [tableDays numberOfRowsInSection:indexPath.section])
+    {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

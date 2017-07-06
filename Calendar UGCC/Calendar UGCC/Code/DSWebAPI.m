@@ -19,7 +19,10 @@
         
         if(jsonDictionary[@"dsDayFull"])
         {
-            DSDay* result = [DSDay fromDictionary:jsonDictionary[@"dsDayFull"]];
+            __block DSDay* result = nil;
+            [CDM.bgObjectContext performBlockAndWait:^{
+                result = [DSDay fromDictionary:jsonDictionary[@"dsDayFull"]];
+            }];
             complete(result, nil);
         }
         else
