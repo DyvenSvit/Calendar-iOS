@@ -354,15 +354,16 @@ NSArray *contentModeIDs;
         case ContentHoliday:
             self.navigationItem.title = @"Свято";
             text = day.saints;
+            text = [text stringByReplacingOccurrencesOfString:@"../" withString:@""];
             //self.screenName = @"Holiday";
             break;
         default:
             break;
     }
     
-    
+    NSURL * assetsPath = [[[NSBundle mainBundle] resourceURL] URLByAppendingPathComponent:@"Assets"];
 
-    [webViewText loadHTMLString:text baseURL:nil];
+    [webViewText loadHTMLString:text baseURL:assetsPath];
     
     /*
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"UI"

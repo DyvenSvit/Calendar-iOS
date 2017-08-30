@@ -257,13 +257,20 @@ static DSData* result;
                           NSUTF8StringEncoding error:nil];
             day.saints = fileContents;
             
-            if(!local)
-            {
-            if(!day.holidayTitleAttr)
-                day.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[day.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-            if(!day.readingTitleAttr)
-                day.readingTitleAttr = [[NSAttributedString alloc] initWithData:[day.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-            }
+            [NSOperationQueue.mainQueue addOperationWithBlock:^(){
+                if(!day.holidayTitleAttr)
+                {
+                    day.holidayTitleAttr = [[NSAttributedString alloc] initWithData:[day.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+                }
+                if(!day.readingTitleAttr)
+                {
+                    day.readingTitleAttr = [[NSAttributedString alloc] initWithData:[day.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+                }
+                
+                    [CDM.mainObjectContext performBlock:^{
+                    [CDM saveMainContext];
+                }];
+            }];
         }
     }
 }
