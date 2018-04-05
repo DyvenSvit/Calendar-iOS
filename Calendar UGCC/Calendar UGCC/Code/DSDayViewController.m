@@ -362,7 +362,9 @@ NSArray *contentModeIDs;
     }
     
     NSURL * assetsPath = [[[NSBundle mainBundle] resourceURL] URLByAppendingPathComponent:@"Assets"];
-
+    
+    
+    text = [NSString stringWithFormat:@"<html><body><link href='txt.css' rel='stylesheet' type='text/css' /></body>%@</html>", text];
     [webViewText loadHTMLString:text baseURL:assetsPath];
     
     /*
@@ -461,6 +463,24 @@ NSArray *contentModeIDs;
     [NSOperationQueue.mainQueue addOperationWithBlock:^(){
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
+}
+
+- (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //...
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        if ([[[request URL] scheme] isEqualToString: @"file"]) {
+            NSArray<NSString*>* components = [request.URL.absoluteString componentsSeparatedByString:@"#"];
+            if (components.count == 2) {
+                NSString* anchor = components.lastObject;
+                NSString* code = [NSString stringWithFormat:@"el = document.getElementsByName(\"%@\")[0]; if (el) el.scrollIntoView();", anchor];
+                (void) [webView stringByEvaluatingJavaScriptFromString:code];
+                return NO;
+            }
+        }
+    return YES;
+    }
+    return YES;
 }
 
 

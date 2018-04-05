@@ -162,10 +162,10 @@
             break;
         case FastingSimple:
         {
-            int year = [self getYearInt];
-            int month = [self getMonthInt];
-            int day = [self getDayInt];
-            int wday = [self getWeekDayInt];
+            NSInteger year = [self getYearInt];
+            NSInteger month = [self getMonthInt];
+            NSInteger day = [self getDayInt];
+            NSInteger wday = [self getWeekDayInt];
             
             if ((month > 1 && month < 6) && (wday == 2||wday == 4||wday == 6))
             {

@@ -49,7 +49,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
             self.navigationItem.title = [[DSMonth getByYear:selectedYear month:selectedMonth] getTitleString];
             //[tableDays reloadData];
             [self prepareAttributedTexts];
-            
+            //[self presentAnnouncement];
             /*
             BOOL dontShow = [[NSUserDefaults standardUserDefaults] boolForKey:@"1.9.1-Announce-Off"];
             if(!dontShow)
@@ -137,6 +137,71 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
          */
         }];
     }];
+}
+
+-(void) presentAnnouncement
+{
+    BOOL dontShow = [[NSUserDefaults standardUserDefaults] boolForKey:@"1.9.8-Announce-Off"];
+    if(!dontShow)
+    {
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus] != NotReachable)
+    {
+        int width = [[UIScreen mainScreen] bounds].size.width*0.9 ;//- 105;
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindowWidth:width];
+        alert.hideAnimationType = SCLAlertViewHideAnimationSlideOutToBottom;
+        alert.showAnimationType =  SCLAlertViewShowAnimationSlideInFromTop;
+        alert.backgroundType = SCLAlertViewBackgroundBlur;
+        alert.customViewColor = [UIColor colorWithHexString:@"008000"];
+        alert.iconTintColor = [UIColor whiteColor];
+        
+        [alert addButton:@"Пройти опитування" actionBlock:^(void) {
+            [Answers logCustomEventWithName:@"Poll opened" customAttributes:@{@"From":@"Info screen",@"Campaign":@"2017-Community-Poll"}];
+            UIApplication *application = [UIApplication sharedApplication];
+            NSURL *URL = [NSURL URLWithString:@"https://docs.google.com/forms/d/e/1FAIpQLSfC-SNM8W3GvnOoLkrTEXS1jWXwf3rp_lt1RzTzafV0gTGqHQ/viewform"];
+            if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+                [application openURL:URL options:@{}
+                   completionHandler:^(BOOL success) {
+                       if(success)
+                       {
+                           NSLog(@"Opened URL: %@",URL.description);
+                           [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"1.9.8-Announce-Off"];
+                           [[NSUserDefaults standardUserDefaults] synchronize];
+                       }
+                       else
+                       {
+                           NSLog(@"Failed to open URL: %@",URL.description);
+                       }
+                   }];
+            } else {
+                BOOL success = [application openURL:URL];
+                if(success)
+                {
+                    NSLog(@"Opened URL: %@",URL.description);
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"1.9.8-Announce-Off"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                else
+                {
+                    NSLog(@"Failed to open URL: %@",URL.description);
+                }
+            }
+        }];
+        
+        [alert addButton:@"Не зараз" actionBlock:^(void) {
+            [Answers logCustomEventWithName:@"Announcement close" customAttributes:@{@"From":@"Info screen",@"Campaign":@"2017-Community-Poll"}];
+        }];
+        
+        [alert addButton:@"Більше не турбувати" actionBlock:^(void) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"1.9.8-Announce-Off"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [Answers logCustomEventWithName:@"Announcement don't show" customAttributes:@{@"From":@"Info screen",@"Campaign":@"2017-Community-Poll"}];
+        }];
+        
+        [alert showCustom:[UIApplication sharedApplication].keyWindow.rootViewController  image:[UIImage imageNamed:@"community"] color:[UIColor brownColor] title:@"Оголошення" subTitle:@"Слава Ісусу Христу! Допоможіть Церкві, присвятивши 5 хв свого часу: пройдіть опитування, яке стосується нашого нового проекту: Довідника спільнот УГКЦ. Дякуємо Вам." closeButtonTitle:nil duration:0.0f];
+
+        [Answers logContentViewWithName:@"Announcement view" contentType:@"Announcement" contentId:@"announce-1.9.8" customAttributes:@{@"From":@"Home screen",@"Campaign":@"2017-Community-Poll"}];
+    }
+    }
 }
 
 -(UIBarButtonItem*) getBarItemWithImageNamed:(NSString*) imgName action:(SEL) action

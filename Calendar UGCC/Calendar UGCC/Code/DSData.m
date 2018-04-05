@@ -203,16 +203,29 @@ static DSData* result;
             day.date = [[[NSCalendar currentCalendar] dateFromComponents:comps] timeIntervalSince1970];
 
             day.isHoliday = [[parts objectAtIndex:2] boolValue];
-            day.fastingType =[[parts objectAtIndex:3] integerValue];
-            
-            NSString *holidayTitle = [parts objectAtIndex:4];
+            NSString *holidayTitle;
+            NSString *reading;
+            NSString *glas;
+            if (day.month.year.value < 2018)
+            {
+                day.fastingType =[[parts objectAtIndex:3] integerValue];
+                holidayTitle = [parts objectAtIndex:4];
+                reading = [parts objectAtIndex:5];
+                glas =[parts objectAtIndex:6];
+            }
+            else
+            {
+                day.fastingType =[[parts objectAtIndex:4] integerValue];
+                holidayTitle = [parts objectAtIndex:5];
+                reading = [parts objectAtIndex:6];
+                glas =[parts objectAtIndex:7];
+            }
+           
             
             holidayTitle = day.isHoliday?[NSString stringWithFormat:@"<font color='#FF0000'>%@</font>", holidayTitle]:holidayTitle;
         
             day.holidayTitle = holidayTitle;
             
-            NSString *reading = [parts objectAtIndex:5];
-            NSString *glas =[parts objectAtIndex:6];
             NSString *readingTitle = [[NSString stringWithFormat:@"%@ %@", [glas isEqualToString:@"*"]?@"": glas,  [reading isEqualToString:@"*"]?@"":reading] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             
             day.readingTitle = readingTitle;
