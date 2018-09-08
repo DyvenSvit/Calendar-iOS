@@ -31,6 +31,16 @@ DEPENDENCIES:
   - Reachability (~> 3.2)
   - SCLAlertView-Objective-C
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ActionSheetPicker-3.0
+    - AFNetworking
+    - Crashlytics
+    - Fabric
+    - MBProgressHUD
+    - Reachability
+    - SCLAlertView-Objective-C
+
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 0e5828a565773ad8d21f837ae961ab163f4cd29d
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -42,4 +52,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1b004e844902a7cefb189d1f5cfb71e1433095fc
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.3

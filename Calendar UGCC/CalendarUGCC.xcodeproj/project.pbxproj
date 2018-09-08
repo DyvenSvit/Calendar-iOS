@@ -673,8 +673,6 @@
 				07E3266E199B56AC0017685A /* Resources */,
 				07C9B49819C9D32900ACF202 /* ShellScript */,
 				841BA27219F6B35C00E77BC3 /* Embed App Extensions */,
-				8F73172548E8C38CF0C6FE92 /* [CP] Embed Pods Frameworks */,
-				51ABDA9142CCC97E7D5EECD2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -697,7 +695,6 @@
 				841BA25619F6B35B00E77BC3 /* Resources */,
 				8418D82C1A04130900AFDD02 /* ShellScript */,
 				8B1AD0111C74D7C100FFB548 /* ShellScript */,
-				67A9B7F26DD9398F2797EED9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -719,7 +716,8 @@
 				ORGANIZATIONNAME = DyvenSvit;
 				TargetAttributes = {
 					07E3266F199B56AC0017685A = {
-						DevelopmentTeam = ZV926KLGMR;
+						DevelopmentTeam = CV388556QG;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -728,8 +726,8 @@
 					};
 					841BA25719F6B35B00E77BC3 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = ZV926KLGMR;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = CV388556QG;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -845,36 +843,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" a833e3cfadfc1218c22f19bfbdc9caf0183fe899 7f95d5bf273744b537ecf1dc278e337ede89c89aca036d1dd3277ea220316d1d";
 		};
-		51ABDA9142CCC97E7D5EECD2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalendarUGCC/Pods-CalendarUGCC-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		67A9B7F26DD9398F2797EED9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TodayWidget/Pods-TodayWidget-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8418D82C1A04130900AFDD02 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -900,21 +868,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then \n    rm -fr Frameworks\nfi";
-		};
-		8F73172548E8C38CF0C6FE92 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalendarUGCC/Pods-CalendarUGCC-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		D6519EB460D173A394DB3CC9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1193,6 +1146,8 @@
 				CODE_SIGN_ENTITLEMENTS = CalendarUGCC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CV388556QG;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1208,7 +1163,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a07c9bc0-ecd3-4405-a22e-e69ee63fc491";
+				PROVISIONING_PROFILE_SPECIFIER = "Calendar UGCC Dev 070918";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1223,6 +1179,8 @@
 				CODE_SIGN_ENTITLEMENTS = CalendarUGCC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CV388556QG;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1238,7 +1196,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a07c9bc0-ecd3-4405-a22e-e69ee63fc491";
+				PROVISIONING_PROFILE_SPECIFIER = "Calendar UGCC Dev 070918";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1255,8 +1214,8 @@
 				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZV926KLGMR;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CV388556QG;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1279,8 +1238,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC.TodayWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "8de6ca96-3667-44eb-ab3a-942ec2c74670";
+				PROVISIONING_PROFILE_SPECIFIER = "Calendar UGCC Today Widget Dev 070918";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(PROJECT_DIR)/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 			};
@@ -1294,10 +1253,10 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZV926KLGMR;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CV388556QG;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1320,8 +1279,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC.TodayWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "8de6ca96-3667-44eb-ab3a-942ec2c74670";
+				PROVISIONING_PROFILE_SPECIFIER = "Calendar UGCC Today Widget Dev 070918";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/Calendar UGCC/DTCoreText/Core\"/** \"$SRCROOT/Calendar UGCC/DTCoreText/Externals/DTFoundation/Core\"/** $(PROJECT_DIR)/** $(SDKROOT)/usr/include/libxml2 \"$SRCROOT/Calendar UGCC/SSZipArchive\"/**";
 			};
