@@ -57,7 +57,9 @@ NSArray *contentModeIDs;
     webViewText.delegate = self;
     [self updateScrollMode];
     webViewText.scrollView.bounces = YES;
+    [self loadResources];
     
+    /*
     if(day.liturgy == nil || day.morning == nil || day.night == nil || day.hours == nil || day.readings == nil || day.saints == nil)
     {
         [MBProgressHUD showHUDAddedTo: self.view animated:YES];
@@ -79,6 +81,7 @@ NSArray *contentModeIDs;
     } else {
         [self loadResources];
     }
+     */
 }
 
 -(void) updateScrollMode

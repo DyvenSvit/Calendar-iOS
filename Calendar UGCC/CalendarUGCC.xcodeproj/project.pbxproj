@@ -98,6 +98,8 @@
 		841BA29919F6BC3400E77BC3 /* fasting_strong.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E1A9D7199DF92A0079037A /* fasting_strong.png */; };
 		841BA29A19F6BC3400E77BC3 /* fasting.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E1A9D8199DF92A0079037A /* fasting.png */; };
 		844B73891AB4A45100CE8540 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844B73871AB4A45100CE8540 /* Launch Screen.xib */; };
+		845AE77C214679B800D2B9F8 /* appbar_scroll_ver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845AE77A214679B700D2B9F8 /* appbar_scroll_ver@2x.png */; };
+		845AE77D214679B800D2B9F8 /* appbar_scroll_hor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845AE77B214679B700D2B9F8 /* appbar_scroll_hor@2x.png */; };
 		845BFDBB1A87E57B0069D3C4 /* appbar_fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 845BFDB71A87E57B0069D3C4 /* appbar_fb.png */; };
 		845BFDBC1A87E57B0069D3C4 /* appbar_fb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845BFDB81A87E57B0069D3C4 /* appbar_fb@2x.png */; };
 		845BFDBD1A87E57B0069D3C4 /* appbar_www.png in Resources */ = {isa = PBXBuildFile; fileRef = 845BFDB91A87E57B0069D3C4 /* appbar_www.png */; };
@@ -270,6 +272,8 @@
 		841BA26119F6B35C00E77BC3 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		841BA29719F6BB0900E77BC3 /* TodayWidget-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TodayWidget-Prefix.pch"; sourceTree = "<group>"; };
 		844B73881AB4A45100CE8540 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/Launch Screen.xib"; sourceTree = "<group>"; };
+		845AE77A214679B700D2B9F8 /* appbar_scroll_ver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appbar_scroll_ver@2x.png"; path = "../../Design/Resources/appbar_scroll_ver@2x.png"; sourceTree = "<group>"; };
+		845AE77B214679B700D2B9F8 /* appbar_scroll_hor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appbar_scroll_hor@2x.png"; path = "../../Design/Resources/appbar_scroll_hor@2x.png"; sourceTree = "<group>"; };
 		845BFDB71A87E57B0069D3C4 /* appbar_fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appbar_fb.png; path = Resources/Images/appbar_fb.png; sourceTree = "<group>"; };
 		845BFDB81A87E57B0069D3C4 /* appbar_fb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appbar_fb@2x.png"; path = "Resources/Images/appbar_fb@2x.png"; sourceTree = "<group>"; };
 		845BFDB91A87E57B0069D3C4 /* appbar_www.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appbar_www.png; path = Resources/Images/appbar_www.png; sourceTree = "<group>"; };
@@ -409,6 +413,8 @@
 		07937F98199CB1460002C317 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				845AE77B214679B700D2B9F8 /* appbar_scroll_hor@2x.png */,
+				845AE77A214679B700D2B9F8 /* appbar_scroll_ver@2x.png */,
 				8B71937C1EFD4DA20087BB93 /* splash-ds-logo.png */,
 				8B71937D1EFD4DA20087BB93 /* splash-logo.png */,
 				8B71937E1EFD4DA20087BB93 /* splash-title.png */,
@@ -793,6 +799,7 @@
 				8496DC541AA399C3006D9043 /* minutes.png in Resources */,
 				84034C3D1A861F8800CA9209 /* appbar_add_event@2x.png in Resources */,
 				07F393FD19A4FBB7006FBDBF /* appbar_settings.png in Resources */,
+				845AE77C214679B800D2B9F8 /* appbar_scroll_ver@2x.png in Resources */,
 				845BFDBB1A87E57B0069D3C4 /* appbar_fb.png in Resources */,
 				8496DC551AA399C3006D9043 /* minutes@2x.png in Resources */,
 				07FFF6D6199D08090022A4D7 /* ic_info.png in Resources */,
@@ -804,6 +811,7 @@
 				07E1A9DA199DF92A0079037A /* fasting.png in Resources */,
 				07DB1A0A19A47FAE00CB15DD /* prayer_book.png in Resources */,
 				07DB1A0619A47FAE00CB15DD /* bell.png in Resources */,
+				845AE77D214679B800D2B9F8 /* appbar_scroll_hor@2x.png in Resources */,
 				07F393D819A4E4F5006FBDBF /* prayer_book@2x.png in Resources */,
 				07F393FA19A4FBB7006FBDBF /* appbar_calendar_month@2x.png in Resources */,
 				07F393FB19A4FBB7006FBDBF /* appbar_information_circle.png in Resources */,
