@@ -47,7 +47,7 @@ NSArray *contentModeIDs;
     
     UIBarButtonItem *addEventItem = [self getBarItemWithImageNamed:@"appbar_add_event" action:@selector(addEventItemClick)];
     BOOL isScroll = [[NSUserDefaults standardUserDefaults] boolForKey:@"settings.scroll"];
-    UIBarButtonItem *scrollMode = [self getBarItemWithImageNamed:isScroll?@"navbar.scroll.hor":@"navbar.scroll.ver" action:@selector(scrollModeClick:)];
+    UIBarButtonItem *scrollMode = [self getBarItemWithImageNamed:isScroll?@"appbar_scroll_hor":@"appbar_scroll_ver" action:@selector(scrollModeClick:)];
     UIBarButtonItem *sizeUpFontItem = [self getBarItemWithImageNamed:@"appbar_text_size_up" action:@selector(sizeUpFontItemClick)];
     UIBarButtonItem *sizeDownFontItem = [self getBarItemWithImageNamed:@"appbar_text_size_down" action:@selector(sizeDownFontItemClick)];
     self.navigationItem.rightBarButtonItems = @[scrollMode, sizeDownFontItem, sizeUpFontItem];
@@ -169,7 +169,7 @@ NSArray *contentModeIDs;
     [[NSUserDefaults standardUserDefaults] setBool:isScroll forKey:@"settings.scroll"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    UIImage* img = [[UIImage imageNamed:(isScroll?@"navbar.scroll.hor":@"navbar.scroll.ver")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage* img = [[UIImage imageNamed:(isScroll?@"appbar_scroll_hor":@"appbar_scroll_ver")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [btn setImage:img forState:UIControlStateNormal];
     [btn setTintColor:[UIColor whiteColor]];
     
