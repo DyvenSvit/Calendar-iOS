@@ -12,7 +12,7 @@
 
 static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
 
-@synthesize tableDays, selectedYear, selectedMonth, HUD;
+@synthesize tableDays, selectedYear, selectedMonth, HUD, attributedTextArray;
 
 - (void)viewDidLoad
 {
@@ -25,10 +25,11 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     UIBarButtonItem *monthItem = [self getBarItemWithImageNamed:@"appbar_calendar_month" action:@selector(monthItemClick:)];
     //UIBarButtonItem *settingsItem = [self getBarItemWithImageNamed:@"appbar_settings" action:@selector(settingsItemClick)];
     UIBarButtonItem *infoItem = [self getBarItemWithImageNamed:@"appbar_information_circle" action:@selector(infoItemClick)];
+    UIBarButtonItem *prayerItem = [self getBarItemWithImageNamed:@"appbar.prayer" action:@selector(prayerItemClick)];
     UIBarButtonItem *wwwItem = [self getBarItemWithImageNamed:@"appbar_www" action:@selector(wwwItemClick)];
     UIBarButtonItem *fbItem = [self getBarItemWithImageNamed:@"appbar_fb" action:@selector(fbItemClick)];
     self.navigationItem.rightBarButtonItems = @[infoItem, monthItem];
-    self.navigationItem.leftBarButtonItems = @[wwwItem, fbItem];
+    self.navigationItem.leftBarButtonItems = @[wwwItem, fbItem, prayerItem];
     tableDays.delegate = self;
     tableDays.dataSource = self;
     
@@ -36,7 +37,7 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     
     selectedMonth = [NSDate getCurrentMonthNumber];
     
-
+    attributedTextArray = [[NSMutableArray alloc] init];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"оновлення даних";
@@ -295,6 +296,26 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
     [self.navigationController pushViewController:navController animated:YES];
 }
 
+-(void)prayerItemClick{
+    NSString *customURL = @"praycatholic://";
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *URL = [NSURL URLWithString:customURL];
+    if ([application canOpenURL:URL])
+    {
+        [application openURL:URL options:@{}
+           completionHandler:^(BOOL success) {
+               NSLog(@"Open %@: %d",customURL,success);
+           }];
+    }
+    else {
+        NSURL *urlToAppStore = [NSURL URLWithString:@"https://itunes.apple.com/us/app/catholic-prayer-molitovnik/id1087833268?mt=8"];
+        [application openURL:urlToAppStore options:@{}
+           completionHandler:^(BOOL success) {
+               NSLog(@"Open %@: %d",customURL,success);
+           }];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -343,10 +364,11 @@ static NSString *const kDSDayTableViewCell = @"DSDayTableViewCell";
         }];
         */
         
-        cell.lbTitle.attributedText = day.holidayTitleAttr;
+        
+        cell.lbTitle.attributedText = [[NSAttributedString alloc] initWithData:[day.holidayTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         cell.viewDate.alpha =  [day getDayBgAlpha];
         cell.viewInfo.alpha = [day getDayBgAlpha];
-        cell.lbReading.attributedText = day.readingTitleAttr;
+        cell.lbReading.attributedText = [[NSAttributedString alloc] initWithData:[day.readingTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         
         cell.viewBackground.backgroundColor = [day getDayMainBgColor];
         return cell;

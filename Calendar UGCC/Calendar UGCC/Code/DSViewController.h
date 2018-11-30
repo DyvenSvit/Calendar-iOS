@@ -31,4 +31,5 @@
 @property (assign, nonatomic) NSInteger selectedYear;
 @property (assign, nonatomic) NSInteger selectedMonth;
 @property (strong, atomic) MBProgressHUD *HUD;
+@property (strong, atomic) NSMutableArray *attributedTextArray;
 @end
