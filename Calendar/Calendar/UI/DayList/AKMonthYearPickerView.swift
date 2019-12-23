@@ -50,6 +50,10 @@ class AKMonthYearPickerView: UIView {
         layer.masksToBounds = true
         
         monthYearPickerView = MonthYearPickerView(frame: CGRect(x: frame.origin.x, y: frame.origin.y+40, width: frame.size.width, height: frame.size.height))
+    
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -158,9 +162,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor     = UIColor.white
-        
+        backgroundColor = .white
         commonSetup()
     }
     
@@ -195,6 +197,10 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
         let currentYear = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.year, from: NSDate() as Date)
         self.selectRow(currentMonth - 1, inComponent: 0, animated: false)
         self.selectRow(self.years.firstIndex(of: currentYear)!, inComponent: 1, animated: false)
+        
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
     }
     
     // Mark: UIPicker Delegate / Data Source

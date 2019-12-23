@@ -38,6 +38,9 @@ class DayListViewController: UIViewController, Storyboarded {
 
         selectedMonth = NSDate.init().getMonth()
         selectedYear = NSDate.init().getYear()
+        selectedMonthTmp = selectedMonth
+        selectedYearTmp = selectedYear
+        
         loadSelectedYearMonth()
     }
     
@@ -64,12 +67,13 @@ class DayListViewController: UIViewController, Storyboarded {
             self.dataSource.setDays(CoreStoreStack.getDays(month: self.selectedMonth, year: self.selectedYear))
             self.tableDays.reloadData()
             
-            
-            if let index = self.dataSource.getTodaysIndex() {
-                self.tableDays.scrollToRow(at: IndexPath.init(row: index, section: 0), at: .top, animated: true)
-            }
-            else {
-                self.tableDays.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+            if(self.dataSource.days.count > 0) {
+                if let index = self.dataSource.getTodaysIndex() {
+                    self.tableDays.scrollToRow(at: IndexPath.init(row: index, section: 0), at: .top, animated: true)
+                }
+                else {
+                    self.tableDays.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+                }
             }
             
             hud.dismiss()
