@@ -123,11 +123,19 @@ struct AKMonthYearPickerConstants {
     struct AppFrameSettings {
         
         static var screenHeight : CGFloat {
-            return UIScreen.main.bounds.size.height
+            if UIDevice.current.orientation.isLandscape {
+                return UIScreen.main.bounds.size.width
+            } else {
+                return UIScreen.main.bounds.size.height
+            }
         }
         
         static var screenWidth : CGFloat {
-            return UIScreen.main.bounds.size.width
+            if UIDevice.current.orientation.isLandscape {
+                return UIScreen.main.bounds.size.height
+            } else {
+                return UIScreen.main.bounds.size.width
+            }
         }
     }
 }
