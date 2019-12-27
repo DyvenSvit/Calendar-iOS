@@ -2,6 +2,9 @@ PODS:
   - AwaitKit (5.1.0):
     - PromiseKit (~> 6)
   - CoreStore (5.3.1)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
   - Firebase/Analytics (6.13.0):
     - Firebase/Core
   - Firebase/Core (6.13.0):
@@ -83,6 +86,8 @@ PODS:
 DEPENDENCIES:
   - AwaitKit (~> 5.1.0)
   - CoreStore (~> 5.3.1)
+  - Crashlytics (~> 3.14.0)
+  - Fabric (~> 1.10.2)
   - Firebase/Analytics
   - JGProgressHUD
   - PromiseKit (~> 6.8)
@@ -93,6 +98,8 @@ SPEC REPOS:
   trunk:
     - AwaitKit
     - CoreStore
+    - Crashlytics
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -112,6 +119,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AwaitKit: a8a3d8982097ee09ac75f5c5d3952fbcc2f26f1c
   CoreStore: 89d0c8e7a9d76d0c533018b4850245c973f4ecbd
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 458d109512200d1aca2e1b9b6cf7d68a869a4a46
   FirebaseAnalytics: 45f36d9c429fc91d206283900ab75390cd05ee8a
   FirebaseCore: 307ea2508df730c5865334e41965bd9ea344b0e5
@@ -128,6 +137,6 @@ SPEC CHECKSUMS:
   Siren: 996f37869eae1f343f8c11f17d90c9c8da90bd4c
   UIColor_Hex_Swift: ca96173c106070db96ae807313278d80170f23f4
 
-PODFILE CHECKSUM: 3774601e180470dc21c9f683f6996fdf1cd1732e
+PODFILE CHECKSUM: 26d842fb450597d30be6e62a4c9fb0bc350c35cf
 
 COCOAPODS: 1.8.4
