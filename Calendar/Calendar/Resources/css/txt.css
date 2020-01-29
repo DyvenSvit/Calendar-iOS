@@ -6,3 +6,16 @@ h3			{font-size:1.2em;font-weight:bold;padding:5px 0;}
 h4			{font-size:1.2em;font-weight:bold;padding:5px 0;}
 i 			{color:#ff0000;}
 img         {width: 100%; height: auto;}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: rgb(38,38,41);
+        color: white;
+    }
+    a:link {
+        color: #0096e2;
+    }
+    a:visited {
+        color: #9d57df;
+    }
+}
