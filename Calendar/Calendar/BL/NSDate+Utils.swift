@@ -24,24 +24,28 @@ extension NSDate {
     
     func getYear() -> Int {
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         let components = calendar.components([.year], from: self as Date)
         return components.year!
     }
     
     func getMonth() -> Int {
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         let components = calendar.components([.month], from: self as Date)
         return components.month!
     }
     
     func getDay() -> Int {
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         let components = calendar.components([.day], from: self as Date)
         return components.day!
     }
     
     func getDayOfWeek() -> Int {
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         let components = calendar.components([.weekday], from: self as Date)
         return components.weekday!
     }
@@ -49,6 +53,7 @@ extension NSDate {
     func startOfMonth() -> NSDate? {
 
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         let currentDateComponents = calendar.components([.year, .month], from: self as Date)
         let startOfMonth = calendar.date(from: currentDateComponents)
 
@@ -58,6 +63,7 @@ extension NSDate {
     func dateByAddingMonths(monthsToAdd: Int) -> NSDate? {
 
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         let months = NSDateComponents()
         months.month = monthsToAdd
 
@@ -67,6 +73,7 @@ extension NSDate {
     func endOfMonth() -> NSDate? {
 
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         if let plusOneMonthDate = dateByAddingMonths(monthsToAdd: 1) {
             let plusOneMonthDateComponents = calendar.components([.year, .month], from: plusOneMonthDate as Date)
 
@@ -148,6 +155,7 @@ extension NSDate {
     func isSameDay(date: NSDate) -> Bool
     {
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         var components = calendar.components([.year, .month, .day], from: date as Date)
         guard let argDate = calendar.date(from: components) else {
             return false
@@ -161,6 +169,7 @@ extension NSDate {
     
     func getMonthName() -> String {
         let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
         let components = calendar.components([.year, .month], from: self as Date)
         
         return "\(NSDate.MONTH_NAMES[components.month!-1]) (\(components.year!))"
