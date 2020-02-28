@@ -23,7 +23,7 @@ class CalendarTests: XCTestCase {
     func testGetDays() {
         var daysResponse: [Day]?
         let exp = expectation(description: "days")
-        WebAPI.shared.getDayListFor(month:2, year:2019).done{
+        WebAPI.shared.getDayListFor(month:1, year:2020).done{
             days in
             daysResponse = days
             exp.fulfill()
@@ -42,7 +42,7 @@ class CalendarTests: XCTestCase {
     func testGetText() {
         var daysResponse: [Day]?
         let exp = expectation(description: "days")
-        WebAPI.shared.getDayListFor(month:2, year:2019).done{
+        WebAPI.shared.getDayListFor(month:1, year:2020).done{
             days in
             daysResponse = days
             exp.fulfill()

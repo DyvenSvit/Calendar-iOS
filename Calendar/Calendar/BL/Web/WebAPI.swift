@@ -133,11 +133,16 @@ class WebAPI {
                 
                 do {
                     guard let text = String(bytes: data, encoding: String.Encoding.utf8) else {throw CalendarError.invalidResponse}
+                    var textProper = text
+                    if type == .holiday {
+                        textProper = self.fixImagesURL(text: textProper)
+                    }
+                    
                     CoreStoreStack.stack.perform(
                         asynchronous: { (transaction) -> Void in
                             // using the same variable name protects us from misusing the non-transaction instance
                             let day = transaction.edit(day)!
-                            day.fillText(type: type, text: text)
+                            day.fillText(type: type, text: textProper)
                     },
                         completion: { _ in
                             let day = CoreStoreStack.stack.fetchExisting(day)
@@ -198,5 +203,107 @@ class WebAPI {
         }, failure: { failure in
             completion(nil, failure)
         })
+    }
+    
+    
+    func fixImagesURL(text:String) -> String {
+        return text.replacingOccurrences(of: "../icons/2020", with: "https://calendar.dyvensvit.org/icons/2020")
+    }
+    
+    let baseIconsUrl = "https://calendar.dyvensvit.org/icons"
+    
+    func getImagesFromText(text:String) {
+        let imageFilenames = matches(for: ".*<img src=\"\\.\\.\\/icons\\/2020\\/(?:.*)\".*", in: text)
+        for imageFilename in imageFilenames {
+            getImage(filename:imageFilename, for: 2020) {
+                success, error in
+                if success {
+                    print("Success")
+                }
+                else {
+                    if let error = error {
+                        print("error: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func matches(for regex: String, in text: String) -> [String] {
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let nsString = text as NSString
+            let results = regex.matches(in: text, range: NSRange(location: 0, length: nsString.length))
+            return results.map { nsString.substring(with: $0.range(at: 0) )}
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    func getImage(filename:String, for year:Int, completion:  @escaping (Bool, Error?) -> Void) {
+        let urlString = baseIconsUrl+"/\(year)/\(filename)"
+        if let url = URL(string: urlString) {
+            runDataTaskImage(year:year, url: url, completion: completion)
+        }
+        else {
+            completion(false, CalendarError.unsupportedURL)
+        }
+    }
+    
+    @discardableResult
+    func runDataTaskImage(year:Int, url:URL, completion: @escaping (Bool, Error?) -> Void) -> URLSessionDataTask {
+        let dataTask = defaultSession.dataTask(with: url) { data, response, error in
+            // 4
+            if let error = error {
+                completion(false, error)
+            } else if let data = data,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200 {
+                
+                do {
+                    let fileName = url.lastPathComponent
+                    if let url = self.saveImageToDocuments(year: year, data: data, fileName: fileName) {
+                        completion(true, nil)
+                    }
+                    else {
+                        completion(false, CalendarError.invalidResponse)
+                    }
+                    
+                } catch {
+                    completion(false, error)
+                }
+            }else {
+                completion(false, CalendarError.invalidResponse)
+            }
+        }
+        // 7
+        dataTask.resume()
+        return dataTask
+    }
+    
+    func saveImageToDocuments(year:Int, data:Data, fileName:String) -> URL? {
+        // get the documents directory url
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        // create the destination file url to save your image
+        var fileURL = documentsDirectory.appendingPathComponent("icons")
+        fileURL = fileURL.appendingPathComponent("2020")
+        fileURL = fileURL.appendingPathComponent(fileName)
+        // get your UIImage jpeg data representation and check if the destination file url already exists
+        if let image = UIImage(data: data), let data = image.jpegData(compressionQuality:  1.0),
+          !FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                // writes the image data to disk
+                try data.write(to: fileURL)
+                return fileURL
+                print("file saved")
+            } catch {
+                print("error saving file:", error)
+                return nil
+            }
+        }
+        else {
+            return nil
+        }
     }
 }

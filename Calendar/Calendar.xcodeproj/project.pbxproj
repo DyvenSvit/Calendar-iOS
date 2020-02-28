@@ -783,7 +783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "Календар";
 				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 260819";
@@ -808,7 +808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "Календар";
 				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 260819";
@@ -835,7 +835,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calendar.app/Calendar";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Календар.app/Календар";
 			};
 			name = Debug;
 		};
@@ -857,7 +857,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calendar.app/Calendar";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Календар.app/Календар";
 			};
 			name = Release;
 		};
