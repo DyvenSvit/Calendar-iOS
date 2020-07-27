@@ -68,11 +68,8 @@ class DayListViewController: UIViewController, Storyboarded {
             self.tableDays.reloadData()
             
             if(self.dataSource.days.count > 0) {
-                if let index = self.dataSource.getTodaysIndex() {
-                    self.tableDays.scrollToRow(at: IndexPath.init(row: index, section: 0), at: .top, animated: true)
-                }
-                else {
-                    self.tableDays.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+                if let today = self.dataSource.getToday() {
+                    Router.openDay(today, from: self.navigationController)
                 }
             }
             

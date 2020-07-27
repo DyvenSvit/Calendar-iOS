@@ -32,9 +32,18 @@ class DayDataSource: NSObject, UITableViewDataSource {
         self.days = days
     }
     
-    func getTodaysIndex() -> Int? {
+    func getToday() -> Day? {
         let filtered = self.days.filter{ $0.date.isToday() }
-        if let today = filtered.first, let index = self.days.firstIndex(of: today) {
+        if let today = filtered.first {
+            return today
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func getTodaysIndex() -> Int? {
+        if let today = getToday(), let index = self.days.firstIndex(of: today) {
             return index
         }
         else {
