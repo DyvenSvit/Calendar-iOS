@@ -207,7 +207,8 @@ class WebAPI {
     
     
     func fixImagesURL(text:String) -> String {
-        return text.replacingOccurrences(of: "../icons/2020", with: "https://calendar.dyvensvit.org/icons/2020")
+        var result = text.replacingOccurrences(of: "../icons/2020", with: "https://calendar.dyvensvit.org/icons/2020")
+        return result.replacingOccurrences(of: "../icons/2021", with: "https://calendar.dyvensvit.org/icons/2021")
     }
     
     let baseIconsUrl = "https://calendar.dyvensvit.org/icons"

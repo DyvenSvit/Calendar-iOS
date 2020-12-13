@@ -308,7 +308,6 @@
 				07A0C96823A0F1900064D25C /* ShellScript */,
 				8B0CF8E5222532B20004B016 /* Resources */,
 				51EEF11F23CCEFF7D742D090 /* [CP] Embed Pods Frameworks */,
-				8BE7D42023B60EB50031E5C0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -492,23 +491,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Calendar/Pods-Calendar-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		8BE7D42023B60EB50031E5C0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		A01511E7666AE8C67F02C827 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -783,10 +765,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "Календар";
-				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 260819";
+				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 201213";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -808,10 +790,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "Календар";
-				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 260819";
+				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 201213";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

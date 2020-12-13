@@ -195,7 +195,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func commonSetup() {
-        self.years = [2018, 2019, 2020]
+        self.years = [2018, 2019, 2020, 2021]
         self.months = NSDate.MONTH_NAMES
         
         self.delegate = self
