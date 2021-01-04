@@ -53,4 +53,14 @@ struct CoreStoreStack {
         return days ?? []
     }
     
+    static func deleteAll() {
+        CoreStoreStack.stack.perform(
+            asynchronous: { (transaction) -> Void in
+                try transaction.deleteAll(
+                    From<Day>()
+                )
+            },
+            completion: { _ in }
+        )
+    }
 }

@@ -28,10 +28,11 @@ enum Text: Int {
     case rule = 0
     case morning = 1
     case evening = 2
-    case hours = 3
-    case liturgy = 4
-    case holiday = 5
-    case quotes = 6
+    case afterevening = 3
+    case hours = 4
+    case liturgy = 5
+    case holiday = 6
+    case quotes = 7
 }
 
 extension Day {
@@ -45,6 +46,8 @@ extension Day {
             self.txtRule = text
         case .evening:
             self.txtEvening = text
+        case .afterevening:
+            self.txtAfterevening = text
         case .morning:
             self.txtMorning = text
         case .hours:
@@ -70,6 +73,7 @@ class Day: NSManagedObject, ImportableUniqueObject {
     @NSManaged public var txtQuotes: String?
     @NSManaged public var txtRule: String?
     @NSManaged public var txtEvening: String?
+    @NSManaged public var txtAfterevening: String?
     @NSManaged public var txtMorning: String?
     @NSManaged public var txtHours: String?
     @NSManaged public var txtLiturgy: String?
@@ -134,6 +138,10 @@ class Day: NSManagedObject, ImportableUniqueObject {
                 text = self.txtEvening
                 btnImage = "day_txt_evening"
                 break
+            case .afterevening:
+                text = self.txtAfterevening
+                btnImage = "day_txt_afterevening"
+                break
             case .hours:
                 text = self.txtHours
                 btnImage = "day_txt_hours"
@@ -170,6 +178,10 @@ class Day: NSManagedObject, ImportableUniqueObject {
             case .evening:
                 text = self.txtEvening
                 title = "Вечірня"
+                break
+            case .afterevening:
+                text = self.txtAfterevening
+                title = "Повечір'я"
                 break
             case .hours:
                 text = self.txtHours

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jhi-Sd-0gJ">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jhi-Sd-0gJ">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,7 +14,7 @@
             <objects>
                 <navigationController id="jhi-Sd-0gJ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TdI-3l-I0c">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -27,40 +28,106 @@
         <!--Info View Controller-->
         <scene sceneID="1MG-3y-UTq">
             <objects>
-                <viewController storyboardIdentifier="InfoViewController" id="uw7-gY-kyF" customClass="InfoViewController" customModule="Calendar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InfoViewController" id="uw7-gY-kyF" customClass="InfoViewController" customModule="Календар" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dOk-oc-OWd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="RDE-B0-G6f"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YqV-qJ-aYx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-700" y="-416"/>
         </scene>
+        <!--Settings Controller-->
+        <scene sceneID="dr8-8D-biz">
+            <objects>
+                <viewController storyboardIdentifier="SettingsController" id="gbK-xu-s6L" customClass="SettingsController" customModule="Календар" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BW8-jb-jsj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j6Q-pf-32K" userLabel="Content View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lLK-bs-Nd3">
+                                        <rect key="frame" x="263" y="8" width="51" height="31"/>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Починати день звечора" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rw-53-hhr">
+                                        <rect key="frame" x="8" y="8" width="247" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yrV-l5-F36">
+                                        <rect key="frame" x="263" y="47" width="51" height="31"/>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Григоріанський календар" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZC9-A4-dEs">
+                                        <rect key="frame" x="8" y="47" width="247" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="ZC9-A4-dEs" firstAttribute="leading" secondItem="j6Q-pf-32K" secondAttribute="leading" constant="8" id="3Ga-ou-7Cy"/>
+                                    <constraint firstItem="lLK-bs-Nd3" firstAttribute="leading" secondItem="6Rw-53-hhr" secondAttribute="trailing" constant="8" id="Eza-6a-OvE"/>
+                                    <constraint firstItem="lLK-bs-Nd3" firstAttribute="top" secondItem="j6Q-pf-32K" secondAttribute="top" constant="8" id="IBP-QQ-1dt"/>
+                                    <constraint firstAttribute="trailing" secondItem="lLK-bs-Nd3" secondAttribute="trailing" constant="8" id="JD3-KL-h2M"/>
+                                    <constraint firstItem="yrV-l5-F36" firstAttribute="top" secondItem="lLK-bs-Nd3" secondAttribute="bottom" constant="8" id="Wbp-PV-1NB"/>
+                                    <constraint firstItem="6Rw-53-hhr" firstAttribute="leading" secondItem="j6Q-pf-32K" secondAttribute="leading" constant="8" id="XVl-jF-fJI"/>
+                                    <constraint firstItem="yrV-l5-F36" firstAttribute="leading" secondItem="ZC9-A4-dEs" secondAttribute="trailing" constant="8" id="Y07-ta-nKE"/>
+                                    <constraint firstItem="ZC9-A4-dEs" firstAttribute="height" secondItem="yrV-l5-F36" secondAttribute="height" id="a4I-uQ-ZHp"/>
+                                    <constraint firstItem="6Rw-53-hhr" firstAttribute="height" secondItem="lLK-bs-Nd3" secondAttribute="height" id="bYg-4f-nr0"/>
+                                    <constraint firstItem="ZC9-A4-dEs" firstAttribute="top" secondItem="6Rw-53-hhr" secondAttribute="bottom" constant="8" id="j00-u7-YdU"/>
+                                    <constraint firstItem="6Rw-53-hhr" firstAttribute="top" secondItem="j6Q-pf-32K" secondAttribute="top" constant="8" id="lZf-TU-eM9"/>
+                                    <constraint firstAttribute="trailing" secondItem="yrV-l5-F36" secondAttribute="trailing" constant="8" id="vKW-hu-Quc"/>
+                                    <constraint firstItem="yrV-l5-F36" firstAttribute="leading" secondItem="ZC9-A4-dEs" secondAttribute="trailing" constant="8" id="w8e-kH-iaI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NJJ-Ql-hLY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="j6Q-pf-32K" firstAttribute="trailing" secondItem="NJJ-Ql-hLY" secondAttribute="trailing" id="5lm-bU-o0v"/>
+                            <constraint firstItem="j6Q-pf-32K" firstAttribute="bottom" secondItem="NJJ-Ql-hLY" secondAttribute="bottom" id="6Df-yu-lT3"/>
+                            <constraint firstItem="j6Q-pf-32K" firstAttribute="top" secondItem="NJJ-Ql-hLY" secondAttribute="top" id="9oe-24-Rex"/>
+                            <constraint firstItem="j6Q-pf-32K" firstAttribute="leading" secondItem="NJJ-Ql-hLY" secondAttribute="leading" id="Aby-ON-A6j"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="swCalendarGregorian" destination="yrV-l5-F36" id="tNr-J5-wH8"/>
+                        <outlet property="swStartDayFromEvening" destination="lLK-bs-Nd3" id="jwc-68-lHz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lcz-LH-DnO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="315" y="-416"/>
+        </scene>
         <!--Day List View Controller-->
         <scene sceneID="fKP-tw-YT4">
             <objects>
-                <viewController storyboardIdentifier="DayListViewCotroller" id="UXw-kH-i4i" customClass="DayListViewController" customModule="Calendar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DayListViewCotroller" id="UXw-kH-i4i" customClass="DayListViewController" customModule="Календар" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="31t-f0-XIK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VBf-H1-bIg">
-                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="l7m-Xd-1J7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="l7m-Xd-1J7" firstAttribute="trailing" secondItem="VBf-H1-bIg" secondAttribute="trailing" id="2bT-E0-NHF"/>
                             <constraint firstItem="VBf-H1-bIg" firstAttribute="leading" secondItem="l7m-Xd-1J7" secondAttribute="leading" id="7Hk-en-lRY"/>
                             <constraint firstItem="VBf-H1-bIg" firstAttribute="top" secondItem="l7m-Xd-1J7" secondAttribute="top" id="8tI-Gd-ypz"/>
                             <constraint firstItem="l7m-Xd-1J7" firstAttribute="bottom" secondItem="VBf-H1-bIg" secondAttribute="bottom" id="vKz-XI-wfz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="l7m-Xd-1J7"/>
                     </view>
                     <navigationItem key="navigationItem" id="xzl-T6-SRu">
                         <barButtonItem key="backBarButtonItem" title=" " id="F9m-h3-eRA"/>
@@ -76,23 +143,24 @@
         <!--Day View Controller-->
         <scene sceneID="4AZ-2K-ZRg">
             <objects>
-                <viewController storyboardIdentifier="DayViewController" id="H0c-og-cZg" customClass="DayViewController" customModule="Calendar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DayViewController" id="H0c-og-cZg" customClass="DayViewController" customModule="Календар" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="adC-dy-xzN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yX4-gI-jHl">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="676"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="420"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpj-Ts-hpl">
-                                <rect key="frame" x="0.0" y="676" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="420" width="320" height="60"/>
                                 <color key="backgroundColor" red="0.00093029496979999998" green="0.32762872900000001" blue="0.001443437349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="nBL-2e-F7X"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="doH-Qz-g8i"/>
                         <color key="backgroundColor" red="0.00093029496979999998" green="0.32762872900000001" blue="0.001443437349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="gpj-Ts-hpl" firstAttribute="top" secondItem="yX4-gI-jHl" secondAttribute="bottom" id="0N8-Ue-ibs"/>
@@ -103,7 +171,6 @@
                             <constraint firstItem="doH-Qz-g8i" firstAttribute="trailing" secondItem="yX4-gI-jHl" secondAttribute="trailing" id="XRG-X8-C2k"/>
                             <constraint firstItem="yX4-gI-jHl" firstAttribute="top" secondItem="doH-Qz-g8i" secondAttribute="top" id="ncc-bi-RST"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="doH-Qz-g8i"/>
                     </view>
                     <connections>
                         <outlet property="stackView" destination="gpj-Ts-hpl" id="VHR-Be-Frk"/>
@@ -115,4 +182,9 @@
             <point key="canvasLocation" x="316" y="301"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

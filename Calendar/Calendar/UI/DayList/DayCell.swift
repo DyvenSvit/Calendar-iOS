@@ -32,6 +32,8 @@ class DayCell: UITableViewCell {
                 lbDate.text = day.date.getDayString()
                 lbDayOfWeek.text = day.date.getDayOfWeekString()
                 
+                lbOldStyleDate.isHidden = AppSettings.boolValue(.calendarGregorian)
+                
                 bgView.backgroundColor = getDayMainBgColor()
                 infoView.alpha = getDayBgAlpha()
                 dateView.alpha = getDayBgAlpha()

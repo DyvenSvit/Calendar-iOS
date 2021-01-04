@@ -21,6 +21,11 @@ class Router {
         navigationController?.pushViewController(infoViewController, animated: true)
     }
     
+    static func openSettings(from navigationController: UINavigationController?) {
+        let settingsController = SettingsController.instantiate()
+        navigationController?.pushViewController(settingsController, animated: true)
+    }
+    
     static func openPrayerApp() {
         let customURL = "praycatholic://"
         guard let url = URL.init(string: customURL) else {return}

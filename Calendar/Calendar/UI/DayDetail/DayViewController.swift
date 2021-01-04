@@ -21,7 +21,7 @@ class DayViewController: UIViewController, Storyboarded {
     
     
     var day:Day!
-    var contentModes:[Text] = [.rule, .morning, .evening, .hours, .liturgy, .holiday, .quotes]
+    var contentModes:[Text] = [.rule, .morning, .evening, .afterevening, .hours, .liturgy, .holiday, .quotes]
     var contentModeButtons:[UIButton] = []
     
     override func loadView() {
@@ -77,9 +77,13 @@ class DayViewController: UIViewController, Storyboarded {
                 button.addTarget(self, action: #selector(contentModeButtonClick(_:)), for: .touchUpInside)
                 stackView.addSubview(button)
             }
+            showContentMode(Text.init(rawValue: 0)!)
+        }
+        else {
+            self.navigationItem.title = "ТЕКСТИ ВІДСУТНІ"
         }
         
-        showContentMode(Text.init(rawValue: 0)!)
+        
     }
         
     @objc func sizeUpFontClick() {

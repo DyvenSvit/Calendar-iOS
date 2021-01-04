@@ -38,6 +38,8 @@
 		8B0CF92F22254D870004B016 /* CoreStoreStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0CF92E22254D870004B016 /* CoreStoreStack.swift */; };
 		8B0CF93122254E540004B016 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0CF93022254E540004B016 /* String+Utils.swift */; };
 		8B0CF93822256D370004B016 /* Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B0CF8F1222532B20004B016 /* Calendar.xcdatamodeld */; };
+		8B9E00CC25A09B7C001491C3 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E00CB25A09B7C001491C3 /* SettingsController.swift */; };
+		8B9E00D425A0AA89001491C3 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E00D325A0AA89001491C3 /* AppSettings.swift */; };
 		A35262B4BB957793C645F469 /* Pods_Calendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF14FAEF1DDE1ADA81CE9327 /* Pods_Calendar.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +102,8 @@
 		8B0CF92C22254B7B0004B016 /* WebAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPI.swift; sourceTree = "<group>"; };
 		8B0CF92E22254D870004B016 /* CoreStoreStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreStoreStack.swift; sourceTree = "<group>"; };
 		8B0CF93022254E540004B016 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
+		8B9E00CB25A09B7C001491C3 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		8B9E00D325A0AA89001491C3 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		BA05DCCFB87561152037EC3A /* Pods-CalendarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarTests/Pods-CalendarTests.release.xcconfig"; sourceTree = "<group>"; };
 		DF14FAEF1DDE1ADA81CE9327 /* Pods_Calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F64593EF5EFB88FBF564B186 /* Pods_CalendarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +140,7 @@
 		07CCF250238FD89000D51B8B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8B9E00C725A09B63001491C3 /* Settings */,
 				07CEDF6623A7DB0000764E75 /* Info */,
 				07CEDF6523A7DAF100764E75 /* DayDetail */,
 				07CEDF6423A7DAD500764E75 /* DayList */,
@@ -262,6 +267,7 @@
 				8B0CF92922253D100004B016 /* NSDate+Utils.swift */,
 				8B0CF92E22254D870004B016 /* CoreStoreStack.swift */,
 				8B0CF93022254E540004B016 /* String+Utils.swift */,
+				8B9E00D325A0AA89001491C3 /* AppSettings.swift */,
 			);
 			path = BL;
 			sourceTree = "<group>";
@@ -280,6 +286,14 @@
 				8B0CF92C22254B7B0004B016 /* WebAPI.swift */,
 			);
 			path = Web;
+			sourceTree = "<group>";
+		};
+		8B9E00C725A09B63001491C3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8B9E00CB25A09B7C001491C3 /* SettingsController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		F9AEE7B2DFA0B4FD848057BD /* Pods */ = {
@@ -575,8 +589,10 @@
 				07CEDF5923A7B5C800764E75 /* DayDataSource.swift in Sources */,
 				072DE0862397E38B006F581A /* UI+Utils.swift in Sources */,
 				8B0CF8EB222532B20004B016 /* AppDelegate.swift in Sources */,
+				8B9E00CC25A09B7C001491C3 /* SettingsController.swift in Sources */,
 				07F1120F239540FF00C88073 /* DayCell.swift in Sources */,
 				07CEDF6123A7D36D00764E75 /* Storyboarded.swift in Sources */,
+				8B9E00D425A0AA89001491C3 /* AppSettings.swift in Sources */,
 				07F11213239575F400C88073 /* DayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,7 +781,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "Календар";
 				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 201213";
@@ -790,7 +806,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "Календар";
 				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 201213";

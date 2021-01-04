@@ -21,7 +21,7 @@ extension WebAPI {
             return "p"
         case .rule:
             return "u"
-        case .evening, .morning, .hours:
+        case .evening, .afterevening, .morning, .hours:
             return "t"
         case .liturgy:
             return "b"
@@ -32,6 +32,8 @@ extension WebAPI {
         switch type {
         case .evening:
             return "v"
+        case .afterevening:
+            return "n"
         case .morning:
             return "u"
         case .hours:
@@ -59,6 +61,7 @@ class WebAPI {
                                                WebAPI.shared.getText(type: .rule, for: day),
                                                WebAPI.shared.getText(type: .liturgy, for: day),
                                                WebAPI.shared.getText(type: .evening, for: day),
+                                               WebAPI.shared.getText(type: .afterevening, for: day),
                                                WebAPI.shared.getText(type: .morning, for: day),
                                                WebAPI.shared.getText(type: .hours, for: day)]
                 
@@ -98,7 +101,9 @@ class WebAPI {
         let dayn = day.date.getDay()
         let prefix = getTextURLPrefixFor(type: type)
         let postfix = getTextURLPostfixFor(type: type)
-        let urlString = baseUrl+"/\(year)/\(String(format: "%02d", month))/\(prefix)\(String(format: "%02d", dayn))\(postfix).html"
+        let isGregorian = AppSettings.boolValue(.calendarGregorian)
+        let calType = isGregorian ? "n" : ""
+        let urlString = baseUrl+"/\(year)\(calType)/\(String(format: "%02d", month))/\(prefix)\(String(format: "%02d", dayn))\(postfix).html"
         if let url = URL(string: urlString) {
             runDataTaskText(type:type, for:day, url: url, completion: completion)
         }
@@ -112,7 +117,10 @@ class WebAPI {
     }
     
     func getDayListFor(month:Int, year:Int, completion:  @escaping ([Day]?, Error?) -> Void) {
-        if let url = URL(string: baseUrl+"/\(year)/\(String(format: "%02d", month))/c.txt") {
+        
+        let isGregorian = AppSettings.boolValue(.calendarGregorian)
+        let calType = isGregorian ? "n" : ""
+        if let url = URL(string: baseUrl+"/\(year)\(calType)/\(String(format: "%02d", month))/c.txt") {
             runDataTaskDays(month:month, year:year, url: url, completion: completion)
         }
         else {

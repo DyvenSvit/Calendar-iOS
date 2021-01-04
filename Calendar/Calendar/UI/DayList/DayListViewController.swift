@@ -28,19 +28,31 @@ class DayListViewController: UIViewController, Storyboarded {
         let biPray = UIUtils.getBarItemWithImageNamed("appbar_pray", action:#selector(prayClick), target:self)!
         let biWWW = UIUtils.getBarItemWithImageNamed("appbar_www", action:#selector(wwwClick), target:self)!
         let biFB = UIUtils.getBarItemWithImageNamed("appbar_fb", action:#selector(fbClick), target:self)!
-
-        self.navigationItem.rightBarButtonItems = [biInfo, biMonth]
+        let biSettings = UIUtils.getBarItemWithImageNamed("appbar_settings", action:#selector(settingsClick), target:self)!
+        
+        self.navigationItem.rightBarButtonItems = [biInfo, biMonth, biSettings]
         self.navigationItem.leftBarButtonItems = [biWWW, biFB, biPray]
         
         tableDays.register(UINib(nibName: "DayCell", bundle: nil), forCellReuseIdentifier: "DayCell")
         tableDays.dataSource = dataSource
         tableDays.delegate = self
-
-        selectedMonth = NSDate.init().getMonth()
-        selectedYear = NSDate.init().getYear()
+        
+        loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if(AppSettings.boolValue(.calendarReload)) {
+            loadData()
+        }
+    }
+    
+    func loadData() {
+        selectedMonth = NSDate.getToday().getMonth()
+        selectedYear = NSDate.getToday().getYear()
         selectedMonthTmp = selectedMonth
         selectedYearTmp = selectedYear
-        
         loadSelectedYearMonth()
     }
     
@@ -64,12 +76,21 @@ class DayListViewController: UIViewController, Storyboarded {
                 print(error)
             }
             
+            let openDayDetail = !AppSettings.boolValue(.calendarReload)
+            AppSettings[.calendarReload] = false
+            
             self.dataSource.setDays(CoreStoreStack.getDays(month: self.selectedMonth, year: self.selectedYear))
             self.tableDays.reloadData()
             
             if(self.dataSource.days.count > 0) {
                 if let today = self.dataSource.getToday() {
-                    Router.openDay(today, from: self.navigationController)
+                    let row = self.dataSource.days.firstIndex(of: today)!
+                    self.tableDays.scrollToRow(at: IndexPath.init(row: row, section: 0), at: .top, animated: false)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+                        if(openDayDetail){
+                            Router.openDay(today, from: self.navigationController)
+                        }
+                    }
                 }
             }
             
@@ -107,6 +128,10 @@ class DayListViewController: UIViewController, Storyboarded {
     
     @objc func fbClick() {
         Router.openCalendarFBGroup()
+    }
+    
+    @objc func settingsClick() {
+        Router.openSettings(from: navigationController)
     }
 }
 

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Day" representedClassName=".Day" syncable="YES">
-        <attribute name="colorMainBg" attributeType="String" syncable="YES"/>
-        <attribute name="colorText" attributeType="String" syncable="YES"/>
-        <attribute name="colorTitleBg" attributeType="String" syncable="YES"/>
-        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="echos" attributeType="String" syncable="YES"/>
-        <attribute name="holiday" attributeType="String" syncable="YES"/>
-        <attribute name="readings" attributeType="String" syncable="YES"/>
-        <attribute name="txtEvening" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="txtHoliday" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="txtHours" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="txtLiturgy" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="txtMorning" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="txtQuotes" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="txtRule" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="typeFasting" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="typeHoliday" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="colorMainBg" attributeType="String"/>
+        <attribute name="colorText" attributeType="String"/>
+        <attribute name="colorTitleBg" attributeType="String"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="echos" attributeType="String"/>
+        <attribute name="holiday" attributeType="String"/>
+        <attribute name="readings" attributeType="String"/>
+        <attribute name="txtAfterevening" optional="YES" attributeType="String"/>
+        <attribute name="txtEvening" optional="YES" attributeType="String"/>
+        <attribute name="txtHoliday" optional="YES" attributeType="String"/>
+        <attribute name="txtHours" optional="YES" attributeType="String"/>
+        <attribute name="txtLiturgy" optional="YES" attributeType="String"/>
+        <attribute name="txtMorning" optional="YES" attributeType="String"/>
+        <attribute name="txtQuotes" optional="YES" attributeType="String"/>
+        <attribute name="txtRule" optional="YES" attributeType="String"/>
+        <attribute name="typeFasting" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="typeHoliday" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Day" positionX="-63" positionY="-18" width="128" height="285"/>
+        <element name="Day" positionX="-63" positionY="-18" width="128" height="284"/>
     </elements>
 </model>

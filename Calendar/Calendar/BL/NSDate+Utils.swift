@@ -146,9 +146,30 @@ extension NSDate {
         return "\(dayOldInt)"
     }
     
+    static func getToday() -> NSDate {
+        var result = NSDate.init().toLocalTime()
+        let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = TimeZone.init(abbreviation: "UTC")!
+        let hoursToAdd = AppSettings.boolValue(.startDayFromEvening) ? 6 : 0
+        result = calendar.date(byAdding: .hour, value: hoursToAdd, to: result as Date)! as NSDate
+        return result
+    }
+    
+    func toLocalTime() -> NSDate {
+        let tz = NSTimeZone.default
+        let seconds = tz.secondsFromGMT(for: self as Date)
+        return NSDate.init(timeInterval: TimeInterval.init(seconds), since: self as Date)
+    }
+    
+    func toGlobalTime() -> NSDate {
+        let tz = NSTimeZone.default
+        let seconds = -tz.secondsFromGMT(for: self as Date)
+        return NSDate.init(timeInterval: TimeInterval.init(seconds), since: self as Date)
+    }
+    
     func isToday() -> Bool
     {
-        return isSameDay(date: NSDate.init())
+        return isSameDay(date: NSDate.getToday())
     }
 
 
