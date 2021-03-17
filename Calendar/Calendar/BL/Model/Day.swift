@@ -29,10 +29,12 @@ enum Text: Int {
     case morning = 1
     case evening = 2
     case afterevening = 3
-    case hours = 4
-    case liturgy = 5
-    case holiday = 6
-    case quotes = 7
+    case midnight = 4
+    case hours = 5
+    case liturgy = 6
+    case liturgy_pg = 7
+    case holiday = 8
+    case quotes = 9
 }
 
 extension Day {
@@ -48,12 +50,16 @@ extension Day {
             self.txtEvening = text
         case .afterevening:
             self.txtAfterevening = text
+        case .midnight:
+            self.txtMidnight = text
         case .morning:
             self.txtMorning = text
         case .hours:
             self.txtHours = text
         case .liturgy:
             self.txtLiturgy = text
+        case .liturgy_pg:
+            self.txtLiturgyPG = text
         }
     }
 }
@@ -74,9 +80,11 @@ class Day: NSManagedObject, ImportableUniqueObject {
     @NSManaged public var txtRule: String?
     @NSManaged public var txtEvening: String?
     @NSManaged public var txtAfterevening: String?
+    @NSManaged public var txtMidnight: String?
     @NSManaged public var txtMorning: String?
     @NSManaged public var txtHours: String?
     @NSManaged public var txtLiturgy: String?
+    @NSManaged public var txtLiturgyPG: String?
     
     // MARK: ImportableUniqueObject
     typealias ImportSource = [String]
@@ -142,6 +150,10 @@ class Day: NSManagedObject, ImportableUniqueObject {
                 text = self.txtAfterevening
                 btnImage = "day_txt_afterevening"
                 break
+            case .midnight:
+                text = self.txtMidnight
+                btnImage = "day_txt_midnight"
+                break
             case .hours:
                 text = self.txtHours
                 btnImage = "day_txt_hours"
@@ -149,6 +161,10 @@ class Day: NSManagedObject, ImportableUniqueObject {
             case .liturgy:
                 text = self.txtLiturgy
                 btnImage = "day_txt_liturgy"
+                break
+            case .liturgy_pg:
+                text = self.txtLiturgyPG
+                btnImage = "day_txt_liturgy_pg"
                 break
             case .holiday:
                 text = self.txtHoliday
@@ -183,6 +199,10 @@ class Day: NSManagedObject, ImportableUniqueObject {
                 text = self.txtAfterevening
                 title = "Повечір'я"
                 break
+            case .midnight:
+                text = self.txtMidnight
+                title = "Опівнічна"
+                break
             case .hours:
                 text = self.txtHours
                 title = "Часи"
@@ -190,6 +210,10 @@ class Day: NSManagedObject, ImportableUniqueObject {
             case .liturgy:
                 text = self.txtLiturgy
                 title = "Літургія"
+                break
+            case .liturgy_pg:
+                text = self.txtLiturgyPG
+                title = "Літургія Передосвячених Дарів"
                 break
             case .holiday:
                 text = self.txtHoliday

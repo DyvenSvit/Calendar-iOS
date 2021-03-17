@@ -781,7 +781,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "Календар";
 				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 201213";
@@ -806,7 +806,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyvensvit.CalendarUGCC;
 				PRODUCT_NAME = "Календар";
 				PROVISIONING_PROFILE_SPECIFIER = "Calendar Main Dev 201213";

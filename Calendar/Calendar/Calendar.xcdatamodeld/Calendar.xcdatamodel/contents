@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Day" representedClassName=".Day" syncable="YES">
         <attribute name="colorMainBg" attributeType="String"/>
         <attribute name="colorText" attributeType="String"/>
@@ -13,6 +13,8 @@
         <attribute name="txtHoliday" optional="YES" attributeType="String"/>
         <attribute name="txtHours" optional="YES" attributeType="String"/>
         <attribute name="txtLiturgy" optional="YES" attributeType="String"/>
+        <attribute name="txtLiturgyPG" optional="YES" attributeType="String"/>
+        <attribute name="txtMidnight" optional="YES" attributeType="String"/>
         <attribute name="txtMorning" optional="YES" attributeType="String"/>
         <attribute name="txtQuotes" optional="YES" attributeType="String"/>
         <attribute name="txtRule" optional="YES" attributeType="String"/>
@@ -20,6 +22,6 @@
         <attribute name="typeHoliday" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Day" positionX="-63" positionY="-18" width="128" height="284"/>
+        <element name="Day" positionX="-63" positionY="-18" width="128" height="314"/>
     </elements>
 </model>

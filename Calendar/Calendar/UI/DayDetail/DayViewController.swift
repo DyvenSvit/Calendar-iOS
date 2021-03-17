@@ -21,7 +21,7 @@ class DayViewController: UIViewController, Storyboarded {
     
     
     var day:Day!
-    var contentModes:[Text] = [.rule, .morning, .evening, .afterevening, .hours, .liturgy, .holiday, .quotes]
+    var contentModes:[Text] = [.rule, .morning, .evening, .afterevening, .midnight, .hours, .liturgy, .liturgy_pg, .holiday, .quotes]
     var contentModeButtons:[UIButton] = []
     
     override func loadView() {

@@ -23,8 +23,12 @@ extension WebAPI {
             return "u"
         case .evening, .afterevening, .morning, .hours:
             return "t"
+        case .midnight:
+            return "o"
         case .liturgy:
             return "b"
+        case .liturgy_pg:
+            return "l"
         }
     }
     
@@ -38,7 +42,7 @@ extension WebAPI {
             return "u"
         case .hours:
             return "c"
-        case .liturgy, .quotes, .holiday, .rule:
+        case .midnight, .liturgy, .liturgy_pg, .quotes, .holiday, .rule:
             return ""
         }
     }
@@ -60,8 +64,10 @@ class WebAPI {
                                                WebAPI.shared.getText(type: .quotes, for: day),
                                                WebAPI.shared.getText(type: .rule, for: day),
                                                WebAPI.shared.getText(type: .liturgy, for: day),
+                                               WebAPI.shared.getText(type: .liturgy_pg, for: day),
                                                WebAPI.shared.getText(type: .evening, for: day),
                                                WebAPI.shared.getText(type: .afterevening, for: day),
+                                               WebAPI.shared.getText(type: .midnight, for: day),
                                                WebAPI.shared.getText(type: .morning, for: day),
                                                WebAPI.shared.getText(type: .hours, for: day)]
                 
